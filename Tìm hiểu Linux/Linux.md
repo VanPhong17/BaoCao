@@ -64,7 +64,7 @@ Fedora Đang là một phần mềm khá phổ biến và tập trung chủ yế
 Fedora: là một distro Linux cập nhật thường xuyên và có tính năng tùy chỉnh cao, được sử dụng cho máy tính cá nhân và máy chủ.
 ![imag](./Ima/8.png)
 ## ***CentOS/Red Hat Enterprise Linux***
-CentOS/ Red Hat Enterprise Linux là gì? Đây đang là 1 bản phân phối thương mại của Linux dành cho máy trạm và máy chủ.
+Đây đang là 1 bản phân phối thương mại của Linux dành cho máy trạm và máy chủ.
 
  Hiện tại nó đang được phát triển dựa vào Fedora. Tuy nhiên có một nền tảng được hỗ trợ lâu dài và ổn định hơn. 
 Red Hat Enterprise Linux (RHEL): là một distro Linux dành cho doanh nghiệp và tổ chức, được hỗ trợ bởi Red Hat.
