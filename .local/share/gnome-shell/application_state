@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<application-state>
+  <context id="">
+    <application id="libreoffice-writer.desktop" score="140" last-seen="1681224241"/>
+    <application id="org.gnome.Evince.desktop" score="108" last-seen="1681228638"/>
+    <application id="org.gnome.FileRoller.desktop" score="1.0000152587890625" last-seen="1681267122"/>
+    <application id="snap-store_ubuntu-software-local-file.desktop" score="3" last-seen="1681227165"/>
+    <application id="org.gnome.Mahjongg.desktop" score="24" last-seen="1681138532"/>
+    <application id="zalo-unofficial-2020_zalo-unofficial-2020.desktop" score="1" last-seen="1681049974"/>
+    <application id="org.gnome.gedit.desktop" score="52" last-seen="1681267509"/>
+    <application id="apport-gtk.desktop" score="0" last-seen="1681263258"/>
+    <application id="org.gnome.Nautilus.desktop" score="38.71124267578125" last-seen="1681267490"/>
+    <application id="xdg-desktop-portal-gnome.desktop" score="1" last-seen="1681267111"/>
+    <application id="update-manager.desktop" score="0" last-seen="1681044974"/>
+    <application id="gnome-control-center.desktop" score="8.000213623046875" last-seen="1681110096"/>
+    <application id="org.gnome.Terminal.desktop" score="969.12828063964844" last-seen="1681267563"/>
+    <application id="firefox_firefox.desktop" score="17799.670471191406" last-seen="1681267971"/>
+    <application id="virtualbox.desktop" score="0" last-seen="1681227176"/>
+    <application id="thunderbird.desktop" score="0" last-seen="1680856429"/>
+    <application id="code.desktop" score="2285.5" last-seen="1681267961"/>
+  </context>
+</application-state>

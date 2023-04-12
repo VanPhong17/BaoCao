@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="head"><meta name="viewport" content="width=device-width, initial-scale=1" /><meta property="fb:app_id" content="1423102994615912" />
+ 
+
+<link rel="stylesheet" type="text/css" href="https://imgt.taimienphi.vn/css/th_style1811.css?ver=vx08022023" /><link rel="shortcut icon" type="image/x-icon" href="https://imgt.taimienphi.vn/images/logo/favico.ico" /><script type="text/javascript" async="async" src="https://imgt.taimienphi.vn/js/jquery-1.7.1.min.js?ver=vx08022023"></script><meta name="keywords" content="cach chuyen doi nguoi dung tren dong lenh linux" /><meta name="description" content="cach chuyen doi nguoi dung tren dong lenh linux, Cách chuyển đổi người dùng trên dòng lệnh Linux" /><link href="https://thuthuat.taimienphi.vn/fuimcach-chuyen-doi-nguoi-dung-tren-dong-lenh-linux-45748n.aspx" rel="canonical" type="text/html" /><link href="https://thuthuat.taimienphi.vn/fuimcach-chuyen-doi-nguoi-dung-tren-dong-lenh-linux-45748n.aspx?ampok=1" rel="amphtml" /><meta property="og:title" content="[TaiMienPhi.Vn] Cách chuyển đổi người dùng trên dòng lệnh Linux" /><meta property="og:description" content="cach chuyen doi nguoi dung tren dong lenh linux, Cách chuyển đổi người dùng trên dòng lệnh Linux" /><meta property="og:image" content="https://thuthuat.taimienphi.vn/cf/ticon/45748.jpg" /><title>
+	Cách chuyển đổi người dùng trên dòng lệnh Linux
+</title></head>
+<body>
+   
+    <form method="post" action="./fuimcach-chuyen-doi-nguoi-dung-tren-dong-lenh-linux-45748n.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTM4NTg5NTE2NGRk0gA/b4m/gcI81NYpgtS2MwDEeV3s6kHvL3QNZBJ0kSQ=" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CA599B58" />
+</div> 
+  
+<div class="t">
+	<div class="th">
+    	<div class="thm clearfix">
+        	<a href="https://taimienphi.vn" class="logo">download </a>
+           
+            <div class="ggml"><div id="google_translate_element"></div>
+            <script type="text/javascript">
+                                                                              function googleTranslateElementInit() {
+                                                                                  new google.translate.TranslateElement({ pageLanguage: 'vi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-43176024-2' }, 'google_translate_element');
+                                                                              }
+        </script>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<div class="m clearfix" id="overTop">
+<div class="menucenter">
+</div>
+	  
+ <div id="cph1_googlescript"> 
+        <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-6672418683212757",
+                enable_page_level_ads: true
+            });
+        </script>
+    </div>
+
+      <div id="cph1_gatop0" class="gabody1">
+    <!--aid:51--><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- thuthuat.news-c0 --><ins class="adsbygoogle"     style="display:block"     data-ad-client="ca-pub-6672418683212757"     data-ad-slot="7558476628"     data-ad-format="auto"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  	<div class="ma clearfix">
+   	</div>  
+	<div class="ml l" >
+	
+	  
+   	  <h1  class="hh6">Cách chuyển đổi người dùng trên dòng lệnh Linux</h1>
+        
+   
+        <p class="link"> <a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-linux-103.aspx' class='acN'>Thủ thuật Linux</a></p>
+        <div class="cl"></div>
+      <div class="des3 clearfix">
+        <div class="shortdes clearfix">
+         	 <strong>Giả sử vì lý do nào đó mà bạn muốn chuyển đổi sang tài khoản người dùng khác, chẳng hạn như tài khoản root để thực thi các lệnh cụ thể, bài viết đưới đây Taimienphi.vn sẽ hướng dẫn bạn cách chuyển đổi người dùng trên dòng lệnh Linux.</strong>
+        </div>
+        <div id="cph1_newsrel">
+          <p class="tit9 clearfix" ><span>Bài viết liên quan</span></p>
+             <div style="border: 1px solid #dad1d1;padding-left:10px;padding-bottom:5px;">
+                 <div class="newsrel">
+                     <ul class='ulf1 clearfix'>  <li><a href='/12-lenh-linux-co-ban-cho-nguoi-dung-moi-45632n.aspx' >12 lệnh Linux cơ bản cho người dùng mới</a></li> <li><a href='/thay-doi-dia-chi-ip-bang-lenh-tren-linux-30195n.aspx' >Thay đổi địa chỉ IP bằng lệnh trên Linux</a></li> <li><a href='/cach-truy-cap-va-su-dung-telegram-tu-tien-ich-dong-lenh-linux-45651n.aspx' >Cách truy cập và sử dụng Telegram từ tiện ích dòng lệnh Linux</a></li> <li><a href='/cach-tao-file-text-bang-terminal-tren-linux-30758n.aspx' >Cách tạo file Text bằng Terminal trên Linux</a></li> <li><a href='/xoa-nhieu-thu-muc-con-tren-linux-bang-lenh-cmd-12464n.aspx' >Xóa nhiều thư mục con trên Linux bằng lệnh CMD</a></li></ul>
+                </div>
+            </div>
+        </div>
+        <div id="cph1_gatop" class="gabody1"><!--aid:57--><div align="center" style="padding-top:10px;margin-bottom:5px;"><!-- tt-res-2909-center --><ins class="adsbygoogle"     style="display:block"     data-ad-client="ca-pub-6672418683212757"     data-ad-slot="9018336321"     data-ad-format="auto"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script> <br /><!-- link-tt-center-2807 --><ins class="adsbygoogle"     style="display:block;height:30px"     data-ad-client="ca-pub-6672418683212757"     data-ad-slot="5439405817"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+         
+         </div>
+        <div class='cl' id='startrel'></div>
+       <div id='relshow' style='width: 720px;display: block;position: absolute;'></div>
+       
+         	 <p>Cũng giống như Windows hay macOS, hệ thống Linux cũng có các loại tài khoản, user khác nhau với các đặc quyền truy cập hệ thống khác nhau. Tuy nhiên không phải tất cả người dùng đều có thể thực thi tất cả các lệnh và không phải tất cả người dùng đều có quyền chuyển đổi sang tài khoản người dùng khác.</p><p><img alt="cach chuyen doi nguoi dung tren dong lenh linux" src="https://thuthuat.taimienphi.vn/cf/Images/ba/2019/4/26/fuimcach-chuyen-doi-nguoi-dung-tren-dong-lenh-linux.jpg"></p><p>Trong bài viết dưới đây Taimienphi.vn sẽ hướng dẫn bạn cách chuyển đổi người dùng trên dòng lệnh Linux.</p><p><h3><strong><em>1. Tổng quan</em></strong></h3><p>Để chuyển đổi người dùng, trước hết chúng ta phải biết mật khẩu của người dùng đó. Sử dụng lệnh dưới đây để chuyển đổi người dùng:</p><p><strong>su -</strong></p><p>Để chuyển đổi người dùng root trên Ubuntu, chúng ta sử dụng lệnh dưới đây:</p><p><strong>sudo -i</strong></p><p><h3><strong><em>2. Danh sách user (người dùng) trên Linux</em></strong></h3><p>Về cơ bản hệ thống Linux có 3 loại người dùng:</p><p>- Người dùng hệ thống</p><p>Là người dùng được tạo tự động trên các hệ thống Linux để có thể chạy các dịch vụ hoặc ứng dụng.</p><p>- Người dùng thường xuyên</p><p>Là người dùng có thể đăng nhập hệ thống. Mỗi người dùng có thể có hoặc không quyền truy cập hệ thống.</p><p>- Super User</p><p>Đây là các Admin hệ thống hoặc người dùng có thể thực hiện các tác vụ cấp cao, có thể là các tác vụ ảnh hưởng hoặc gây nguy hiểm cho hệ thống.</p><p><img alt="fuimcach chuyen doi nguoi dung tren dong lenh linux" height="335" src="https://taimienphi.vn/tmp/cf/aut/fuimcach-chuyen-doi-nguoi-dung-tren-dong-lenh-linux.jpg" width="670"></p><p><h3><strong><em>3. Cách chuyển đổi người dùng trên dòng lệnh Linux</em></strong></h3><p>Trên hệ thống Linux, chúng ta có thể đăng nhập người dùng bất kỳ, sau đó chuyển đổi sang người dùng khác thông qua cùng một phiên dòng lệnh. Để làm được điều này, chúng ta sẽ sử dụng lệnh <strong>"su -",</strong> cho phép chuyển đổi trực tiếp sang người dùng khác:</p><p>Ví dụ:</p><p>johndoe@system:-$ su - janedoe</p><p>Password:</p><p>janedoe@system:-$</p><p>Trong ví dụ trên chúng ta phải biết mật khẩu của người dùng janedoe để chuyển đổi sang người dùng đó.</p><p><h3><strong><em>4. Chuyển đổi người dùng root</em></strong></h3><p>Vì một số lý do bảo mật, một số hệ thống chặn đăng nhập trực tiếp, đăng nhập cục bộ hoặc đăng nhập từ xa tài khoản root. Vì vậy để thực thi các lệnh dưới người dùng root, chúng ta sẽ phải sử dụng lệnh <strong>sudo</strong>.</p><p>Về cơ bản lệnh sudo sẽ thực thi bất kỳ điều gì mà bạn muốn trên hệ thống như thể "root" đã làm. Quan trọng là bạn không cần phải biết mật khẩu của người dùng root, trong thực tế có lẽ không một ai biết root được gán mật khẩu nào cả.</p><p>Tất cả những gì bạn cần biết là mật khẩu người dùng và người dùng đó phải thuộc nhóm "<strong>sudoers", </strong>về cơ bản là nhóm người dùng có thể sử dụng lệnh sudo trên hệ thống.</p><p>Thường để chạy các lệnh dưới quyền root thông qua lệnh sudo, chúng ta sử dụng lệnh dưới đây:</p><p><strong>sudo</strong></p><p>Trường hợp nếu muốn chuyển đổi người dùng root để tất cả các lệnh tiếp theo sẽ chạy dưới người dùng root, chúng ta sử dụng lệnh:</p><p><strong>sudo -i</strong></p><p>Mật khẩu mà chúng ta sử dụng ở đây là mật khẩu người dùng riêng, không phải mật khẩu tài khoản root.</p><p>Như vậy bài viết trên đây Taimienphi.vn vừa hướng dẫn bạn cách chuyển đổi người dùng trên dòng lệnh Linux. Về cơ bản các hệ thống Linux cho phép người dùng dễ dàng chuyển đổi người dùng hoặc thực thi các lệnh cao cấp bằng cách sử dụng các lệnh su và sudo.</p><p>Ngoài ra nếu có bất kỳ thắc mắc hoặc câu hỏi nào cần giải đáp, bạn đọc có thể để lại ý kiến của mình trong phần bình luận bên dưới bài viết nhé.</p><p>Việc tạo user trong windows 10, tạo tài khoản người dùng mới cũng là câu hỏi được nhiều người mới bắt đầu sử dụng Windows 10 phân vân, chi tiết về việc <strong><a href="https://thuthuat.taimienphi.vn/tao-va-xoa-1-user-trong-windows-10-2629n.aspx" target="_blank">tạo user trong windows 10</a></strong> mời các bạn tìm hiểu trên Taimienphi.</p><p>Cũng là một thủ thuật trên hệ điều hành Linux, đổi địa chỉ IP bằng lệnh trên Linux - một trong những cách không được nhiều người biết đến, bạn tham khảo cách <strong><a href="https://thuthuat.taimienphi.vn/thay-doi-dia-chi-ip-bang-lenh-tren-linux-30195n.aspx" target="_blank">đổi địa chỉ IP bằng lệnh trên Linux</a></strong> được trình bày chi tiết trên trang của chúng tôi.</p><p><span style='color:#f1ffff;font-size:4px'> https://thuthuat.taimienphi.vn/fuimcach-chuyen-doi-nguoi-dung-tren-dong-lenh-linux-45748n.aspx </span><br><!--AMPOK-->
+   	  </div>
+        <div id='endshow'></div> 
+        <p class="info4"><b>Tác giả: </b><a href="https://thuthuat.taimienphi.vn/tacgia/Nguy%e1%bb%85n+Long+Th%e1%bb%8bnh.aspx" rel="nofollow" class="auth"><b>Nguyễn Long Thịnh</b></a> 
+            &nbsp;&nbsp;&nbsp;<span><span class="trating"> (</span><span >4.0</span>★- <span id="totalvote"  >3</span> đánh giá)&nbsp;
+                  
+           </span><span class="trating">  ĐG của bạn?   <span id="showrank" class="irating" data-id="45748" data-rating="3" data-status="open"></span></span>
+         </p>
+          
+        <div style="float:right;margint-top:5px;margin-bottom:5px;">   
+            <div class="fb-like likebox"
+                data-href="https://www.facebook.com/taimienphi.vn"
+                data-layout="button_count" data-action="like"
+                                 data-size="large" data-show-faces="false" data-share="false"></div> 
+                                 &nbsp;&nbsp;
+            <div class="fb-like" data-href="https://thuthuat.taimienphi.vn/fuimcach-chuyen-doi-nguoi-dung-tren-dong-lenh-linux-45748n.aspx"  data-size="large" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+                                 </div>
+    <div class="cl"></div>
+        <div id="cph1_gacenter2">
+    <!--aid:48--><div style="margin-top:10px;margin-bottom:10px;max-height:210px;"><!-- thuthuat-bottom-dsp --><ins class="adsbygoogle"     style="display:block"     data-ad-client="ca-pub-6672418683212757"     data-ad-slot="7674035427"     data-ad-format="auto"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>    	</div>
+    
+     <p class="tit9 clearfix" ><span>Bài viết liên quan</span></p>
+      <dl id="cph1_boxLq2" class="dl1 ma7 bxf1">
+                <dd><a href='/10-lenh-huu-ich-nguoi-dung-windows-10-nen-biet-25182n.aspx' >10 lệnh hữu ích người dùng Windows 10 nên biết</a></dd> <dd><a href='/cach-tim-file-va-thu-muc-tren-linux-30759n.aspx' >Cách tìm file và thư mục trên Linux</a></dd> <dd><a href='/lam-chu-vlc-thong-qua-tien-ich-dong-lenh-tren-linux-45652n.aspx' >Làm chủ VLC thông qua tiện ích dòng lệnh trên Linux</a></dd> <dd><a href='/su-dung-lenh-vmstat-tren-linux-55846n.aspx' >Sử dụng lệnh Vmstat trên Linux</a></dd> <dd><a href='/huong-dan-cai-dat-phan-mem-va-ung-dung-tren-linux-45371n.aspx' >Hướng dẫn cài đặt phần mềm và ứng dụng trên Linux</a></dd> 
+        </dl>  
+        
+       <div id="fbcommentx"  data-order-by='reverse_time' data-width="728" data-href="https://thuthuat.taimienphi.vn/fuimcach-chuyen-doi-nguoi-dung-tren-dong-lenh-linux-45748n.aspx"  data-numposts="20" data-colorscheme="light"></div>
+
+        
+      	<div class="tagstext">Từ khoá liên quan:  <h4>Cách chuyển đổi người dùng trên dòng lệnh Linux</h4>,  chuyển đổi người dùng trên dòng lệnh Linux,  chuyển đổi người dùng trên Linux,  </div>
+    </div>
+  
+     <div class="mr r" >
+        <div id="cph1_garight1">
+        <!--aid:29--><ins class="adsbygoogle"     style="display:block"     data-ad-client="ca-pub-6672418683212757"     data-ad-slot="4760482298"     data-ad-format="auto"     data-full-width-responsive="true"></ins><br /></div>	
+        
+        <div id="topR"> 
+            <div id="cph1_boxSoft" class="bxb3">
+                <div class="tit6">SOFT LIÊN QUAN</div>
+                 <div class="ctagf1 clearfix">
+                     <ul class='list'><li> <img src='https://i1.taimienphi.vn/tmp/cf/icon/gnome-terminal-for-linux.jpg' /> <p class='ques'> <h3><a href='https://taimienphi.vn/download-gnome-terminal-for-linux-9059' style='font-size:15pt' >GNOME Terminal For Linux</a></h3> <em>Ứng dụng điều khiển máy tính bằng dòng lệnh</em></p><span class='softtxt'> GNOME Terminal For Linux là một ứng dụng để điều khiển hoạt động của máy tính thông qua dòng lệnh, Nó được thiết kế đặc biệt dành cho hệ điều hành Linux trong môi trường GNOME, Người sử dụng có thể nhanh chóng chạy các ứ ...</span></li></ul><ul class='tagf3'><li><a href='https://taimienphi.vn/download-termux-83652' >Termux</a><span> Công cụ nhập lệnh Linux cho Android</span> <img  src='https://i1.taimienphi.vn/tmp/cf/icon/termux_w24.jpg'   /><i></i></li><li><a href='https://taimienphi.vn/download-g-mic-66051' >G'MIC</a><span> Chỉnh sửa ảnh qua dòng lệnh</span> <img  src='https://i1.taimienphi.vn/tmp/cf/icon/gmic_w24.jpg'   /><i></i></li><li><a href='https://taimienphi.vn/download-clingo-9905' >Clingo</a><span> Xử lý chương trình logic bằng dòng lệnh</span> <img  src='https://i1.taimienphi.vn/tmp/cf/icon/clingo_w24.jpg'   /><i></i></li><li><a href='https://taimienphi.vn/download-gpdf2swf-for-linux-11771' >GPDF2SWF for Linux</a><span> Chuyển đổi ebook trên Linux</span> <img  src='https://i1.taimienphi.vn/tmp/cf/icon/gpdf2swf-for-linux_w24.jpg'   /><i></i></li><li><a href='https://taimienphi.vn/download-handbrake-for-linux-12941' >HandBrake for Linux</a><span> Chuyển đổi video MPEG trên hệ điều hành Linux</span> <img  src='https://i1.taimienphi.vn/tmp/cf/icon/handbrake-for-linux_w24.jpg'   /><i></i></li></ul>
+                 </div>
+             </div>
+           
+            <!--aid:30-->	
+            <div class='bx bxb3'><h4 class='tit6'>ĐỌC NHIỀU</h4><ul class='nav2'>
+                
+                 <li><a  href='https://thuthuat.taimienphi.vn/cach-lay-lai-mat-khau-facebook-bang-cmnd-27658n.aspx'>Cách lấy lại mật khẩu Facebook bằng CMND, CCCD</a></li><li><a  href='https://thuthuat.taimienphi.vn/code-ao-linh-su-75327n.aspx'>Full Code Ảo Linh Sư mới nhất và cách nhập Code game đổi thưởng</a></li><li><a  href='https://thuthuat.taimienphi.vn/cach-livestream-tren-tiktok-65717n.aspx'>Cách bật livestream phát trực tiếp trên TikTok nhanh nhất</a></li> 
+             </ul></div>
+          </div>
+          
+          
+            <!--aid:35-->	
+            <div class="bx bxb4">
+        	    <h4 class="tit7">Tin Mới</h4>
+                <ul class="listq">
+               <li><p class='ques'><a  href='https://thuthuat.taimienphi.vn/linux-kernel-la-gi-chuc-nang-ung-dung-cua-linux-kernel-trong-he-thong-may-tinh-22546n.aspx'>Linux Kernel là gì? Chức năng ứng dụng của Linux Kernel trong hệ thống máy tính</a></p><p class='des'>Điểm chung dễ thấy của các hệ điều hành dựa trên Linux là đều có Linux Kernel. Vậy chính xác thì Linux Kernel là gì? Chức năng ứng dụng của <a href="https://taimienphi.vn/download-linux-kernel-69598" target="_blank">Linux Kernel</a> trong hệ thống máy tính? Các thành phần của Linux Kernel bao gồm những gì?<br /></p></li><li><p class='ques'><a  href='https://thuthuat.taimienphi.vn/khoi-dong-va-chay-ubuntu-tu-o-usb-31792n.aspx'>Khởi động và chạy Ubuntu từ ổ USB</a></p><p class='des'>Việc chạy hệ điều hành trên ổ USB, chẳng hạn như Windows khá là hữu ích. Bằng cách này bạn có thể khôi phục lại dữ liệu từ ổ cứng và sao chép dữ liệu đó vào các ổ cứng gắn ngoài trong trường hợp nếu máy tính không khởi</p></li><li><p class='ques'><a  href='https://thuthuat.taimienphi.vn/cach-kiem-tra-dia-chi-mac-tren-linux-61192n.aspx'>Cách kiểm tra địa chỉ MAC trên Linux</a></p><p class='des'>Các bước để tìm và <a href="https://thuthuat.taimienphi.vn/xem-dia-chi-mac-tren-windows-7-8-va-mac-os-x-1897n.aspx"target="_blank">kiểm tra địa chỉ MAC</a> trên Windows và macOS khá đơn giản. Vậy còn trên Linux thì sao? Có những cách nào để kiểm tra địa chỉ MAC trên Linux?</p></li><li><p class='ques'><a  href='https://thuthuat.taimienphi.vn/giai-bai-tap-trang-144-145-sgk-toan-5-luyen-tap-chung-38629n.aspx'>Giải Toán lớp 5 trang 144, 145, Luyện tập chung</a></p><p class='des'>Sau khi đọc đề bài các bài 1, 2, 3, 4 Toán 5 trang 144, 145 xong, các em chưa hình dung ra cách làm thì hãy tham khảo ngay tài liệu <a href="https://thuthuat.taimienphi.vn/giai-bai-tap-trang-144-145-sgk-toan-5-luyen-tap-chung-38629n.aspx" target="_blank">giải Toán lớp 5 trang 144, 145</a>, Luyện tập chung mà Taimienphi.vn chia sẻ dưới đây. Tài liệu này hướng dẫn giải rất chi tiết. </p></li> 
+             
+                </ul>
+            </div> <!--aid:36--><p>	<iframe height="600" scrolling="no" src="https://xads.joboko.com/getadsframe.aspx?size=300x600&dha=1&cpid=vHAvBPadvhoiife9c&bckcpid=a3KcjqKcXcYhbSf3U&bcksize=300x600" style="border: currentColor; border-image: none; width: 100%;"></iframe></p>	
+            <div class="cl"></div>
+            <div id="cph1_truotads">
+            <div id='rightstick' style=' display: block; position: absolute; text-align:center;padding-top:10px;'>
+
+            </div>
+           </div>
+             
+            
+      </div>
+   
+
+
+<div id="fb-root"></div>
+
+<div id="social" style="">
+      <div class="fb-like likebox"
+                                 data-href="https://www.facebook.com/taimienphi.vn"
+                                 data-layout="box_count" data-action="like"
+                                 data-size="large" data-show-faces="false" data-share="false"></div>
+
+    <div class="fb-like likebox" data-href="https://thuthuat.taimienphi.vn/fuimcach-chuyen-doi-nguoi-dung-tren-dong-lenh-linux-45748n.aspx" data-layout="box_count" data-size="large" data-action="like" data-show-faces="true" data-share="true"></div>
+      <br />
+      <div>
+        <a href="#fbcommentx" rel="nofollow"><img class="cmticon" width="48px" /></a>
+      </div>
+   </div>
+    <script type="text/javascript"> 
+        var tkid='4F6DA56366B3F67156A86A0A1F95BA48'; 
+    </script>
+
+<script type="application/ld+json">
+{
+   "@context":"https://schema.org",
+   "@type":"AggregateRating",
+   "ratingValue":"4.0",
+   "ratingCount":"3",
+   "itemReviewed":{
+      "@type":"CreativeWorkSeries",
+      "name":"Cách chuyển đổi người dùng trên dòng lệnh Linux",
+      "image":"https://imgt.taimienphi.vn/cf/ticon/45748.jpg"
+   }
+}
+
+</script> <script type="application/ld+json">{
+   "@context":"http://schema.org",
+   "@type":"Article",
+   "mainEntityOfPage":"https://thuthuat.taimienphi.vn/fuimcach-chuyen-doi-nguoi-dung-tren-dong-lenh-linux-45748n.aspx",
+   "headline":"Cách chuyển đổi người dùng trên dòng lệnh Linux",
+   "image":"anhthumb",
+   "datePublished":"4/28/2019 11:17:26 AM",
+   "dateModified":"4/26/2019 6:23:33 PM",
+   "author":{
+      "@type":"Person",
+      "name":"Nguyễn Long Thịnh"
+   },
+   "publisher":{
+      "@type":"Organization",
+      "name":"taimienphi.vn",
+      "url":"https://thuthuat.taimienphi.vn",
+      "logo":{
+         "@type":"ImageObject",
+         "url":"https://taimienphi.vn/images/logo.png"
+      }
+   },
+   "description":"Giả sử vì lý do nào đó mà bạn muốn chuyển đổi sang tài khoản người dùng khác, chẳng hạn như tài khoản root để thực thi các lệnh cụ thể, bài viết đưới đây Taimienphi.vn sẽ hướng dẫn bạn cách chuyển đổi người dùng trên dòng lệnh Linux."
+}
+</script> 
+
+    </div>
+   <div class="targetnews">
+        <div class='shortn clearfix'><div class='dvcn'><p class='shortnh'><span>Tiêu điểm</span><em></em></p><p class='shortnt'><a href='https://thuthuat.taimienphi.vn/3-cach-chuyen-doi-file-word-sang-pdf-cuc-hieu-qua-394n.aspx'>5+ Cách chuyển Word sang PDF trên máy tính nhanh chóng</a><a href='https://thuthuat.taimienphi.vn/cach-tao-tai-khoan-moi-khi-su-dung-skype-75n.aspx'>Cách tạo tài khoản Skype mới trên PC và Mobile</a></p></div></div>
+   </div>
+    <div class="menu">	<div>
+      <!--aid:42-->  <ul class="clearfix">	<li>		<a class="win" href="http://taimienphi.vn"><em> </em>Windows<i></i></a></li>	<li>		<a class="andr" href="http://tmo.taimienphi.vn/android"><em> </em>Android</a></li>	<li>		<a class="ios" href="http://tmo.taimienphi.vn/ios"><em> </em>iOS</a></li>	<li>		<a class="winp" href="http://tmo.taimienphi.vn/winphone"><em> </em>Win phone</a></li>	<li>		<a class="tipm" href="http://9mobi.vn"><em> </em>Mobile Tips</a></li>	<li  class="act">		<a class="tipc" href="http://thuthuat.taimienphi.vn"><em> </em>Thủ thuật PC</a></li></ul>
+      	</div>
+    </div>
+      <div class="culn">
+	    <ul class="uln">
+            	<li>
+                	<h4 class="titN">Danh mục<i>&nbsp;</i></h4>
+                	    <ul class='nav'><li><a href='https://thuthuat.taimienphi.vn/canews_ban-quyen-mien-phi-10.aspx'>Bản quyền miễn phí</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-2.aspx'>Thủ thuật Internet</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-audio-video-7.aspx'>Audio-Video</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-anh-do-hoa-4.aspx'>Ảnh, đồ họa</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_bao-ve-may-tinh-8.aspx'>Bảo vệ máy tính</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_ung-dung-van-phong-9.aspx'>Ứng dụng văn phòng</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_word-excel-powerpoint-11.aspx'>Word, Excel, PowerPoint</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-windows-10-93.aspx'>Thủ thuật Windows 10</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-windows-11-1325.aspx'>Thủ thuật Windows 11</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_he-thong-may-tinh-35.aspx'>Hệ thống máy tính</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_hoc-tap-giao-duc-77.aspx'>Học Tập - Giáo dục</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_du-lieu-file-42.aspx'>Dữ liệu - File</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-phan-cung-6.aspx'>Phần cứng</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_tin-tuc-cong-nghe-40.aspx'>Tin công nghệ</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-mobile-5.aspx'>Mobile</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_chat-nhan-tin-video-call-12.aspx'>Chat, nhắn tin, video call</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_game-75.aspx'>Game</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_hoi-dap-76.aspx'>Hỏi - Đáp</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_kien-thuc-chung-79.aspx'>Kiến thức chung</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-mac-102.aspx'>Thủ thuật Mac</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-linux-103.aspx'>Thủ thuật Linux</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_ho-tro-doanh-nghiep-105.aspx'>Hỗ trợ doanh nghiệp</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_loi-bai-hat-111.aspx'>Lời bài hát</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_kien-thuc-cntt-121.aspx'>Kiến thức CNTT</a></li></li><li><a href='https://thuthuat.taimienphi.vn/canews_share-acc-vip-132.aspx'>Share Acc VIP</a></li></li></li></li><li><a href='https://thuthuat.taimienphi.vn/canews_dich-vu-nha-mang-1199.aspx'>Dịch vụ nhà mạng</a></li></li><li><a href='https://thuthuat.taimienphi.vn/canews_lich-chieu-phim-1239.aspx'>Lịch chiếu phim</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_video-hot-1242.aspx'>Video hot</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_danh-gia-1243.aspx'>Đánh giá</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_ngay-le-ky-niem-1259.aspx'>Ngày lễ kỷ niệm</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_trac-nghiem-1264.aspx'>Trắc nghiệm</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_video-phim-1265.aspx'>Video, phim</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-zom-1328.aspx'>Thủ thuật Zoom</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_thu-thuat-tiktok-1329.aspx'>Thủ thuật TikTok</a></li><li><a href='https://thuthuat.taimienphi.vn/canews_phap-luat-1330.aspx'>Pháp luật</a></li></ul><ul class='tempcat'><li><a href='https://thuthuat.taimienphi.vn/canews_ngan-hang-128.aspx'>Ngân hàng</a><li><a href='https://thuthuat.taimienphi.vn/canews_ket-qua-vietlott-136.aspx'>Kết quả Vietlott</a><li><a href='https://thuthuat.taimienphi.vn/canews_danh-ba-taxi-1175.aspx'>Danh bạ Taxi</a><li><a href='https://thuthuat.taimienphi.vn/canews_giai-ma-giac-mo-1192.aspx'>Giải mã giấc mơ</a><li><a href='https://thuthuat.taimienphi.vn/canews_status-1229.aspx'>Status</a></ul>
+                </li>
+            </ul>
+     </div>
+     <div class="b">
+	
+    <div class="bfs">
+          <div class="bf clearfix">
+            <!--aid:2--><p class="legal">	Copyright TAIMIENPHI.VN © 2018 - All rights reserved</p> 
+          </div>
+    </div>
+     <div class="blinks">
+        <ul class="blink clearfix">
+    	    <li>
+        	    <p>ĐIỀU KHOẢN &amp; ĐIỀU KIỆN</p>
+                <ul>
+            	      <li><a rel="nofollow" href="/help/about-us.htm">Giới thiệu</a></li>
+                       <li><a rel="nofollow" href="/help/Privacy-policy.htm">Điều khoản sử dụng</a></li>
+                       <li><a rel="nofollow" href="/help/security.htm">Chính sách bảo mật</a></li>
+                        <li><a rel="nofollow" href="/help/dcma.htm">DCMA</a></li>
+                       <li><a rel="nofollow" href="/help/contact-us.htm">Liên hệ</a></li>
+                </ul>
+            </li>
+    	    <li>
+        	    <p>Trợ giúp</p>
+                <ul>
+            	     <li><a rel="nofollow" href="/help/save-install.htm">Hướng dẫn cài đặt phần mềm</a></li>
+                   <li><a rel="nofollow" href="/help/uninstall-remove.htm">Hướng dẫn xoá/gỡ phần mềm</a></li> 
+                   <li><a rel="nofollow" href="https://taimienphi.vn/Uploadsoft.aspx">Upload apps, softs</a></li> 
+                </ul>
+            </li>
+    	    <li>
+                <!-- <a href="//www.dmca.com/Protection/Status.aspx?ID=0d3e93c3-32cf-4726-9513-a16565b5419b" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=0d3e93c3-32cf-4726-9513-a16565b5419b"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script> -->
+                
+        	    <ul class="social">
+			    <li><a class="fb" rel="nofollow" title="Facebook page" target="_blank" rel="nofollow" href="http://facebook.com/taimienphi.vn">Facebook</a></li>		
+                <li><a title="Google +" class="gg" target="_blank" rel="publisher" href="https://plus.google.com/110749430077828635378">google+ Taimienphi</a></li>		
+               
+            </ul>
+            </li>
+        </ul>
+    </div>
+     <!--aid:31-->
+</div>
+
+
+ 
+        
+        
+        
+        
+        
+
+    </form>
+</body>
+</html>
+�e�ݎ           d6�Evpd6�   �    O^partitionKey=%28https%2Ctaimienphi.vn%29,:https://thuthuat.taimienphi.vn/fuimcach-chuyen-doi-nguoi-dung-tren-dong-lenh-linux-45748n.aspx strongly-framed 1 security-info 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 request-method GET response-head HTTP/2 200 OK
+cache-control: private
+content-type: text/html; charset=utf-8
+server: Microsoft-IIS/10.0
+x-aspnet-version: 4.0.30319
+x-powered-by: ASP.NET
+date: Wed, 12 Apr 2023 01:26:02 GMT
+content-length: 31579
+X-Firefox-Spdy: h2
+ original-response-headers cache-control: private
+content-type: text/html; charset=utf-8
+server: Microsoft-IIS/10.0
+set-cookie: ASP.NET_SessionId=3kh4plj0ig3cnklvg25fs3nm; path=/; HttpOnly; SameSite=Lax
+x-aspnet-version: 4.0.30319
+x-powered-by: ASP.NET
+date: Wed, 12 Apr 2023 01:26:02 GMT
+content-length: 31579
+X-Firefox-Spdy: h2
+ ctid 1 uncompressed-len 0   {[

@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	TRƯỜNG ĐẠI HỌC THĂNG LONG - 
+</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/tooltip.js"></script>
+    <script type="text/javascript" src="/js/thickbox-compressed.js"></script>
+    <script src="/js/java.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input.number').keypress(function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    return false;
+                };
+            });
+        });
+    </script>
+    
+    <link href="../App_Themes/abrasive/a10777.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/abrasive/em.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/abrasive/jQuery.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/abrasive/style.css" type="text/css" rel="stylesheet" /><link href="../App_Themes/abrasive/thickbox.css" type="text/css" rel="stylesheet" /></head>
+<body>
+    <!-- Top -->
+    <div id="head">
+        <!-- Center COntent -->
+        <div class="center">
+            <!-- Logo -->
+            <div class="logo">
+            </div>
+            <!-- End Logo -->
+            <!-- User Info -->
+            <div class="right">
+                <b>Chào
+                    <span id="ctl00_lbUser" style="color:Red;">NGUYỄN VĂN PHONG (A40590)</span></b> | <a href="../User/ChangePassword.aspx">Đổi mật khẩu</a> | <a href="../User/Logoff.aspx">Đăng xuất</a><br />
+                Tình trạng: <strong>
+                    <span id="ctl00_lbTinhtrang" style="color:Brown;">Bình thường</span></strong>
+            </div>
+            <div class="maquee">
+                <a href="../SinhVien/DangKyEmailSoDienThoai.aspx" style="color: Red">Để nhận hỗ trợ từ hệ thống, đăng ký địa chỉ Email, số điện thoại!</a>
+            </div>
+            <!-- End User Info -->
+            <!-- Menu -->
+            <div id="menu">
+                <ul>
+                    <li><a class="active" href="../Default.aspx">Trang chủ đăng ký học</a></li>
+                    <li><a href="http://thanglong.edu.vn/">Trang chủ nhà trường</a></li>
+                    <li><a href="#">Trang chủ quản lý đào tạo</a></li>
+                    
+                    <li><b><a class="msg" href="#">
+                        Có 0 tin báo mới
+                    </a></b></li>
+                </ul>
+            </div>
+            <!-- End Menu -->
+        </div>
+        <!-- End Center Content -->
+    </div>
+    <!-- End Top -->
+    <!-- Page -->
+    <div id="page">
+        
+        <div id="left">
+            <ul>
+                
+                        <li>
+                            <h3 class="title">
+                                Toàn trường</h3>
+                            
+                                    <ul class="sub-menu" style="display: block;">
+                                
+                                    <li><a href='/ToanTruong/TKBToanTruong.aspx'>
+                                        Thời khóa biểu toàn trường</a></li>
+                                
+                                    <li><a href='/ToanTruong/LichThiLaiToanTruong.aspx'>
+                                        Lịch thi lại toàn trường</a></li>
+                                
+                                    <li><a href='/ToanTruong/ChuongTrinhDaoTao.aspx'>
+                                        Chương trình đào tạo</a></li>
+                                
+                                    </ul>
+                                
+                        </li>
+                    
+                        <li>
+                            <h3 class="title">
+                                Góc sinh viên</h3>
+                            
+                                    <ul class="sub-menu" style="display: block;">
+                                
+                                    <li><a href='/SinhVien/frmThongTinSinhVien.aspx'>
+                                        Thông tin cá nhân</a></li>
+                                
+                                    <li><a href='/DangKyHoc/DangKiHoc.aspx'>
+                                        Đăng ký học</a></li>
+                                
+                                    <li><a href='/DangKyHoc/DangKiThiLai.aspx'>
+                                        Đăng ký thi lại</a></li>
+                                
+                                    <li><a href='/SinhVien/ThoiKhoaBieuSinhVien.aspx'>
+                                        Thời khóa biểu</a></li>
+                                
+                                    <li><a href='http://hocphi.thanglong.edu.vn'>
+                                        Phiếu báo thu tiền</a></li>
+                                
+                                    <li><a href='/SinhVien/BangDiemSinhVien.aspx'>
+                                        Bảng điểm</a></li>
+                                
+                                    <li><a href='/SinhVien/LichThiSV.aspx'>
+                                        Lịch thi chính thức</a></li>
+                                
+                                    <li><a href='/SinhVien/LichThiDuKien.aspx'>
+                                        Lịch thi dự kiến</a></li>
+                                
+                                    <li><a href='http://sinhvien.thanglong.edu.vn/'>
+                                        Phiếu báo điểm</a></li>
+                                
+                                    <li><a href='http://sinhvien.thanglong.edu.vn'>
+                                        Lịch ký sổ gốc</a></li>
+                                
+                                    </ul>
+                                
+                        </li>
+                    
+                <li>
+                    
+                </li>
+            </ul>
+        </div>
+        
+        
+        <!-- Right -->
+        <div id="right">
+            <div class="title">
+                
+    Bảng điểm sinh viên
+
+                
+    NGUYỄN VĂN PHONG - A40590 - 17/08/2002 - TC33h1
+
+            </div>
+            <div class="entry">
+                
+    <form name="aspnetForm" method="post" action="./BangDiemSinhVien.aspx" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNzU1MjAwOTQ5D2QWAmYPZBYMAgEPDxYCHgRUZXh0BRxOR1VZ4buETiBWxIJOIFBIT05HIChBNDA1OTApZGQCAg8PFgIfAAUPQsOsbmggdGjGsOG7nW5nZGQCBA8WAh8ABRRDw7MgMCB0aW4gYsOhbyBt4bubaWQCBQ8WAh4LXyFJdGVtQ291bnQCAhYEZg9kFgRmDxUBD1Rvw6BuIHRyxrDhu51uZ2QCAQ8WAh8BAgMWBgIBD2QWAmYPFQIeL1RvYW5UcnVvbmcvVEtCVG9hblRydW9uZy5hc3B4I1Ro4budaSBraMOzYSBiaeG7g3UgdG/DoG4gdHLGsOG7nW5nZAICD2QWAmYPFQIlL1RvYW5UcnVvbmcvTGljaFRoaUxhaVRvYW5UcnVvbmcuYXNweCBM4buLY2ggdGhpIGzhuqFpIHRvw6BuIHRyxrDhu51uZ2QCAw9kFgJmDxUCIi9Ub2FuVHJ1b25nL0NodW9uZ1RyaW5oRGFvVGFvLmFzcHgbQ2jGsMahbmcgdHLDrG5oIMSRw6BvIHThuqFvZAIBD2QWBGYPFQEPR8OzYyBzaW5oIHZpw6puZAIBDxYCHwECChYUAgEPZBYCZg8VAiIvU2luaFZpZW4vZnJtVGhvbmdUaW5TaW5oVmllbi5hc3B4FFRow7RuZyB0aW4gY8OhIG5ow6JuZAICD2QWAmYPFQIZL0RhbmdLeUhvYy9EYW5nS2lIb2MuYXNweBDEkMSDbmcga8O9IGjhu41jZAIDD2QWAmYPFQIcL0RhbmdLeUhvYy9EYW5nS2lUaGlMYWkuYXNweBTEkMSDbmcga8O9IHRoaSBs4bqhaWQCBA9kFgJmDxUCIy9TaW5oVmllbi9UaG9pS2hvYUJpZXVTaW5oVmllbi5hc3B4E1Ro4budaSBraMOzYSBiaeG7g3VkAgUPZBYCZg8VAh5odHRwOi8vaG9jcGhpLnRoYW5nbG9uZy5lZHUudm4XUGhp4bq/dSBiw6FvIHRodSB0aeG7gW5kAgYPZBYCZg8VAh8vU2luaFZpZW4vQmFuZ0RpZW1TaW5oVmllbi5hc3B4DkLhuqNuZyDEkWnhu4NtZAIHD2QWAmYPFQIYL1NpbmhWaWVuL0xpY2hUaGlTVi5hc3B4GEzhu4tjaCB0aGkgY2jDrW5oIHRo4bupY2QCCA9kFgJmDxUCHC9TaW5oVmllbi9MaWNoVGhpRHVLaWVuLmFzcHgWTOG7i2NoIHRoaSBk4buxIGtp4bq/bmQCCQ9kFgJmDxUCIWh0dHA6Ly9zaW5odmllbi50aGFuZ2xvbmcuZWR1LnZuLxRQaGnhur91IGLDoW8gxJFp4buDbWQCCg9kFgJmDxUCIGh0dHA6Ly9zaW5odmllbi50aGFuZ2xvbmcuZWR1LnZuFUzhu4tjaCBrw70gc+G7lSBn4buRY2QCCA9kFgICAQ8WAh8ABTJOR1VZ4buETiBWxIJOIFBIT05HIC0gQTQwNTkwIC0gMTcvMDgvMjAwMiAtIFRDMzNoMWQCCQ9kFgICAQ9kFg4CAQ8QDxYGHg1EYXRhVGV4dEZpZWxkBQpUZW5IaWVuVGhpHg5EYXRhVmFsdWVGaWVsZAUNTWFDaHVvbmdUcmluaB4LXyFEYXRhQm91bmRnZBAVASNN4bqhbmcgbcOheSB0w61uaCB2w6Agdmnhu4VuIHRow7RuZxUBBFRDQ1QUKwMBZ2RkAgUPPCsAEQMADxYEHwRnHwECHWQBEBYDAgECAgIFFgM8KwAFAQAWAh4KSGVhZGVyVGV4dAUGTcOjIEhQPCsABQEAFgIfBQUHVMOqbiBIUDwrAAUBABYCHgdWaXNpYmxlaBYDZmZmDBQrAAAWAmYPZBY6AgEPZBYMZg9kFgJmDxUBATFkAgEPDxYCHwAFBUNGMzIwZGQCAg8PFgIfAAUkVCYjMjM3O24gaGnhu4d1IHYmIzIyNDsgaOG7hyB0aOG7kW5nZGQCAw8PFgIfAAUBM2RkAgQPDxYCHwAFAzgsNWRkAgUPDxYCHwAFAi0xZGQCAg9kFgxmD2QWAmYPFQEBMmQCAQ8PFgIfAAUFQ1MxMDBkZAICDw8WAh8ABRJUaW4gxJHhuqFpIGPGsMahbmdkZAIDDw8WAh8ABQEyZGQCBA8PFgIfAAUBNWRkAgUPDxYCHwAFAi0xZGQCAw9kFgxmD2QWAmYPFQEBM2QCAQ8PFgIfAAUFQ1MxMDJkZAICDw8WAh8ABRdDJiMyNDQ7bmcgZCYjMjI2O24gc+G7kWRkAgMPDxYCHwAFATJkZAIEDw8WAh8ABQM0LDdkZAIFDw8WAh8ABQItMWRkAgQPZBYMZg9kFgJmDxUBATRkAgEPDxYCHwAFBUNTMTIxZGQCAg8PFgIfAAUhTmcmIzI0NDtuIG5n4buvIGzhuq1wIHRyJiMyMzY7bmggZGQCAw8PFgIfAAUBM2RkAgQPDxYCHwAFAzUsNWRkAgUPDxYCHwAFAi0xZGQCBQ9kFgxmD2QWAmYPFQEBNWQCAQ8PFgIfAAUFQ1MxMjJkZAICDw8WAh8ABSlM4bqtcCB0ciYjMjM2O25oIGjGsOG7m25nIMSR4buRaSB0xrDhu6NuZ2RkAgMPDxYCHwAFATNkZAIEDw8WAh8ABQM2LDNkZAIFDw8WAh8ABQItMWRkAgYPZBYMZg9kFgJmDxUBATZkAgEPDxYCHwAFBUVDMTAyZGQCAg8PFgIfAAUfTmjhuq1wIG0mIzI0NDtuIGtpbmggdOG6vyBo4buNY2RkAgMPDxYCHwAFATJkZAIEDw8WAh8ABQM3LDNkZAIFDw8WAh8ABQItMWRkAgcPZBYMZg9kFgJmDxUBATdkAgEPDxYCHwAFBUdFMTAxZGQCAg8PFgIfAAUXVGnhur9uZyBBbmggc8ahIGPhuqVwIDFkZAIDDw8WAh8ABQEyZGQCBA8PFgIfAAUDNCwyZGQCBQ8PFgIfAAUCLTFkZAIID2QWDGYPZBYCZg8VAQE4ZAIBDw8WAh8ABQVHRTEwMmRkAgIPDxYCHwAFF1Rp4bq/bmcgQW5oIHPGoSBj4bqlcCAyZGQCAw8PFgIfAAUBMmRkAgQPDxYCHwAFAzUsNWRkAgUPDxYCHwAFAi0xZGQCCQ9kFgxmD2QWAmYPFQEBOWQCAQ8PFgIfAAUFR0UxMDNkZAICDw8WAh8ABRdUaeG6v25nIEFuaCBzxqEgY+G6pXAgM2RkAgMPDxYCHwAFATJkZAIEDw8WBh8ABQMzLDgeCENzc0NsYXNzBQhUaGlUcnVvdB4EXyFTQgICZGQCBQ8PFgIfAAUCLTFkZAIKD2QWDGYPZBYCZg8VAQIxMGQCAQ8PFgIfAAUFR0UyMDFkZAICDw8WAh8ABR1UaeG6v25nIEFuaCBzxqEgdHJ1bmcgY+G6pXAgMWRkAgMPDxYCHwAFATJkZAIEDw8WBh8ABQMzLDIfBwUIVGhpVHJ1b3QfCAICZGQCBQ8PFgIfAAUCLTFkZAILD2QWDGYPZBYCZg8VAQIxMWQCAQ8PFgIfAAUFR0oxMDFkZAICDw8WAh8ABRBUaeG6v25nIE5o4bqtdCAxZGQCAw8PFgIfAAUBMmRkAgQPDxYCHwAFAzcsNmRkAgUPDxYCHwAFAi0xZGQCDA9kFgxmD2QWAmYPFQECMTJkAgEPDxYCHwAFBUdKMTAyZGQCAg8PFgIfAAUQVGnhur9uZyBOaOG6rXQgMmRkAgMPDxYCHwAFATJkZAIEDw8WAh8ABQM4LDJkZAIFDw8WAh8ABQItMWRkAg0PZBYMZg9kFgJmDxUBAjEzZAIBDw8WAh8ABQVNQTEwMWRkAgIPDxYCHwAFPUxvZ2ljLCBzdXkgbHXhuq1uIHRvJiMyMjU7biBo4buNYyB2JiMyMjQ7IGvhu7kgdGh14bqtdCDEkeG6v21kZAIDDw8WAh8ABQEzZGQCBA8PFgIfAAUDNywzZGQCBQ8PFgIfAAUCLTFkZAIOD2QWDGYPZBYCZg8VAQIxNGQCAQ8PFgIfAAUFTUExMDRkZAICDw8WAh8ABShT4buRIHYmIzIyNDsgY+G6pXUgdHImIzI1MDtjIMSR4bqhaSBz4buRZGQCAw8PFgIfAAUBM2RkAgQPDxYCHwAFAzQsNmRkAgUPDxYCHwAFAi0xZGQCDw9kFgxmD2QWAmYPFQECMTVkAgEPDxYCHwAFBU1BMzAwZGQCAg8PFgIfAAVAVG8mIzIyNTtuIGNodXkmIzIzNDtuIG5nJiMyMjQ7bmggdHJ1eeG7gW4gdGgmIzI0NDtuZyBk4buvIGxp4buHdWRkAgMPDxYCHwAFATNkZAIEDw8WAh8ABQM0LDZkZAIFDw8WAh8ABQItMWRkAhAPZBYMZg9kFgJmDxUBAjE2ZAIBDw8WAh8ABQVNTDExM2RkAgIPDxYCHwAFI1RyaeG6v3QgaOG7jWMgTSYjMjI1O2MgLSBMJiMyMzQ7bmluZGQCAw8PFgIfAAUBM2RkAgQPDxYCHwAFATlkZAIFDw8WAh8ABQItMWRkAhEPZBYMZg9kFgJmDxUBAjE3ZAIBDw8WAh8ABQVNTDExNGRkAgIPDxYCHwAFMEtpbmggdOG6vyBjaCYjMjM3O25oIHRy4buLIE0mIzIyNTtjIC0gTCYjMjM0O25pbmRkAgMPDxYCHwAFATJkZAIEDw8WAh8ABQM5LDFkZAIFDw8WAh8ABQItMWRkAhIPZBYMZg9kFgJmDxUBAjE4ZAIBDw8WAh8ABQVNTDExNWRkAgIPDxYCHwAFJUNo4bunIG5naMSpYSB4JiMyMjc7IGjhu5lpIGtob2EgaOG7jWNkZAIDDw8WAh8ABQEyZGQCBA8PFgIfAAUDOSw2ZGQCBQ8PFgIfAAUCLTFkZAITD2QWDGYPZBYCZg8VAQIxOWQCAQ8PFgIfAAUFTUwyMDJkZAICDw8WAh8ABR9UxrAgdMaw4bufbmcgSOG7kyBDaCYjMjM3OyBNaW5oZGQCAw8PFgIfAAUBMmRkAgQPDxYCHwAFAzgsNmRkAgUPDxYCHwAFAi0xZGQCFA9kFgxmD2QWAmYPFQECMjBkAgEPDxYCHwAFBU1MMjA0ZGQCAg8PFgIfAAUTTOG7i2NoIHPhu60gxJDhuqNuZ2RkAgMPDxYCHwAFATJkZAIEDw8WAh8ABQE5ZGQCBQ8PFgIfAAUCLTFkZAIVD2QWDGYPZBYCZg8VAQIyMWQCAQ8PFgIfAAUFTkExNTFkZAICDw8WAh8ABR1LaG9hIGjhu41jIG0mIzI0NDtpIHRyxrDhu51uZ2RkAgMPDxYCHwAFATJkZAIEDw8WAh8ABQM3LDdkZAIFDw8WAh8ABQItMWRkAhYPZBYMZg9kFgJmDxUBAjIyZAIBDw8WAh8ABQVQRzEwMGRkAgIPDxYCHwAFHUdpJiMyMjU7byBk4bulYyB0aOG7gyBjaOG6pXQgZGQCAw8PFgIfAAUBNGRkAgQPDxYCHwAFAzgsNGRkAgUPDxYCHwAFAi0xZGQCFw9kFgxmD2QWAmYPFQECMjNkAgEPDxYCHwAFBVBHMTIxZGQCAg8PFgIfAAUhR2kmIzIyNTtvIGThu6VjIHF14buRYyBwaCYjMjQyO25nZGQCAw8PFgIfAAUBNGRkAgQPDxYCHwAFAzYsNGRkAgUPDxYCHwAFAi0xZGQCGA9kFgxmD2QWAmYPFQECMjRkAgEPDxYCHwAFBVNIMTMxZGQCAg8PFgIfAAUfUGgmIzIyNTtwIGx14bqtdCDEkeG6oWkgY8awxqFuZ2RkAgMPDxYCHwAFATJkZAIEDw8WAh8ABQM3LDVkZAIFDw8WAh8ABQItMWRkAhkPZBYMZg9kFgJmDxUBAjI1ZAIBDw8WAh8ABQVUQzMwMGRkAgIPDxYCHwAFMk0mIzI0NDsgaCYjMjM2O25oIGgmIzI0MzthIHYmIzIyNDsgbSYjMjQ0OyBwaOG7j25nZGQCAw8PFgIfAAUBM2RkAgQPDxYCHwAFATlkZAIFDw8WAh8ABQItMWRkAhoPZBYMZg9kFgJmDxUBAjI2ZAIBDw8WAh8ABQVUQzMwM2RkAgIPDxYCHwAFNVRoaeG6v3Qga+G6vyB2JiMyMjQ7IHF14bqjbiB0cuG7iyB0cnV54buBbiB0aCYjMjQ0O25nZGQCAw8PFgIfAAUBM2RkAgQPDxYCHwAFAzUsNmRkAgUPDxYCHwAFAi0xZGQCGw9kFgxmD2QWAmYPFQECMjdkAgEPDxYCHwAFBVRDMzE2ZGQCAg8PFgIfAAUiQW4gbmluaCBt4bqhbmcgdHJ1eeG7gW4gdGgmIzI0NDtuZ2RkAgMPDxYCHwAFATNkZAIEDw8WAh8ABQM4LDVkZAIFDw8WAh8ABQItMWRkAhwPZBYMZg9kFgJmDxUBAjI4ZAIBDw8WAh8ABQVUQzQxOGRkAgIPDxYCHwAFG0zhuq1wIHRyJiMyMzY7bmggbmgmIzI1MDtuZ2RkAgMPDxYCHwAFATJkZAIEDw8WAh8ABQM3LDNkZAIFDw8WAh8ABQItMWRkAh0PZBYMZg9kFgJmDxUBAjI5ZAIBDw8WAh8ABQVWTDEwMWRkAgIPDxYCHwAFH1Rp4bq/bmcgVmnhu4d0IHRo4buxYyBoJiMyMjQ7bmhkZAIDDw8WAh8ABQEyZGQCBA8PFgIfAAUDOSwyZGQCBQ8PFgIfAAUCLTFkZAIHDzwrABEDAA8WBB8EZx8BAhNkARAWAwIBAgICBRYDPCsABQEAFgIfBQUGTcOjIEhQPCsABQEAFgIfBQUHVMOqbiBIUDwrAAUBABYCHwZoFgNmZmYMFCsAABYCZg9kFiYCAQ9kFgxmD2QWAmYPFQEBMWQCAQ8PFgIfAAUFQUQyMTZkZAICDw8WAh8ABRFL4bu5IG7Eg25nIHPhu5FuZ2RkAgMPDxYCHwAFATNkZAIEDw8WAh8ABQM5LDhkZAIFDw8WAh8ABQItMWRkAgIPZBYMZg9kFgJmDxUBATJkAgEPDxYCHwAFBUFEMjQwZGQCAg8PFgIfAAUXTmhp4bq/cCDhuqNuaCBjxqEgYuG6o25kZAIDDw8WAh8ABQEzZGQCBA8PFgIfAAUCMTBkZAIFDw8WAh8ABQItMWRkAgMPZBYMZg9kFgJmDxUBATNkAgEPDxYCHwAFBUFEMjQxZGQCAg8PFgIfAAUeROG6q24gY2jGsMahbmcgdHImIzIzNjtuaCAoTUMpZGQCAw8PFgIfAAUBM2RkAgQPDxYCHwAFAzksNWRkAgUPDxYCHwAFAi0xZGQCBA9kFgxmD2QWAmYPFQEBNGQCAQ8PFgIfAAUFQ0YyMTJkZAICDw8WAh8ABRtD4bqldSB0ciYjMjUwO2MgZOG7ryBsaeG7h3VkZAIDDw8WAh8ABQEzZGQCBA8PFgIfAAUBOGRkAgUPDxYCHwAFAi0xZGQCBQ9kFgxmD2QWAmYPFQEBNWQCAQ8PFgIfAAUFQ0YyMzFkZAICDw8WAh8ABTlMJiMyNTM7IHRodXnhur90IHRoJiMyNDQ7bmcgdGluIHYmIzIyNDsgbSYjMjI3OyBoJiMyNDM7YSBkZAIDDw8WAh8ABQEyZGQCBA8PFgIfAAUBOGRkAgUPDxYCHwAFAi0xZGQCBg9kFgxmD2QWAmYPFQEBNmQCAQ8PFgIfAAUFQ1MxMTBkZAICDw8WAh8ABRJL4bu5IHRodeG6rXQgc+G7kSBkZAIDDw8WAh8ABQEyZGQCBA8PFgIfAAUDNiw0ZGQCBQ8PFgIfAAUCLTFkZAIHD2QWDGYPZBYCZg8VAQE3ZAIBDw8WAh8ABQVDUzIxMmRkAgIPDxYCHwAFI0tp4bq/biB0ciYjMjUwO2MgbSYjMjI1O3kgdCYjMjM3O25oZGQCAw8PFgIfAAUBM2RkAgQPDxYCHwAFAzUsNmRkAgUPDxYCHwAFAi0xZGQCCA9kFgxmD2QWAmYPFQEBOGQCAQ8PFgIfAAUFQ1MzMTVkZAICDw8WAh8ABSpOZ3V5JiMyMzQ7biBsJiMyNTM7IGjhu4cgxJFp4buBdSBoJiMyMjQ7bmhkZAIDDw8WAh8ABQEzZGQCBA8PFgIfAAUBOGRkAgUPDxYCHwAFAi0xZGQCCQ9kFgxmD2QWAmYPFQEBOWQCAQ8PFgIfAAUFSVMyMjJkZAICDw8WAh8ABRRDxqEgc+G7nyBk4buvIGxp4buHdWRkAgMPDxYCHwAFATNkZAIEDw8WAh8ABQM2LDVkZAIFDw8WAh8ABQItMWRkAgoPZBYMZg9kFgJmDxUBAjEwZAIBDw8WAh8ABQVJUzMyMmRkAgIPDxYCHwAFJkjhu4cgcXXhuqNuIHRy4buLIGPGoSBz4bufIGThu68gbGnhu4d1ZGQCAw8PFgIfAAUBM2RkAgQPDxYGHwAFAzEsNR8HBQhUaGlUcnVvdB8IAgJkZAIFDw8WAh8ABQItMWRkAgsPZBYMZg9kFgJmDxUBAjExZAIBDw8WAh8ABQVJUzMzMmRkAgIPDxYCHwAFOVBoJiMyMjY7biB0JiMyMzc7Y2ggdGhp4bq/dCBr4bq/IGjGsOG7m25nIMSR4buRaSB0xrDhu6NuZ2RkAgMPDxYCHwAFATNkZAIEDw8WAh8ABQM3LDdkZAIFDw8WAh8ABQItMWRkAgwPZBYMZg9kFgJmDxUBAjEyZAIBDw8WAh8ABQVNQTExMGRkAgIPDxYCHwAFEkdp4bqjaSB0JiMyMzc7Y2ggMWRkAgMPDxYCHwAFATNkZAIEDw8WAh8ABQM3LDVkZAIFDw8WAh8ABQItMWRkAg0PZBYMZg9kFgJmDxUBAjEzZAIBDw8WAh8ABQVNQTExMWRkAgIPDxYCHwAFEkdp4bqjaSB0JiMyMzc7Y2ggMmRkAgMPDxYCHwAFATNkZAIEDw8WAh8ABQM1LDVkZAIFDw8WAh8ABQItMWRkAg4PZBYMZg9kFgJmDxUBAjE0ZAIBDw8WAh8ABQVNQTEyMGRkAgIPDxYCHwAFHsSQ4bqhaSBz4buRIHR1eeG6v24gdCYjMjM3O25oIGRkAgMPDxYCHwAFATNkZAIEDw8WAh8ABQM4LDRkZAIFDw8WAh8ABQItMWRkAg8PZBYMZg9kFgJmDxUBAjE1ZAIBDw8WAh8ABQVNQTIzMWRkAgIPDxYCHwAFLVgmIzIyNTtjIHN14bqldCB0aOG7kW5nIGsmIzIzNDsg4bupbmcgZOG7pW5nIGRkAgMPDxYCHwAFATRkZAIEDw8WAh8ABQM1LDdkZAIFDw8WAh8ABQItMWRkAhAPZBYMZg9kFgJmDxUBAjE2ZAIBDw8WAh8ABQVNSTIwMWRkAgIPDxYCHwAFFlRvJiMyMjU7biBy4budaSBy4bqhYyBkZAIDDw8WAh8ABQEzZGQCBA8PFgIfAAUDNiw0ZGQCBQ8PFgIfAAUCLTFkZAIRD2QWDGYPZBYCZg8VAQIxN2QCAQ8PFgIfAAUFTlcyMTJkZAICDw8WAh8ABRlN4bqhbmcgbSYjMjI1O3kgdCYjMjM3O25oZGQCAw8PFgIfAAUBMmRkAgQPDxYCHwAFAzQsN2RkAgUPDxYCHwAFAi0xZGQCEg9kFgxmD2QWAmYPFQECMThkAgEPDxYCHwAFBVRDMzE0ZGQCAg8PFgIfAAUfS+G7uSB0aHXhuq10IGvhur90IG7hu5FpIG3huqFuZ2RkAgMPDxYCHwAFATNkZAIEDw8WAh8ABQM3LDRkZAIFDw8WAh8ABQItMWRkAhMPZBYMZg9kFgJmDxUBAjE5ZAIBDw8WAh8ABQVUQzQyNWRkAgIPDxYCHwAFIUzhuq1wIHRyJiMyMzY7bmgg4bupbmcgZOG7pW5nIElPVGRkAgMPDxYCHwAFATJkZAIEDw8WAh8ABQM1LDdkZAIFDw8WAh8ABQItMWRkAgkPDxYCHwAFAzExMWRkAgsPDxYCHwAFBDcsMjJkZAINDw8WAh8ABQEwZGQCEQ8WAh8BZmQYAgUOY3RsMDAkYyRHcmlkQ04PPCsADAEIAgFkBQ5jdGwwMCRjJEdyaWREQw88KwAMAQgCAWRKmnqRVWo0qgDo66ZwRI1xrPDAncg/1kqNZULVI3tBSw==" />
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="47638515" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAOk7WWmGugmA8BePHqVk5bBws7CMfLC3sUyf9FjXxzZsD29CokaUdyRsBKmnxiIzxqaleenB2Za+w+69zvE+GsALShRvTpXkZ29sLSuoQDZjQ==" />
+</div>
+    Chọn chương trình học: <select name="ctl00$c$droCTH" id="ctl00_c_droCTH">
+	<option selected="selected" value="TCCT">Mạng m&#225;y t&#237;nh v&#224; viễn th&#244;ng</option>
+
+</select> 
+    <input type="submit" name="ctl00$c$btOK" value="Hiển thị" id="ctl00_c_btOK" class="fr" />
+	<table cellspacing="3" cellpadding="0" border="0px" width="100%">
+		<tr valign="top">
+			<td style="width: 50%">
+				<div>
+	<table class="grid" cellspacing="0" border="0" id="ctl00_c_GridDC" style="border-style:None;width:100%;border-collapse:collapse;">
+		<caption>
+			Giáo dục đại cương
+		</caption><tr>
+			<th scope="col">STT</th><th scope="col" style="white-space:nowrap;">M&#227; HP</th><th scope="col">T&#234;n HP</th><th scope="col" style="white-space:nowrap;">Số TC</th><th scope="col">Điểm</th>
+		</tr><tr>
+			<td>
+								1
+							</td><td>CF320</td><td>T&#237;n hiệu v&#224; hệ thống</td><td align="center">3</td><td align="right">8,5</td>
+		</tr><tr>
+			<td>
+								2
+							</td><td>CS100</td><td>Tin đại cương</td><td align="center">2</td><td align="right">5</td>
+		</tr><tr>
+			<td>
+								3
+							</td><td>CS102</td><td>C&#244;ng d&#226;n số</td><td align="center">2</td><td align="right">4,7</td>
+		</tr><tr>
+			<td>
+								4
+							</td><td>CS121</td><td>Ng&#244;n ngữ lập tr&#236;nh </td><td align="center">3</td><td align="right">5,5</td>
+		</tr><tr>
+			<td>
+								5
+							</td><td>CS122</td><td>Lập tr&#236;nh hướng đối tượng</td><td align="center">3</td><td align="right">6,3</td>
+		</tr><tr>
+			<td>
+								6
+							</td><td>EC102</td><td>Nhập m&#244;n kinh tế học</td><td align="center">2</td><td align="right">7,3</td>
+		</tr><tr>
+			<td>
+								7
+							</td><td>GE101</td><td>Tiếng Anh sơ cấp 1</td><td align="center">2</td><td align="right">4,2</td>
+		</tr><tr>
+			<td>
+								8
+							</td><td>GE102</td><td>Tiếng Anh sơ cấp 2</td><td align="center">2</td><td align="right">5,5</td>
+		</tr><tr>
+			<td>
+								9
+							</td><td>GE103</td><td>Tiếng Anh sơ cấp 3</td><td align="center">2</td><td class="ThiTruot" align="right">3,8</td>
+		</tr><tr>
+			<td>
+								10
+							</td><td>GE201</td><td>Tiếng Anh sơ trung cấp 1</td><td align="center">2</td><td class="ThiTruot" align="right">3,2</td>
+		</tr><tr>
+			<td>
+								11
+							</td><td>GJ101</td><td>Tiếng Nhật 1</td><td align="center">2</td><td align="right">7,6</td>
+		</tr><tr>
+			<td>
+								12
+							</td><td>GJ102</td><td>Tiếng Nhật 2</td><td align="center">2</td><td align="right">8,2</td>
+		</tr><tr>
+			<td>
+								13
+							</td><td>MA101</td><td>Logic, suy luận to&#225;n học v&#224; kỹ thuật đếm</td><td align="center">3</td><td align="right">7,3</td>
+		</tr><tr>
+			<td>
+								14
+							</td><td>MA104</td><td>Số v&#224; cấu tr&#250;c đại số</td><td align="center">3</td><td align="right">4,6</td>
+		</tr><tr>
+			<td>
+								15
+							</td><td>MA300</td><td>To&#225;n chuy&#234;n ng&#224;nh truyền th&#244;ng dữ liệu</td><td align="center">3</td><td align="right">4,6</td>
+		</tr><tr>
+			<td>
+								16
+							</td><td>ML113</td><td>Triết học M&#225;c - L&#234;nin</td><td align="center">3</td><td align="right">9</td>
+		</tr><tr>
+			<td>
+								17
+							</td><td>ML114</td><td>Kinh tế ch&#237;nh trị M&#225;c - L&#234;nin</td><td align="center">2</td><td align="right">9,1</td>
+		</tr><tr>
+			<td>
+								18
+							</td><td>ML115</td><td>Chủ nghĩa x&#227; hội khoa học</td><td align="center">2</td><td align="right">9,6</td>
+		</tr><tr>
+			<td>
+								19
+							</td><td>ML202</td><td>Tư tưởng Hồ Ch&#237; Minh</td><td align="center">2</td><td align="right">8,6</td>
+		</tr><tr>
+			<td>
+								20
+							</td><td>ML204</td><td>Lịch sử Đảng</td><td align="center">2</td><td align="right">9</td>
+		</tr><tr>
+			<td>
+								21
+							</td><td>NA151</td><td>Khoa học m&#244;i trường</td><td align="center">2</td><td align="right">7,7</td>
+		</tr><tr>
+			<td>
+								22
+							</td><td>PG100</td><td>Gi&#225;o dục thể chất </td><td align="center">4</td><td align="right">8,4</td>
+		</tr><tr>
+			<td>
+								23
+							</td><td>PG121</td><td>Gi&#225;o dục quốc ph&#242;ng</td><td align="center">4</td><td align="right">6,4</td>
+		</tr><tr>
+			<td>
+								24
+							</td><td>SH131</td><td>Ph&#225;p luật đại cương</td><td align="center">2</td><td align="right">7,5</td>
+		</tr><tr>
+			<td>
+								25
+							</td><td>TC300</td><td>M&#244; h&#236;nh h&#243;a v&#224; m&#244; phỏng</td><td align="center">3</td><td align="right">9</td>
+		</tr><tr>
+			<td>
+								26
+							</td><td>TC303</td><td>Thiết kế v&#224; quản trị truyền th&#244;ng</td><td align="center">3</td><td align="right">5,6</td>
+		</tr><tr>
+			<td>
+								27
+							</td><td>TC316</td><td>An ninh mạng truyền th&#244;ng</td><td align="center">3</td><td align="right">8,5</td>
+		</tr><tr>
+			<td>
+								28
+							</td><td>TC418</td><td>Lập tr&#236;nh nh&#250;ng</td><td align="center">2</td><td align="right">7,3</td>
+		</tr><tr>
+			<td>
+								29
+							</td><td>VL101</td><td>Tiếng Việt thực h&#224;nh</td><td align="center">2</td><td align="right">9,2</td>
+		</tr><tr>
+			<td colspan="3"> </td><td colspan="2"> </td>
+		</tr>
+	</table>
+</div>
+			</td>
+			<td>
+				<div>
+	<table class="grid" cellspacing="0" border="0" id="ctl00_c_GridCN" style="border-style:None;width:100%;border-collapse:collapse;">
+		<caption>
+			Giáo dục chuyên ngành
+		</caption><tr>
+			<th scope="col">STT</th><th scope="col" style="white-space:nowrap;">M&#227; HP</th><th scope="col">T&#234;n HP</th><th scope="col" style="white-space:nowrap;">Số TC</th><th scope="col">Điểm</th>
+		</tr><tr>
+			<td>
+								1
+							</td><td>AD216</td><td>Kỹ năng sống</td><td align="center">3</td><td align="right">9,8</td>
+		</tr><tr>
+			<td>
+								2
+							</td><td>AD240</td><td>Nhiếp ảnh cơ bản</td><td align="center">3</td><td align="right">10</td>
+		</tr><tr>
+			<td>
+								3
+							</td><td>AD241</td><td>Dẫn chương tr&#236;nh (MC)</td><td align="center">3</td><td align="right">9,5</td>
+		</tr><tr>
+			<td>
+								4
+							</td><td>CF212</td><td>Cấu tr&#250;c dữ liệu</td><td align="center">3</td><td align="right">8</td>
+		</tr><tr>
+			<td>
+								5
+							</td><td>CF231</td><td>L&#253; thuyết th&#244;ng tin v&#224; m&#227; h&#243;a </td><td align="center">2</td><td align="right">8</td>
+		</tr><tr>
+			<td>
+								6
+							</td><td>CS110</td><td>Kỹ thuật số </td><td align="center">2</td><td align="right">6,4</td>
+		</tr><tr>
+			<td>
+								7
+							</td><td>CS212</td><td>Kiến tr&#250;c m&#225;y t&#237;nh</td><td align="center">3</td><td align="right">5,6</td>
+		</tr><tr>
+			<td>
+								8
+							</td><td>CS315</td><td>Nguy&#234;n l&#253; hệ điều h&#224;nh</td><td align="center">3</td><td align="right">8</td>
+		</tr><tr>
+			<td>
+								9
+							</td><td>IS222</td><td>Cơ sở dữ liệu</td><td align="center">3</td><td align="right">6,5</td>
+		</tr><tr>
+			<td>
+								10
+							</td><td>IS322</td><td>Hệ quản trị cơ sở dữ liệu</td><td align="center">3</td><td class="ThiTruot" align="right">1,5</td>
+		</tr><tr>
+			<td>
+								11
+							</td><td>IS332</td><td>Ph&#226;n t&#237;ch thiết kế hướng đối tượng</td><td align="center">3</td><td align="right">7,7</td>
+		</tr><tr>
+			<td>
+								12
+							</td><td>MA110</td><td>Giải t&#237;ch 1</td><td align="center">3</td><td align="right">7,5</td>
+		</tr><tr>
+			<td>
+								13
+							</td><td>MA111</td><td>Giải t&#237;ch 2</td><td align="center">3</td><td align="right">5,5</td>
+		</tr><tr>
+			<td>
+								14
+							</td><td>MA120</td><td>Đại số tuyến t&#237;nh </td><td align="center">3</td><td align="right">8,4</td>
+		</tr><tr>
+			<td>
+								15
+							</td><td>MA231</td><td>X&#225;c suất thống k&#234; ứng dụng </td><td align="center">4</td><td align="right">5,7</td>
+		</tr><tr>
+			<td>
+								16
+							</td><td>MI201</td><td>To&#225;n rời rạc </td><td align="center">3</td><td align="right">6,4</td>
+		</tr><tr>
+			<td>
+								17
+							</td><td>NW212</td><td>Mạng m&#225;y t&#237;nh</td><td align="center">2</td><td align="right">4,7</td>
+		</tr><tr>
+			<td>
+								18
+							</td><td>TC314</td><td>Kỹ thuật kết nối mạng</td><td align="center">3</td><td align="right">7,4</td>
+		</tr><tr>
+			<td>
+								19
+							</td><td>TC425</td><td>Lập tr&#236;nh ứng dụng IOT</td><td align="center">2</td><td align="right">5,7</td>
+		</tr><tr>
+			<td colspan="3"> </td><td colspan="2"> </td>
+		</tr>
+	</table>
+</div>
+			</td>
+		</tr>
+	</table>    
+    <b>Tổng số tín chỉ tích lũy: </b><span id="ctl00_c_lblTongSoTinChiTichLuy">111</span>
+    <br />
+    <b>Trung bình chung tích lũy: </b><span id="ctl00_c_lblTrungBinhTrungTichLuy">7,22</span>
+    <br />
+    <b>Tổng số tín chỉ đang đợi điểm: </b><span id="ctl00_c_lblTongTCDoiDiem">0</span>
+    <br />
+	(*Chú giải: Mã HP là mã học phần, Tên HP là tên học phần. Lưu ý: TBC không tính điểm của các học phần GDTC & GDQP)
+    <br />
+    Những môn học không thuộc chương trình
+    
+            <table cellpadding="0" cellspacing="0" class="tablesv">
+                <thead>
+                    <th>STT</th>
+                    <th>Mã HP</th>
+                    <th>Tên HP</th>
+                    <th>Số TC</th>
+                    <th>Điểm</th>
+                </thead>
+        
+            </table>
+        
+</form>
+
+            </div>
+        </div>
+        
+        <!-- End Right -->
+    </div>
+    <!-- End Page -->
+    <!-- Footer -->
+    <div id="footer">
+        Địa chỉ: Đường Nghiêm Xuân Yêm - Đại Kim - Hoàng Mai - Hà Nội<br />
+        Điện thoại hỗ trợ kỹ thuật:(04) 355 92 678 website <a href="http://www.thanglong.edu.vn">http://www.thanglong.edu.vn</a> mail:<a href="mailto:p.cntt@thanglong.edu.vn">p.cntt@thanglong.edu.vn</a><a
+            href='http://atgo.vn/member/svgo/QTQwNTkwfDE3LzA4LzIwMDJ8TkdVWeG7hE4gVsSCTnxQSE9OR3wwMzYyMDU2NjM0fG52cGhvbmcxNzA3QGdtYWlsLmNvbXxDaMawYSBjw7N8Q2jGsGEgY8Oz'>.</a>
+    </div>
+    <!-- End Footer -->
+
+     
+
+</body>
+</html>
+(g�X[�      d6d6Evd6   p    O^partitionKey=%28https%2Cthanglong.edu.vn%29,:https://dangkyhoc.thanglong.edu.vn/SinhVien/BangDiemSinhVien.aspx necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: text/html; charset=utf-8
+Server: Microsoft-IIS/8.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Wed, 12 Apr 2023 01:23:45 GMT
+Content-Length: 27923
+ original-response-headers Cache-Control: private
+Content-Type: text/html; charset=utf-8
+Server: Microsoft-IIS/8.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Wed, 12 Apr 2023 01:23:45 GMT
+Content-Length: 27923
+ ctid 1 uncompressed-len 0 net-response-time-onstart 281 net-response-time-onstop 291   m

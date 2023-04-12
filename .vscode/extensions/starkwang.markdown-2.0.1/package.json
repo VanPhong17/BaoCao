@@ -1,0 +1,96 @@
+{
+	"name": "markdown",
+	"displayName": "Markdown",
+	"description": "Markdown Paste Image To Qiniu OSS store",
+	"version": "2.0.1",
+	"publisher": "starkwang",
+	"icon": "images/icon.png",
+	"author": {
+		"name": "starkwang",
+		"email": "wsd312@163.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/wsdo/vscode-markdown-img-qiniu.git"
+	},
+	"homepage": "https://github.com/wsdo/vscode-markdown-img-qiniu.git/blob/master/README.md",
+	"bugs": {
+		"url": "https://github.com/wsdo/vscode-markdown-img-qiniu.git/issues"
+	},
+	"engines": {
+		"vscode": "^1.11.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.figimg"
+	],
+	"main": "./extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.figimg",
+				"title": "Paste Image To Oss"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.figimg",
+				"key": "ctrl+alt+v",
+				"mac": "cmd+alt+v",
+				"when": "editorTextFocus"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "config figimg",
+			"properties": {
+				"figimg.provider": {
+					"type": "string",
+					"default": "smms",
+					"description": "choice provider"
+				},
+				"figimg.token": {
+					"type": "string",
+					"default": "",
+					"description": "go to figimg.com get token"
+				},
+				"figimg.smmsToken": {
+					"type": "string",
+					"default": "",
+					"description": "go to sm.ms get token"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/mocha": "^2.2.32",
+		"@types/node": "^6.0.40",
+		"eslint": "^3.6.0",
+		"mocha": "^2.3.3",
+		"typescript": "^2.0.3",
+		"vscode": "^1.0.0"
+	},
+	"dependencies": {
+		"axios": "^0.27.2",
+		"form-data": "^4.0.0",
+		"moment": "^2.18.1",
+		"qiniu": "^7.7.0",
+		"request": "^2.88.2",
+		"vsce": "^2.9.1"
+	},
+	"__metadata": {
+		"id": "957be4ab-b0ef-413f-8f1d-6d6fac19c4eb",
+		"publisherId": "05a60502-ccf9-4ba4-9b6f-268f43531e2d",
+		"publisherDisplayName": "starkwang",
+		"targetPlatform": "undefined",
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1680705365956,
+		"preRelease": false
+	}
+}

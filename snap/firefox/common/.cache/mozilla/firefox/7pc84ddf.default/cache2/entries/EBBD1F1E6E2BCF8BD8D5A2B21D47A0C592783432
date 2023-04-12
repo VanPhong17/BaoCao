@@ -1,0 +1,743 @@
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+    									sURLVariables = sPageURL.split('&'),
+								        sParameterName,
+								        i;
+    //alert(sPageURL);
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+YUI({
+    debug: true,
+    useBrowserConsole: true,
+    filter: 'raw',
+    filters: {
+		slider: 'debug',
+		dd: 'debug'
+    }
+}).use('node', 'event', 'console', 'slider', 'sortable', 'panel', 'datatable', 'io', 'json-parse', function (Y) {
+	/*Display User Picture in Attempt Page*/
+	if (Y.one('#user-picture')!=null) {
+		var studentText = Y.one('#user-picture').get('text');
+		var stdId = studentText.search(/A[0-9]{5}\s/);
+		// console.log(studentText);
+		if (stdId>-1) {
+			var studentId = studentText.substr(stdId,6);
+			var studentIdUp = studentId.toUpperCase();
+			var studentFName = studentText.substr(6);
+			if (Y.one('#quiz-timer')!=null) { 
+				Y.one('#quiz-timer').remove();
+			}
+			
+			var _close_attempt_text = '';
+			if (window.location.href.indexOf('review.php')==-1)
+				var _close_attempt_text = '<div class="message">Sinh vi√™n kh√¥ng ƒë∆∞·ª£c ƒë√≥ng c·ª≠a s·ªï n√†y khi ch∆∞a k·∫øt th√∫c b√†i thi</div>';			
+			
+			var image_div = '<div id="custom_avatar"><div id="quiz-timer"><span id="quiz-time-left" class="tlu-quiz-time-left"></span></div><div id="student_img"><strong>'+studentIdUp+'<br/>'+studentFName+'</strong><img src="/tlu-custom/image.php?studentId='+studentId+'" height="auto" width="100" alt=""></div><div style="font-weight:bold;font-size:12pt"></div>'+_close_attempt_text+'</div>';
+			Y.one('#user-picture').append(image_div);
+			// Y.one('#user-picture').html(hidden_student);
+		}	
+	}
+	
+	/*Add the filter column in GradeParent view*/ 
+	var _category = Y.one(".gradeparent .category");
+	if (_category!=null) {		
+		_category.append('<a href="#" id="gradeparent_filterbyquizs" style="color:#fff">Filter By Quizs</a>');		
+		var _filterbyquiz_checkboxes = '';
+		Y.all("#user-grades tr:nth-child(3) th").each(function(node, index) {
+			var _text = node.get('text').substring(0,4).replace('W','Week ').replace('D',' Day ');
+				_filterbyquiz_checkboxes += '<li><input type="checkbox" class="filterbyquiz-chk" id="filterbyquiz-'+index+'">&nbsp;<label for="filterbyquiz-'+index+'">'+_text+'</label></li>';
+			node.addClass('filterbyquiz-'+index);				
+		});		
+		var dialog = new Y.Panel({
+			contentBox 	: Y.Node.create('<div id="filterbyquizs-dialog"/>'),
+			bodyContent	: '<div class="message icon-info filterbyquiz_content"><h5>Choose Quiz(s) for displaying below:</h5><ul class="filterbyquizs-list">'+_filterbyquiz_checkboxes+'</ul></div>',
+			width		: 410,
+			height     	: 350,
+			draggable  	: true,
+			underlay 	: 'none',
+			zIndex     	: 6,
+			centered   	: true,
+			modal      	: false, // modal behavior
+			render     	: '.example',
+			visible    	: false, // make visible explicitly with .show()
+			fixedcenter : false ,
+			constraintoviewport : true,
+			buttons    	: {
+				footer: [
+					{
+						name  : 'cancel',
+						label : 'Cancel',
+						action: 'onCancel'
+					},
+
+					{
+						name     : 'proceed',
+						label    : 'OK',
+						action   : 'onOK'
+					}
+				]
+			}
+		});		
+		Y.one('#filterbyquizs-dialog .yui3-widget-bd').setStyle('overflow-y','auto');
+		Y.one('#filterbyquizs-dialog .yui3-widget-bd').setStyle('overflow-x','hidden');
+		Y.one('#filterbyquizs-dialog .yui3-widget-bd').setStyle('position','relative');
+		dialog.onCancel = function (e) {
+			e.preventDefault();
+			this.hide();
+			// the callback is not executed, and is
+			// callback reference removed, so it won't persist
+			this.callback = false;
+		}
+
+		dialog.onOK = function (e) {
+			e.preventDefault();
+			this.hide();
+			// code that executes the user confirmed action goes here
+			Y.all(".filterbyquiz-chk").each(function (node, index) {
+				var _checked = this.get('checked'),
+					_id = this.get('id'),
+					_theads  = Y.one("#user-grades th."+_id),
+					_colspan = Y.one("#user-grades th."+_id).getAttribute('colspan'),
+					_class   = Y.one("#user-grades th."+_id).get('className'),
+					_colspan = parseInt(_colspan),					
+					_indexes = _id.split('-'),
+					_colindex = parseInt(_indexes[1]);
+				
+				/* console.log('_colindex='+_colindex);
+				console.log('_id='+_id); */
+				Y.all("#user-grades tr.heading th:gt(1").each(function(node,index){
+					node.addClass('hide-column');
+				});
+				if (_checked) {
+					Y.one("#user-grades tr th."+_id).removeClass('hide-column');					
+					Y.all("#user-grades tr").each(function(node,index){   
+					  if (node.getAttribute('data-uid')!='') {
+						for(i=_colindex;i<_colindex+_colspan;i++) {
+							var k_heading=i,
+								k_row=i+1;
+							Y.one("#user-grades tr.heading th:nth-child("+k_heading+")").removeClass('hide-column'); 
+							node.one('td:nth-child('+k_row+')').removeClass('hide-column');  
+						}
+					  }
+					});
+				}
+				else {
+					Y.one("#user-grades tr th."+_id).addClass('hide-column');
+					Y.all("#user-grades tr").each(function(node,index){   
+					  if (node.getAttribute('data-uid')!='') {
+						for(i=_colindex;i<_colindex+_colspan;i++) {
+							var k_heading=i,
+								k_row=i+1;
+							Y.one("#user-grades tr.heading th:nth-child("+k_heading+")").addClass('hide-column'); 
+							node.one('td:nth-child('+k_row+')').addClass('hide-column');  
+						}
+					  }
+					});
+				}
+				//Y.all("#user-grades tr:gt(3) td:gt(3):lt(10)").hide();
+				/* Y.all(_th).show();
+				Y.all(_td).show(); */
+				/* if (_checked) {					
+					Y.all(_th).show();
+					Y.all(_td).show();
+				}
+				else { 
+					Y.all(_th).hide();
+					Y.all(_td).hide();
+				} */
+				
+			});
+			if(this.callback){
+			   this.callback();
+			}
+			// callback reference removed, so it won't persist
+			this.callback = false;
+		}
+
+		
+		Y.one("#gradeparent_filterbyquizs").on('click',function(e){
+			dialog.show();
+			e.preventDefault();
+		});
+	}
+	/*Fix the "'" (on mobile), the last "." & "?", double spaces character*/
+	//a.endtestlink
+	var _responseform = Y.one("#responseform");
+	if (_responseform!=null) {
+		_responseform.on('submit',function(evt){
+			var _cancel = false;
+			//evt.preventDefault();	
+			Y.all(".subquestion input[type=text]").each(function (node, index) {			
+				var _value = node.get('value').replace( /  +/g, ' ' ).trim();
+				if (_value.indexOf("`")>-1 || _value.indexOf("‚Äò")>-1 || _value.indexOf("‚Äô")>-1) {
+					_cancel = true;
+					_value = _value.replace("`","'").replace("‚Äò","'").replace("‚Äô","'");
+				}				
+				var _last = _value.slice(-1);
+				if (_last=='.' || _last=='?') {
+					_cancel = true;
+					_value=_value.slice(0,-1);
+				}
+				node.set('value', _value);
+			}); 
+			if (_cancel) {				
+				console.log("Invalid characters have been fixed");
+				//evt.preventDefault();				
+				//window.location.reload(true);
+			}		 
+		});
+	}
+	
+	var nav_navbar_dropdownmenu = Y.one('.nav.navbar-nav .dropdown-menu');
+	
+	var _usertext = Y.one("span.usertext");
+    var _usertext = _usertext!=null?_usertext.get('text'):'';
+    if (md5(_usertext)!='afb394694ec8581da6e680aa4dbee3c6') {
+      Y.all("form#chooserform div.alloptions div.option").each(function (node, index) {
+          var _text = node.get('text');
+          if (_text.indexOf('BigBlueButtonBN')>-1 || _text.indexOf('RecordingsBN')>-1) {
+              node.remove();
+          }
+      });
+    }
+
+	var url = window.location.href;
+	if (nav_navbar_dropdownmenu!=null && (
+			url.indexOf('course/view.php?id=')>0 ||
+			url.indexOf('courseid=')>0)
+	    ){
+		if (url.indexOf('course/view.php?id=')>0)
+			var _courseId = getUrlParameter('id');
+		if (url.indexOf('courseid=')>0)
+			var _courseId = getUrlParameter('courseid');
+
+
+		var importquestion_obj =  Y.Node.create('<a class="dropdown-item" href="/question/import.php?courseid='+_courseId+'" title="Import Questions">Import Questions</a>');
+		nav_navbar_dropdownmenu.insert(importquestion_obj);
+
+		var category_obj =  Y.Node.create('<a class="dropdown-item" href="/question/category.php?courseid='+_courseId+'" title="Question Categories">Question Categories</a>');
+		nav_navbar_dropdownmenu.insert(category_obj); 
+
+		var enrol_obj =  Y.Node.create('<a class="dropdown-item" href="/user/index.php?id='+_courseId+'" title="Enrol Users">Enrol Users</a>');
+		nav_navbar_dropdownmenu.insert(enrol_obj);
+
+		var group_obj =  Y.Node.create('<a class="dropdown-item" href="/group/index.php?id='+_courseId+'" title="Groups">Groups</a>');
+		nav_navbar_dropdownmenu.insert(group_obj);
+		
+		var grade_obj =  Y.Node.create('<a class="dropdown-item" href="/grade/edit/tree/index.php?id='+_courseId+'" title="Grade">Grade Setup</a>');
+		nav_navbar_dropdownmenu.insert(grade_obj);
+
+	}
+
+	/*Insert Turn Editing On*/
+	Y.all("div.dropdown-item a").each(function (node, index) {
+		var _text = node.get('text');
+		//Y.log(node);
+		//if (_text=='Turn editing on' || _text=='Turn editing off') {
+		//	nav_navbar_dropdownmenu.insert(node);
+		//}
+	});
+
+	/*Remove dl button in audio*/
+	/*
+	Y.all("audio").each(function (node, index) {
+	  node.data('controlsList','nodownload');
+	});
+	*/
+
+	var ul = document.querySelectorAll('ul.multicols');
+	for (var ulIndex = ul.length - 1; ulIndex >= 0; ulIndex--) {
+		for (var i = ul[ulIndex].children.length; i >= 0; i--) {
+			ul[ulIndex].appendChild(ul[ulIndex].children[Math.random() * i | 0]);
+		}
+	}
+	
+	/*Insert QuizID into question panel: for ADM's checking only */
+	Y.all("div.que div.info").each(function (node, index) {
+		var _qid = getUrlParameter('attempt');
+		node.append('<div style="text-align:center;font-weight:bold;font-size:1.2em">'+_qid+'</div>');
+	});
+	
+	/*Change Login button to Google OAUTH2*/
+	var username = Y.one('#username');
+	if (username!=null) {
+		username.on('blur', function (e) {
+			var _username = username.get("value");
+			Y.io('/tlu-custom/index.php?controller=student-tool&action=get-auth', {
+				method: 'POST',
+				data: {username:_username},
+				on: {
+					success: function (id, result) {
+						var _auth = result.responseText;
+						var _gglogin = Y.one("a[title=Google]").get("href");
+						if (result.responseText=='oauth2')
+							Y.one("form#login").set("action",_gglogin);
+						else 
+							Y.one("form#login").set("action",'/login/index.php');
+					},
+					failure : function (x,o) {
+						alert("Async call failed!");
+					}
+				}
+			});
+		});
+		/*Insert Google Logout iframe*/
+		var _html = Y.one('body');
+
+		Y.Node.create('<iframe id="logoutframe" src="https://accounts.google.com/logout" style="display: none"></iframe>').appendTo(_html);
+		
+	}
+	
+	/*User Picture when do the attempt*/
+	// if (url.indexOf('/mod/quiz/attempt.php?attempt=')>0 ||) {
+	if (url.indexOf('debugpicture=')>0) {
+		var _html = Y.one('body');
+
+		Y.Node.create('<div class="user-picture" style="position: fixed;top: 40px;right: 21px;z-index: 999;width: 100px;text-align: center;" id="yui_3_17_2_1_1541667332369_136"><div id="quiz-timer" style="display: block;"><span id="quiz-time-left" class="tlu-quiz-time-left">0:14:12</span></div><div id="student_img"><strong>A00000<br> Admin User</strong><img src="/tlu-custom/image.php?studentId=A00000" alt="" width="100" height="auto"></div><div style="font-weight:bold;font-size:12pt"></div><strong>A00000<br> Admin User</strong><img src="/tlu-custom/image.php?studentId=A00000" alt="" width="100" height="auto"></div>').appendTo(_html);
+	}
+	if (Y.one('.logselecform select#menuuser')!=null) {
+		console.log('Injecting into log form...'); 
+		var _searchNode = Y.Node.create('<input type="textbox" id="searchtxtuser" class="input searchtxtuser" placeholder="userid">');
+		Y.one('.logselecform select#menuuser').set('html','');
+		Y.one('.logselecform select#menuuser').insert(_searchNode,'after');
+		Y.one('.logselecform #searchtxtuser').on('blur',function(){
+			var _selectedId = Y.one('.logselecform #searchtxtuser').get('value');			
+			if (parseInt(_selectedId)>0) {
+				Y.one('.logselecform').set('action','/report/log/index.php?id=1&modid=0&showcourses=1&showusers=1&logreader=logstore_standard');
+				this.set('name','user');
+				Y.one('.logselecform select#menuuser').set('name','_user');
+				Y.one('.logselecform input[name=showusers]').set('value',1);
+				Y.one('.logselecform input[name=showcourses]').set('value',1);
+			}
+			else {
+				Y.one('.logselecform').set('action','/report/log/index.php?logreader=logstore_standard');
+				this.set('name','_user');
+				Y.one('.logselecform select#menuuser').set('name','user');
+				Y.one('.logselecform input[name=showusers]').set('value',0);
+				Y.one('.logselecform input[name=showcourses]').set('value',0);
+			}
+		});
+		console.log('Injected into log form');  
+	}
+	else console.log('not log form'); 
+	/*Remove "insert moodle media"*/
+	//Y.all("#id_questiontext_moodlemedia").remove();
+	
+	
+});
+        ¯Ñ  x¯Ñ{   20230321162322-8l;   https://elearning.thanglong.edu.vn/tlu-custom/js/tlu-YUI.js   À3  var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+    									sURLVariables = sPageURL.split('&'),
+								        sParameterName,
+								        i;
+    //alert(sPageURL);
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+YUI({
+    debug: true,
+    useBrowserConsole: true,
+    filter: 'raw',
+    filters: {
+		slider: 'debug',
+		dd: 'debug'
+    }
+}).use('node', 'event', 'console', 'slider', 'sortable', 'panel', 'datatable', 'io', 'json-parse', function (Y) {
+	/*Display User Picture in Attempt Page*/
+	if (Y.one('#user-picture')!=null) {
+		var studentText = Y.one('#user-picture').get('text');
+		var stdId = studentText.search(/A[0-9]{5}\s/);
+		// console.log(studentText);
+		if (stdId>-1) {
+			var studentId = studentText.substr(stdId,6);
+			var studentIdUp = studentId.toUpperCase();
+			var studentFName = studentText.substr(6);
+			if (Y.one('#quiz-timer')!=null) { 
+				Y.one('#quiz-timer').remove();
+			}
+			
+			var _close_attempt_text = '';
+			if (window.location.href.indexOf('review.php')==-1)
+				var _close_attempt_text = '<div class="message">Sinh vi√™n kh√¥ng ƒë∆∞·ª£c ƒë√≥ng c·ª≠a s·ªï n√†y khi ch∆∞a k·∫øt th√∫c b√†i thi</div>';			
+			
+			var image_div = '<div id="custom_avatar"><div id="quiz-timer"><span id="quiz-time-left" class="tlu-quiz-time-left"></span></div><div id="student_img"><strong>'+studentIdUp+'<br/>'+studentFName+'</strong><img src="/tlu-custom/image.php?studentId='+studentId+'" height="auto" width="100" alt=""></div><div style="font-weight:bold;font-size:12pt"></div>'+_close_attempt_text+'</div>';
+			Y.one('#user-picture').append(image_div);
+			// Y.one('#user-picture').html(hidden_student);
+		}	
+	}
+	
+	/*Add the filter column in GradeParent view*/ 
+	var _category = Y.one(".gradeparent .category");
+	if (_category!=null) {		
+		_category.append('<a href="#" id="gradeparent_filterbyquizs" style="color:#fff">Filter By Quizs</a>');		
+		var _filterbyquiz_checkboxes = '';
+		Y.all("#user-grades tr:nth-child(3) th").each(function(node, index) {
+			var _text = node.get('text').substring(0,4).replace('W','Week ').replace('D',' Day ');
+				_filterbyquiz_checkboxes += '<li><input type="checkbox" class="filterbyquiz-chk" id="filterbyquiz-'+index+'">&nbsp;<label for="filterbyquiz-'+index+'">'+_text+'</label></li>';
+			node.addClass('filterbyquiz-'+index);				
+		});		
+		var dialog = new Y.Panel({
+			contentBox 	: Y.Node.create('<div id="filterbyquizs-dialog"/>'),
+			bodyContent	: '<div class="message icon-info filterbyquiz_content"><h5>Choose Quiz(s) for displaying below:</h5><ul class="filterbyquizs-list">'+_filterbyquiz_checkboxes+'</ul></div>',
+			width		: 410,
+			height     	: 350,
+			draggable  	: true,
+			underlay 	: 'none',
+			zIndex     	: 6,
+			centered   	: true,
+			modal      	: false, // modal behavior
+			render     	: '.example',
+			visible    	: false, // make visible explicitly with .show()
+			fixedcenter : false ,
+			constraintoviewport : true,
+			buttons    	: {
+				footer: [
+					{
+						name  : 'cancel',
+						label : 'Cancel',
+						action: 'onCancel'
+					},
+
+					{
+						name     : 'proceed',
+						label    : 'OK',
+						action   : 'onOK'
+					}
+				]
+			}
+		});		
+		Y.one('#filterbyquizs-dialog .yui3-widget-bd').setStyle('overflow-y','auto');
+		Y.one('#filterbyquizs-dialog .yui3-widget-bd').setStyle('overflow-x','hidden');
+		Y.one('#filterbyquizs-dialog .yui3-widget-bd').setStyle('position','relative');
+		dialog.onCancel = function (e) {
+			e.preventDefault();
+			this.hide();
+			// the callback is not executed, and is
+			// callback reference removed, so it won't persist
+			this.callback = false;
+		}
+
+		dialog.onOK = function (e) {
+			e.preventDefault();
+			this.hide();
+			// code that executes the user confirmed action goes here
+			Y.all(".filterbyquiz-chk").each(function (node, index) {
+				var _checked = this.get('checked'),
+					_id = this.get('id'),
+					_theads  = Y.one("#user-grades th."+_id),
+					_colspan = Y.one("#user-grades th."+_id).getAttribute('colspan'),
+					_class   = Y.one("#user-grades th."+_id).get('className'),
+					_colspan = parseInt(_colspan),					
+					_indexes = _id.split('-'),
+					_colindex = parseInt(_indexes[1]);
+				
+				/* console.log('_colindex='+_colindex);
+				console.log('_id='+_id); */
+				Y.all("#user-grades tr.heading th:gt(1").each(function(node,index){
+					node.addClass('hide-column');
+				});
+				if (_checked) {
+					Y.one("#user-grades tr th."+_id).removeClass('hide-column');					
+					Y.all("#user-grades tr").each(function(node,index){   
+					  if (node.getAttribute('data-uid')!='') {
+						for(i=_colindex;i<_colindex+_colspan;i++) {
+							var k_heading=i,
+								k_row=i+1;
+							Y.one("#user-grades tr.heading th:nth-child("+k_heading+")").removeClass('hide-column'); 
+							node.one('td:nth-child('+k_row+')').removeClass('hide-column');  
+						}
+					  }
+					});
+				}
+				else {
+					Y.one("#user-grades tr th."+_id).addClass('hide-column');
+					Y.all("#user-grades tr").each(function(node,index){   
+					  if (node.getAttribute('data-uid')!='') {
+						for(i=_colindex;i<_colindex+_colspan;i++) {
+							var k_heading=i,
+								k_row=i+1;
+							Y.one("#user-grades tr.heading th:nth-child("+k_heading+")").addClass('hide-column'); 
+							node.one('td:nth-child('+k_row+')').addClass('hide-column');  
+						}
+					  }
+					});
+				}
+				//Y.all("#user-grades tr:gt(3) td:gt(3):lt(10)").hide();
+				/* Y.all(_th).show();
+				Y.all(_td).show(); */
+				/* if (_checked) {					
+					Y.all(_th).show();
+					Y.all(_td).show();
+				}
+				else { 
+					Y.all(_th).hide();
+					Y.all(_td).hide();
+				} */
+				
+			});
+			if(this.callback){
+			   this.callback();
+			}
+			// callback reference removed, so it won't persist
+			this.callback = false;
+		}
+
+		
+		Y.one("#gradeparent_filterbyquizs").on('click',function(e){
+			dialog.show();
+			e.preventDefault();
+		});
+	}
+	/*Fix the "'" (on mobile), the last "." & "?", double spaces character*/
+	//a.endtestlink
+	var _responseform = Y.one("#responseform");
+	if (_responseform!=null) {
+		_responseform.on('submit',function(evt){
+			var _cancel = false;
+			//evt.preventDefault();	
+			Y.all(".subquestion input[type=text]").each(function (node, index) {			
+				var _value = node.get('value').replace( /  +/g, ' ' ).trim();
+				if (_value.indexOf("`")>-1 || _value.indexOf("‚Äò")>-1 || _value.indexOf("‚Äô")>-1) {
+					_cancel = true;
+					_value = _value.replace("`","'").replace("‚Äò","'").replace("‚Äô","'");
+				}				
+				var _last = _value.slice(-1);
+				if (_last=='.' || _last=='?') {
+					_cancel = true;
+					_value=_value.slice(0,-1);
+				}
+				node.set('value', _value);
+			}); 
+			if (_cancel) {				
+				console.log("Invalid characters have been fixed");
+				//evt.preventDefault();				
+				//window.location.reload(true);
+			}		 
+		});
+	}
+	
+	var nav_navbar_dropdownmenu = Y.one('.nav.navbar-nav .dropdown-menu');
+	
+	var _usertext = Y.one("span.usertext");
+    var _usertext = _usertext!=null?_usertext.get('text'):'';
+    if (md5(_usertext)!='afb394694ec8581da6e680aa4dbee3c6') {
+      Y.all("form#chooserform div.alloptions div.option").each(function (node, index) {
+          var _text = node.get('text');
+          if (_text.indexOf('BigBlueButtonBN')>-1 || _text.indexOf('RecordingsBN')>-1) {
+              node.remove();
+          }
+      });
+    }
+
+	var url = window.location.href;
+	if (nav_navbar_dropdownmenu!=null && (
+			url.indexOf('course/view.php?id=')>0 ||
+			url.indexOf('courseid=')>0)
+	    ){
+		if (url.indexOf('course/view.php?id=')>0)
+			var _courseId = getUrlParameter('id');
+		if (url.indexOf('courseid=')>0)
+			var _courseId = getUrlParameter('courseid');
+
+
+		var importquestion_obj =  Y.Node.create('<a class="dropdown-item" href="/question/import.php?courseid='+_courseId+'" title="Import Questions">Import Questions</a>');
+		nav_navbar_dropdownmenu.insert(importquestion_obj);
+
+		var category_obj =  Y.Node.create('<a class="dropdown-item" href="/question/category.php?courseid='+_courseId+'" title="Question Categories">Question Categories</a>');
+		nav_navbar_dropdownmenu.insert(category_obj); 
+
+		var enrol_obj =  Y.Node.create('<a class="dropdown-item" href="/user/index.php?id='+_courseId+'" title="Enrol Users">Enrol Users</a>');
+		nav_navbar_dropdownmenu.insert(enrol_obj);
+
+		var group_obj =  Y.Node.create('<a class="dropdown-item" href="/group/index.php?id='+_courseId+'" title="Groups">Groups</a>');
+		nav_navbar_dropdownmenu.insert(group_obj);
+		
+		var grade_obj =  Y.Node.create('<a class="dropdown-item" href="/grade/edit/tree/index.php?id='+_courseId+'" title="Grade">Grade Setup</a>');
+		nav_navbar_dropdownmenu.insert(grade_obj);
+
+	}
+
+	/*Insert Turn Editing On*/
+	Y.all("div.dropdown-item a").each(function (node, index) {
+		var _text = node.get('text');
+		//Y.log(node);
+		//if (_text=='Turn editing on' || _text=='Turn editing off') {
+		//	nav_navbar_dropdownmenu.insert(node);
+		//}
+	});
+
+	/*Remove dl button in audio*/
+	/*
+	Y.all("audio").each(function (node, index) {
+	  node.data('controlsList','nodownload');
+	});
+	*/
+
+	var ul = document.querySelectorAll('ul.multicols');
+	for (var ulIndex = ul.length - 1; ulIndex >= 0; ulIndex--) {
+		for (var i = ul[ulIndex].children.length; i >= 0; i--) {
+			ul[ulIndex].appendChild(ul[ulIndex].children[Math.random() * i | 0]);
+		}
+	}
+	
+	/*Insert QuizID into question panel: for ADM's checking only */
+	Y.all("div.que div.info").each(function (node, index) {
+		var _qid = getUrlParameter('attempt');
+		node.append('<div style="text-align:center;font-weight:bold;font-size:1.2em">'+_qid+'</div>');
+	});
+	
+	/*Change Login button to Google OAUTH2*/
+	var username = Y.one('#username');
+	if (username!=null) {
+		username.on('blur', function (e) {
+			var _username = username.get("value");
+			Y.io('/tlu-custom/index.php?controller=student-tool&action=get-auth', {
+				method: 'POST',
+				data: {username:_username},
+				on: {
+					success: function (id, result) {
+						var _auth = result.responseText;
+						var _gglogin = Y.one("a[title=Google]").get("href");
+						if (result.responseText=='oauth2')
+							Y.one("form#login").set("action",_gglogin);
+						else 
+							Y.one("form#login").set("action",'/login/index.php');
+					},
+					failure : function (x,o) {
+						alert("Async call failed!");
+					}
+				}
+			});
+		});
+		/*Insert Google Logout iframe*/
+		var _html = Y.one('body');
+
+		Y.Node.create('<iframe id="logoutframe" src="https://accounts.google.com/logout" style="display: none"></iframe>').appendTo(_html);
+		
+	}
+	
+	/*User Picture when do the attempt*/
+	// if (url.indexOf('/mod/quiz/attempt.php?attempt=')>0 ||) {
+	if (url.indexOf('debugpicture=')>0) {
+		var _html = Y.one('body');
+
+		Y.Node.create('<div class="user-picture" style="position: fixed;top: 40px;right: 21px;z-index: 999;width: 100px;text-align: center;" id="yui_3_17_2_1_1541667332369_136"><div id="quiz-timer" style="display: block;"><span id="quiz-time-left" class="tlu-quiz-time-left">0:14:12</span></div><div id="student_img"><strong>A00000<br> Admin User</strong><img src="/tlu-custom/image.php?studentId=A00000" alt="" width="100" height="auto"></div><div style="font-weight:bold;font-size:12pt"></div><strong>A00000<br> Admin User</strong><img src="/tlu-custom/image.php?studentId=A00000" alt="" width="100" height="auto"></div>').appendTo(_html);
+	}
+	if (Y.one('.logselecform select#menuuser')!=null) {
+		console.log('Injecting into log form...'); 
+		var _searchNode = Y.Node.create('<input type="textbox" id="searchtxtuser" class="input searchtxtuser" placeholder="userid">');
+		Y.one('.logselecform select#menuuser').set('html','');
+		Y.one('.logselecform select#menuuser').insert(_searchNode,'after');
+		Y.one('.logselecform #searchtxtuser').on('blur',function(){
+			var _selectedId = Y.one('.logselecform #searchtxtuser').get('value');			
+			if (parseInt(_selectedId)>0) {
+				Y.one('.logselecform').set('action','/report/log/index.php?id=1&modid=0&showcourses=1&showusers=1&logreader=logstore_standard');
+				this.set('name','user');
+				Y.one('.logselecform select#menuuser').set('name','_user');
+				Y.one('.logselecform input[name=showusers]').set('value',1);
+				Y.one('.logselecform input[name=showcourses]').set('value',1);
+			}
+			else {
+				Y.one('.logselecform').set('action','/report/log/index.php?logreader=logstore_standard');
+				this.set('name','_user');
+				Y.one('.logselecform select#menuuser').set('name','user');
+				Y.one('.logselecform input[name=showusers]').set('value',0);
+				Y.one('.logselecform input[name=showcourses]').set('value',0);
+			}
+		});
+		console.log('Injected into log form');  
+	}
+	else console.log('not log form'); 
+	/*Remove "insert moodle media"*/
+	//Y.all("#id_questiontext_moodlemedia").remove();
+	
+	
+});
+”ò¿ŸÂ   Â          ØI[!      getUrlParameter    Äàª      sParam     pQª-      sPageURL   ¯2áâ      window     0+QA      location   ﬂY„	      substring      A@≥«      sURLVariables      &—˜ı      sParameterName     arÑ      YUI	    .`      debug
+      \S       useBrowserConsole      >	≈      filter     ìΩ‡
+      filters    ûK      slider     vZÉ      use    &`°›      node   II∑P      event      ˛Q1      console    FWßË      sortable   ~õ›&      panel      pö,	      datatable      	üK
+      json-parse     ®◊=l      #user-picture      ∞Ípú      studentText    à3¿µ      text   ˜∏Ï˚      stdId      K,≠≠      A[0-9]{5}\s    æK˛2	      studentId      6ôfÿ      substr     Û…Œ√      studentIdUp    ¨‚s◊      toUpperCase    TÚF      studentFName    è|£Í      #quiz-timer!    *N∑∆      remove"     ∂êG¿      _close_attempt_text#    ª©`X      href$   ⁄Eú¡      indexOf%    q„ü˙
+      review.php&     {0 _Y      < d i v   c l a s s = " m e s s a g e " > S i n h   v i Í n   k h Ù n g   ∞„c   Û n g   c Ìa   s ’  n ‡ y   k h i   c h ∞a   k øt   t h ˙ c   b ‡ i   t h i < / d i v > '     ±Õ®	      image_div(      Ñ≥`ç      <div id="custom_avatar"><div id="quiz-timer"><span id="quiz-time-left" class="tlu-quiz-time-left"></span></div><div id="student_img"><strong>)      Ôü      <br/>*      ™‚Ë3      </strong><img src="/tlu-custom/image.php?studentId=+    Ç8•\      " height="auto" width="100" alt=""></div><div style="font-weight:bold;font-size:12pt"></div>,   ©è^      </div>-     ‹B-      append.     ùN¬	      _category/      »A      .gradeparent .category0     [óQ      <a href="#" id="gradeparent_filterbyquizs" style="color:#fff">Filter By Quizs</a>1      (∑÷n      _filterbyquiz_checkboxes2   £’/Â      all3    fı.À      #user-grades tr:nth-child(3) th4    Ë∂S      _text5      eqD      Week 6      !™ÿ˝       Day 7      Ix0E      <li><input type="checkbox" class="filterbyquiz-chk" id="filterbyquiz-8      ê‚¶Q!      ">&nbsp;<label for="filterbyquiz-9      +®¢      ">:     WHbt      </label></li>;      Bå|      addClass<   ˇáçÀ      filterbyquiz-=      ‘πm      dialog>     >†’(      Panel?      mÎÎ
+      contentBox@     â¢°      NodeA   :	∂#      createB     –5çD       <div id="filterbyquizs-dialog"/>C   ˘œ      bodyContentD    ≥≥™Ä      <div class="message icon-info filterbyquiz_content"><h5>Choose Quiz(s) for displaying below:</h5><ul class="filterbyquizs-list">E   Ë5à‘      </ul></div>F    ÎƒJ˚      widthG      ∑…≈      heightH     HL
+	      draggableI      ¨4      underlayJ   ,Ω      noneK   f˜      zIndexL     0j      centeredM    ∫˚      modalN      ‘ÍÕ˜      renderO     Äw„É      .exampleP   ?Iqõ      visibleQ    ∏j¥Ò      fixedcenterR    ï5GL      constraintoviewportS    \éã      buttonsT    â>Ç˚      footerU     &Ùê⁄      CancelV     	‡Ï      actionW     \1Y˚      onCancelX   k∫      proceedY    ∆Œ‡^      onOKZ   ŒΩJ™%      #filterbyquizs-dialog .yui3-widget-bd[      ﬁW ä      setStyle\   øˆÜ
+      overflow-y]     z¡≤S      auto^   }Ov
+      overflow-x_     Ñ€ËW      hidden`     »Åí      positiona   Ï-k      relativeb   B9∫¿      preventDefaultc     üvÙ}      hided   Ë€˘      callbacke   üT‡x      .filterbyquiz-chkf      bVDŸ      _checkedg   »:0ó      checkedh    .¸%∞      _idi    ’¿øN      _theadsj    çÕl      #user-grades th.k   ^OÎ      _colspanl   4>ÙE      getAttributem   ˙∏mŸ      colspann    !¿∆∏      _classo     6CY>	      classNamep      ’)q      _indexesq    ¸;	      _colindexr      …ã@o      #user-grades tr.heading th:gt(1s    2\å}      hide-columnt    GÙ„
+      #user-grades tr th.u    ˆ+      removeClassv    Î±P"      #user-grades trw    ‹’OÓ      data-uidx   ,Dk	      k_headingy      ¯tÜ÷      k_rowz      ?Ld%      #user-grades tr.heading th:nth-child({      T`ÊU      td:nth-child(|      ƒEßÕ      #gradeparent_filterbyquizs}     ü™‚X      click~      HáíK      show   Tˇ¡ñ      _responseformÄ      lß∞~      #responseformÅ      dÙ∂      submitÇ     Ûçg      evtÉ    ›®ñ      _cancelÑ    kÙuù      .subquestion input[type=text]Ö      ˇ∆.	      _valueÜ     °’¨7        +á    óñôb      trimà   Xâjƒ       â     ¢b       ä     l*á      _lastã      ÿÖ Ã      sliceå      =X˚      logç    3˜k"      Invalid characters have been fixedé     ë,	&      nav_navbar_dropdownmenuè    |π6™      .nav.navbar-nav .dropdown-menuê     Ÿ=»	      _usertextë      ËK‹      span.usertextí      ≥Õ:      md5ì    6≠<°       afb394694ec8581da6e680aa4dbee3c6î   qª™¯*      form#chooserform div.alloptions div.optionï     ª˘÷ü      BigBlueButtonBNñ    ¢ sI      RecordingsBNó   b[Æ      course/view.php?id=ò    GF√;	      courseid=ô      ¸™gü	      _courseIdö      ˛Öa      courseidõ   =zª:      importquestion_objú     NLNL=      <a class="dropdown-item" href="/question/import.php?courseid=ù      ∫;›/      " title="Import Questions">Import Questions</a>û    ﬁô«	      insertü     B∂mΩ      category_obj†   ±õ!1?      <a class="dropdown-item" href="/question/category.php?courseid=°    Ù¶,Ô5      " title="Question Categories">Question Categories</a>¢      Ôè
+	      enrol_obj£      √Û922      <a class="dropdown-item" href="/user/index.php?id=§     gnï%      " title="Enrol Users">Enrol Users</a>•      ˆÒ¯∂	      group_obj¶      XJò⁄3      <a class="dropdown-item" href="/group/index.php?id=ß    ¶–r      " title="Groups">Groups</a>®    ˇÜ&0	      grade_obj©      s#‡R=      <a class="dropdown-item" href="/grade/edit/tree/index.php?id=™      )Í˜      " title="Grade">Grade Setup</a>´    âÅ”      div.dropdown-item a¨    ∏OÄ      document≠   #•ç      querySelectorAllÆ   U˙˝|      ul.multicolsØ   )Ì      ulIndex∞    
+}N      children±   ≠$~      appendChild≤    '∂Ä≈      random≥     %äí!      div.que div.info¥   0ªˆ      _qidµ   ¢âô      attempt∂    ÷GÃ@@      <div style="text-align:center;font-weight:bold;font-size:1.2em">∑   /©¬%      username∏   èÜK	      #usernameπ      ƒ∫·%      blur∫   ©qCœ	      _usernameª      ÷ÁGi=      /tlu-custom/index.php?controller=student-tool&action=get-authº      Ωpwm      methodΩ     ﬂ:      POSTæ   6ó(Å      dataø   …©\9      success¿    >ç      _auth¡      H}ı#      responseText¬   Œ2“      _gglogin√   &Ú7      a[title=Google]ƒ    ,\Ê      oauth2≈     ≠öˆ
+      form#login∆     —;“      /login/index.php«   ŸΩ>R      failure»    “Ô¢Z      alert…      }ä6      Async call failed!      –I;      _htmlÀ      òh;      bodyÃ   $ha      <iframe id="logoutframe" src="https://accounts.google.com/logout" style="display: none"></iframe>Õ      †Á„V      appendToŒ   I6¬c      debugpicture=œ      •5‰W     <div class="user-picture" style="position: fixed;top: 40px;right: 21px;z-index: 999;width: 100px;text-align: center;" id="yui_3_17_2_1_1541667332369_136"><div id="quiz-timer" style="display: block;"><span id="quiz-time-left" class="tlu-quiz-time-left">0:14:12</span></div><div id="student_img"><strong>A00000<br> Admin User</strong><img src="/tlu-custom/image.php?studentId=A00000" alt="" width="100" height="auto"></div><div style="font-weight:bold;font-size:12pt"></div><strong>A00000<br> Admin User</strong><img src="/tlu-custom/image.php?studentId=A00000" alt="" width="100" height="auto"></div>–    ’ˆzs      .logselecform select#menuuser—      â-/,      Injecting into log form...“     ïÍ/      _searchNode”    ®µ$ÚZ      <input type="textbox" id="searchtxtuser" class="input searchtxtuser" placeholder="userid">‘     ‘„X      html’   ç≥T      after÷      …±Ô      .logselecform #searchtxtuser◊   ?$∏      _selectedIdÿ    ‰xö}      .logselecformŸ      ÂhìàX      /report/log/index.php?id=1&modid=0&showcourses=1&showusers=1&logreader=logstore_standard⁄   ÈÜƒª      user€   t_%à      _user‹      ‘6iá#      .logselecform input[name=showusers]›    fHP∫%      .logselecform input[name=showcourses]ﬁ      {øa1      /report/log/index.php?logreader=logstore_standardﬂ      ú7µ„      Injected into log form‡     ∆+[€      not log form·   J‹¡R      dialog.onCancel‚    X4‚z      dialog.onOK„    °¢‰Ê      dialog.onOK/<‰      mâ?      dialog.onOK/</<        O               	   Ô%,â                                                                                                                                                                                         	                 
+                                                                                                                                                              ≥Oåc                                             i              Y `    ô    =  Pé  õ  ®       i `•  ê  "  '  ï Ø      ∑  Pü  1  P¢  ›  “  .                Ÿ   4              e  o               e  o   
+              Ÿ   f  h  i  k  Pn  p  q  Po                  Ÿ                 Ÿ   x  y                Ÿ   x  y               e               Ç  É  P              Ÿ   Ö  ä                Ÿ   4                Ÿ   4                Ÿ   ¥              e  ∫              ç z  ¿  ¬               x  o                ◊  o   Ø¬0∞      Ü     IÙ$KEÆ˙ö         	  
+                 	  M 	     F    ?  C  F  G  H  I  K  L  M  N  P  Q  R  S         T          +    V        +    V        º  æ         ∑     
+     ø  «  á&’™ç!´!   »     »   Å                 
+        –    ±   j   ¿   ’¥    8   :   :      :   8	   :
+   p ◊H   ⁄                           j   t
+ ’°*`PK`P; 6 6 : J PJ≤ PDÄ NP X  H  ›          	            ¥    ¥   H   H   ◊H   ⁄p p √   ’∂   ◊H   ⁄   p √  ’√  ’î	   ∂  ∂  H	   ñ}   ì   ∂  ∂  I◊H   ⁄
+   p √  ’∂  Iµ  ñ7   ì   ∂  I¥   ñ   ì   ï   ì   ∂  Iì   ûì   ∂  .'√  ’ïtˇˇˇì   °0 `Pù *P#ˇˇˇËP8 `Pê 	PH 	`P&fPò0 `Pï "PH	 `Pî0 `P¨@F *`Pï@P X         F   ë   Ñ  d  Ë	                     ∑   ◊H   ⁄   p ñ}  ì   ∑   ◊H   ⁄   p ◊H   ⁄   p √  ’∂  ◊H   ⁄i   p √   ’∂   ˇñ,  ì   ∂  ◊H   ⁄∂   p √  ’∂  ◊H   ⁄p  √  ’∂  ◊H   ⁄p √  ’∑   ◊H   ⁄	   p ñ)   ì   ∑   ◊H   ⁄	   p ◊H
+   ⁄t  ’ì      √  ’¥   H   H   ◊H   ⁄   p ˇñ   ì!      √  ’ì!      ∂  %   %∂  %   %∂  %   %∂  %   %√  ’∑   ◊H   ⁄   p ◊H   ⁄∂  t ’ì-   ∑   ◊H   ⁄   p √  ’∂  ñ  ì1   ∂  ◊H   ⁄   t ’   ƒ   ’∑   ◊H   ⁄   p ◊H   ⁄j   t ’∑   H   }7   ∑   H    ◊H!   ⁄"   p :#   $   ∑   %%   %:&   ö:'   ^:(   :)   *   :+   :,   :-   :.   /   :0   :1   :2   :3   74   e   75   6   :7   8   :9   :   :;   f    7<   =   :7   >   :9   ?   :;   f   :@   :A   Ÿ  ~ ƒ   ’∑   ◊H   ⁄B   p ◊HC   ⁄D   E   t ’∑   ◊H   ⁄B   p ◊HC   ⁄F   G   t ’∑   ◊H   ⁄B   p ◊HC   ⁄H   I   t ’∑   jJ   J:   ’∑   jK   J?   ’∑   ◊H   ⁄L   p ◊HM   ⁄N   jO   t ’ìj   ∑   ◊H   ⁄P   p √  ’∂  ñ#   ìn   ∂  ◊HM   ⁄Q   jR   t ’ìp   ∑   ◊H   ⁄S   p √  ’∑   ◊H   ⁄T   p √
+  ’∂
+  ñ"   ìv   ∂
+  ◊H   ⁄   p ï   ìx      ìx   √
+  ’¥U    ∂
+  p V   ñ.   ì|   ∑   ◊H   ⁄W   p ◊H   ⁄jX   t ’ìÄ   ¥   H   H   √  ’∂  ò@   ìÖ   ’∂  ◊H   ⁄Y   p ô    ìâ   ’∂  ◊H   ⁄Z   p ìå   ñ§  ìç   ∂  ◊H   ⁄Y   p ñ   ìë   ¥[    \   p √  ’ìì   ∂  ◊H   ⁄Z   p ñ   ìó   ¥[    ]   p √  ’ìô   ∑   H    ◊H!   ⁄^   ∂  %_   %p √  ’∂  ◊H`   ⁄∂  t ’∑   H    ◊H!   ⁄a   ∂  %b   %p √  ’∂  ◊H`   ⁄∂  t ’∑   H    ◊H!   ⁄c   ∂  %d   %p √  ’∂  ◊H`   ⁄∂  t ’∑   H    ◊H!   ⁄e   ∂  %f   %p √	  ’∂  ◊H`   ⁄∂	  t ’∑   H    ◊H!   ⁄g   ∂  %h   %p √  ’∂  ◊H`   ⁄∂  t ’ìº   ∑   ◊H   ⁄i   p ◊H   ⁄jj   t ’¥k   ◊Hl   ⁄m   p √  ’∂  Hn   &√  ’î≈   ∂  ñõ   ì«   ∂  ∂  IHo   Hn   ƒ   ’î    ∑   ñV   ìÃ   ∂  ∂  I◊Hp   ⁄∂  ∂  IHo   ¥q   ◊Hr   ⁄p  ∑   )It ’∑   .(ƒ   ’ï¢ˇˇˇìŸ   ∂  .(√  ’ï^ˇˇˇì€   ∑   ◊H   ⁄s   p ◊H   ⁄jt   t ’∑   ◊H   ⁄u   p ƒ   ’∑   ñe   ì„   ∑   ◊HM   ⁄v   jw   t ’∑   ◊H   ⁄x   p √  ’∑   H    ◊H!   ⁄y   p ◊Hz   ⁄∂  t ’ìÏ   ∂  ◊H   ⁄{   p ñK   ì   ∑   ◊H   ⁄x   p √  ’∑   H    ◊H!   ⁄|   p ◊Hz   ⁄∂  t ’ì˜   ∑   ◊H   ⁄}   p ñ—   ì˚   ¥~   ◊H   ⁄Ä   t ’∑   H    ◊H!   ⁄Å   p √  ’∑   ◊H   ⁄}   p ◊HÇ   ⁄É      t ’∑   ◊H   ⁄}   p ◊H`   ⁄∂  Ñ   t ’∑   ◊H   ⁄Ö   p ◊HM   ⁄v   jÜ   t ’¥~   ◊H   ⁄á   t ’ï   ì  ¥~   ◊H   ⁄à   t ’ì  °@ `Pë P? `Pë P/P8 `Pê PH `Pë0 `Pë P8 `P+
+P8 `P-P8 `Pë P? `Pë P*PI `P: `Põ Pê0 `PO `P∂0 `Pë P.PI `Pë P8 `Pê0 `Pê 
+P4 !`P; `Pë P/'PD" `Pê0 ñ P8 ñ0 8 8 6 : 7 6 6 : 6 6 6 5 5 5 : : O8 5 : : ù@" I@ `Pë Pî -P4 `Pë Pî -P4 `Pë Pî -P4 `Pê@K `Pê@Ä  ç `Pë Pî "PIÄ  î `Pë P8 `Pê0 `Pï PIÄ  Æ `Pë P80 `Pë P8 `P† Pú0 `P*Pì0 `Pë P/2PIÄ  ª `Pî0 `Pë0ê Pê0ê Pî00 `Pê P? `P+P= `Pê P? `P+P=00 `P° P8 `P/P40 `P° P8 `P/P40 `P° P8 `P/P40 `P° P8 `P/P40 `P° P8 `P/PIÄ  ÿ `Pë P/PDÄ  Á 
+`Pë 	P8  `Pê fPê0  `Pô fPë0 `P™ 2P,ˇˇˇ⁄PDÄ  È 4`Pó@Ä  Ë 1`Pï@Ä  Ô `Pë P/PDÄ  ı `Pë P9 `Pë0 `Pñ 	PDÄ  `Pë P80 `Pñ P.lPIÄ  `Pê P? `Pë P80 `Pñ P.Ä bP90 `Pë P? `Pë P4 `Pñ P8 `Pë Pî %P4 `Pë Pì %P4 `Pë Pî $PDÄ / `Pë P>0 `Pë PIÄ 6P  Ñ         P  c          !  ß   ‡   ‡   î                        µ  ◊H   ⁄   p ◊H   ⁄p ◊H   ⁄      p ◊H   ⁄      p √   ’∑   	   µ %
+   %µ %   %∂   %   %%ƒ   ’µ  ◊H   ⁄   µ %t ’°0 `P/P-Pî Pî P8 `P©7 `Pì P4 P    l   l   /                       ‘√   ’µ  ◊H   ⁄t  ’∂   ◊H   ⁄t  ’∂   J   ’°6 `P*P4 `P+PD `P; P  ‘   ‘   z                       ‘√   ’µ  ◊H   ⁄t  ’∂   ◊H   ⁄t  ’∑   ◊H   ⁄   p ◊H   ⁄j   t ’∂   H   ñ   ì
+   ∂   ◊H   ⁄t  ’ì   ∂   J   ’°6 `P*P4 `P+PD `Pë P/PD: `Pì0 `P+PI> `P; P   Ñ  Ñ  Ã        
+       /       ‘√  ’∂  ◊H   ⁄   p √   ’∂  ◊H   ⁄   p √  ’∑  ◊H   ⁄   ∂  %p √  ’∑  ◊H   ⁄   ∂  %p ◊H   ⁄   p ƒ   ’∑  ◊H   ⁄   ∂  %p ◊H   ⁄   p √  ’¥	    ∑   p ƒ   ’∂  ◊H
+   ⁄   p √  ’¥	    ∂  Ip ƒ   ’∑  ◊H   ⁄   p ◊H   ⁄j   t ’∂   ñ\   ì   ∑  ◊H   ⁄   ∂  %p ◊H   ⁄   t ’∑  ◊H   ⁄   p ◊H   ⁄j   t ’ïW   ì&   ∑  ◊H   ⁄   ∂  %p ◊H   ⁄   t ’∑  ◊H   ⁄   p ◊H   ⁄j   t ’ì/   °6 `Pê P8 `Pê P8 `Pñ P8 `Pñ P/P9 `Pñ P/P8 `P+P9 `Pê P8 `P,PI `Pë P/'PD `P> `Pñ P/P4 `Pë P/PN0 `Pñ P/P4 `Pë P/PI5 P D   D                            µ  ◊H   ⁄   t ’°0 `P/P4 P   P  @  ÿ                       µ  ◊H   ⁄   p    ñ∫   ì   ∑   ƒ  ’î   ∑  ∑   ∑   %ñé   ì   ∑  √   ’∑  %√  ’∑  ◊H   ⁄   ∂   %   %p ◊H   ⁄   t ’µ  ◊H   ⁄	   ∂  %   %p ◊H   ⁄   t ’∑  .'ƒ  ’ï`ˇˇˇì   °0 `P/Pì0 
+`P+fPõ0 `P: `P< `Pú P/;P4 `Pö P/PD +`Pó@	 P  P         -   •   P  @  ÿ                       µ  ◊H   ⁄   p    ñ∫   ì   ∑   ƒ  ’î   ∑  ∑   ∑   %ñé   ì   ∑  √   ’∑  %√  ’∑  ◊H   ⁄   ∂   %   %p ◊H   ⁄   t ’µ  ◊H   ⁄	   ∂  %   %p ◊H   ⁄   t ’∑  .'ƒ  ’ï`ˇˇˇì   °0 `P/Pì0 
+`P+fPõ0 `P: `P< `Pú P/;P4 `Pö P/PD +`Pó@	 P  P         -   •   X   X                            ∑   ◊H   ⁄t  ’µ  ◊H   ⁄t  ’°0 `P,P4 `P*P4 P    †   †   U                         ƒ   ’∑  ◊H   ⁄   p ◊H   ⁄j   t ’∑   ñ   ì   ¥   ◊H   ⁄   t ’ì   °0 `PG `Pë P/%PD `P? `Pë PI P        j                "       µ  ◊H   ⁄   p ◊H   ⁄i      p ◊H   ⁄p  √   ’∂   ◊H   ⁄   p ˇôB   ì
+   ’∂   ◊H   ⁄	   p ˇô!   ì   ’∂   ◊H   ⁄
+   p ˇì   ñV   ì   ƒ   ’∂   ◊H   ⁄      p ◊H   ⁄	      p ◊H   ⁄
+      p √   ’ì   ∂   ◊H   ⁄ˇp √  ’∂     ô   ì   ’∂     ì   ñ'   ì   ƒ   ’∂   ◊H   ⁄ˇp √   ’ì    µ  ◊H   ⁄   ∂   t ’°0 `P/Pî P*P8 `Pê P° P° Pï0 `P7 `Pï Pî Pî PM `P-P8 `PÆ0 `P7 `P.PM `Pì P4 P    ∏   ∏   q                        µ  ◊H   ⁄   p √   ’∂   ◊H   ⁄   p ˇô!   ì   ’∂   ◊H   ⁄   p ˇì	   ñ   ì
+   µ  ◊H   ⁄t  ’ì   °0 `P/P8 `Pê P° 'Pï0 `P*PI P   H   H                           µ  ◊H   ⁄   p √   ’°0 `P/PH P  l   l   2                        ¥       p √   ’µ  ◊H   ⁄   ∂   %   %t ’°0 `P+P8 `Pö P4 P    º   º   o                        ∑   ◊H   ⁄   p √   ’∑   ◊H   ⁄   7      :   7   ∂   :	   :
+   7   j   :   j   :   :   t ’°0 `Pë 	P8 `Pñ0 : %> 5 J O PD P     Æ                        µ H   √   ’∑   ◊H   ⁄   p ◊H   ⁄   p √  ’µ H      ñ7   ì   ∑   ◊H   ⁄   p ◊H   ⁄	   ∂  t ’ï3   ì   ∑   ◊H   ⁄   p ◊H   ⁄	   
+   t ’ì   °0 `P= `Pë P/P8 
+`Pò0 `Pë Pì PN `Pë Pî P9 P   @   @                            ¥       t ’°0 `P+P4 P   x  x  ¡               ,        ‘√  ’∑   ◊H   ⁄   p ◊H   ⁄   p √   ’¥    ∂   p ñƒ   ì   ∑   ◊H   ⁄   p ◊H   ⁄   	   t ’∂  ◊H   ⁄
+      t ’∑   ◊H   ⁄   p ◊H   ⁄
+      t ’∑   ◊H   ⁄   p ◊H   ⁄   t ’∑   ◊H   ⁄   p ◊H   ⁄   t ’ïø   ì   ∑   ◊H   ⁄   p ◊H   ⁄      t ’∂  ◊H   ⁄
+      t ’∑   ◊H   ⁄   p ◊H   ⁄
+      t ’∑   ◊H   ⁄   p ◊H   ⁄   t ’∑   ◊H   ⁄   p ◊H   ⁄   t ’ì,   °6 `Pë P/$P8 `P*P? `Pë Pî P4 `Pï P4 `Pë Pî %P4 `Pë Pê +P4 `Pë Pê -PN	0 `Pë Pî P4 `Pï P4 `Pë Pî %P4 `Pë Pê +P4 `Pë Pê -PI P 3ıÿ  `  `Y       W    Z  &    =  ˇ    `Ø       V  W  5  D  6  7  8  9  :  ;  <    `b  c  d    `;  s  	  `l  w  t   P  z  )  u  s  {  
+  `l  w  t   P  z  )  ;  s  {    `Ø   g  ç P  j  l  m  o  X  Z  -  2  r  p     pt  u  s  v    p;  	  p  `b  c  2  e  p     pd    `~  b    `Ø   „  V    P   á  $  `  à  â  '  ã  .  ?  á    `2  Ñ  p     p  å  ç    `Ø     $  ï  ñ  !    `Ø       `   µ  -  ∂  ,    `¡  P  √  Ø   #  ƒ  ≈  á  V  ∆    `»  …    `Ø   „  ò ª    @Ω  º    @∑  æ    @  pø    p«     `P  ÷  Ø   „  X  ÿ  á  V  Ÿ  +  ⁄  –  €  ‹  ›  ﬁ    `P    Ø     W     P       !  t       #  $  %  &  (  )  *  +  ,  -  /  0  2  3  p     p>    @@  A  B  ?  D  E  C  F  G  H  J  I  K  L  M  O  N  P  Q  R    @  @6   +  U    W  V    @X  Æ Y  T  S  Z  [  \  ]  ^  _  `  a    p  p|   }  
+  pÄ  Å    pè  ë  í  ì  î    pó  ò     ç ö  ú  ù  û  †  °  £  §  ¶  ß  ©  ™  ´    p¨  ≠  Æ    ∞  ±    ≤  ≥    p∏  π    pÀ  Ã  Õ  Œ  œ  –    å  —  ”  á  ‘  ’  ÷    pﬂ  ‡     `     p     @	  
+  l      @                  ò     pˇXÑ9                              † ∞   â           †               †       ·      † M      ‚      † 6      „      †       ‰      † "   
+   ‰      † ,   
+   ‰      † U              † h              † X              † p              † w              † z              † é              † Ä      ø      †
+ ã      «      †
+ ü              † ùH©¿      À3      À3                   .             .          Ä¯  «3  Ô  «3     l            ¸  N
+  Ù  N
+  5   8           »  y  ø  y  [             ñ    ç    c             Ç0  y  '  y  g   ,            A  y  9  y  s   :              m  ˝  m  x   +            Ô  Q  Á  Q  Ö   +            H  |  @  |  •   9          ÄP  7  H  7  Æ   $            ∆  ë  Ω  ë  ±   8            ~  D  u  D  À   H            ‡#  õ$  ◊#  õ$     ,            †&  ?'  ó&  ?'    )           Õ'  (*  ƒ'  (*                £(  ∆)  ö(  ∆)                ·)  *  ÿ)  *               “/  3   /  3  6  :           5°›%òá,Mÿ
+€ö      d3‘sd3‘sEw¯¡d=	™   j    O^partitionKey=%28https%2Cthanglong.edu.vn%29,:https://elearning.thanglong.edu.vn/tlu-custom/js/tlu-YUI.js necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Server: nginx/1.20.1
+Date: Mon, 10 Apr 2023 09:14:26 GMT
+Content-Type: application/javascript
+Content-Length: 13259
+Last-Modified: Mon, 30 Jan 2023 12:16:45 GMT
+ETag: "63d7b52d-33cb"
+Strict-Transport-Security: max-age=31536000
+Accept-Ranges: bytes
+ original-response-headers Server: nginx/1.20.1
+Date: Mon, 10 Apr 2023 09:14:26 GMT
+Content-Type: application/javascript
+Content-Length: 13259
+Last-Modified: Mon, 30 Jan 2023 12:16:45 GMT
+Connection: keep-alive
+ETag: "63d7b52d-33cb"
+Strict-Transport-Security: max-age=31536000
+Accept-Ranges: bytes
+ ctid 2 uncompressed-len 0 net-response-time-onstart 598 net-response-time-onstop 599 alt-data 1;13259,javascript/moz-script-bytecode-20230321162322-8l alt-data-from-child 1   ∏⁄

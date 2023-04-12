@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+
+
+  <head>
+    <title>
+      Linux_Downloads – Oracle VM VirtualBox
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/wiki/Linux_Downloads?format=txt" type="text/x-trac-wiki" title="Plain Text" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/wiki.css" type="text/css" />
+        <link rel="shortcut icon" href="/graphics/VirtualBox.ico" type="image/x-icon" />
+        <link rel="icon" href="/graphics/VirtualBox.ico" type="image/x-icon" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search Oracle VM VirtualBox" />
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("#content").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $("#content").find(".wikianchor").each(function() {
+          $(this).addAnchor(babel.format(_("Link to #%(id)s"), {id: $(this).attr('id')}));
+        });
+        $(".foldable").enableFolding(true, true);
+      });
+    </script>
+  <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+</head>
+  <body>
+  <div id="vboxlogo">
+    <a id="innologo-f" href="https://www.virtualbox.org/"><img src="/graphics/vbox_logo2_gradient.png" alt="" /></a>
+  </div>
+  <div id="vboxstring">
+    <img src="/graphics/vboxlogodown.png" alt="VirtualBox" />
+  </div>
+  <div class="innoframe" id="innolinks">
+    <a href="/wiki/VirtualBox">About</a><br />
+    <a href="/wiki/Screenshots">Screenshots</a><br />
+    <a href="/wiki/Downloads">Downloads</a><br />
+    <a href="/wiki/Documentation">Documentation</a><br />
+        <a href="/wiki/End-user_documentation">End-user docs</a><br />
+        <a href="/wiki/Technical_documentation">Technical docs</a><br />
+    <a href="/wiki/Contributor_information">Contribute</a><br />
+    <a href="/wiki/Community">Community</a><br />
+    </div>
+    <div id="center">
+      <!-- <p style="text-align:right">
+      <a href="/">Home</a> |
+      <a href="/wiki/VirtualBox">About</a>
+      <img style="margin-left:5px; vertical-align:bottom" src="/graphics/vbox40px.png" alt="" /> 
+      </p> -->
+      <form style="text-align: right" action="/search" method="get">
+        <div>
+          <input id="innosearch" type="text" name="q" size="10" value="search..." onblur="if(this.value=='') this.value='search...';" onfocus="if(this.value=='search...') this.value='';" />
+          <input type="hidden" name="wiki" value="on" />
+          <input type="hidden" name="changeset" value="on" />
+          <input type="hidden" name="ticket" value="on" />
+        </div>
+      </form>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="https://www.virtualbox.org/"><img src="/graphics/vbox_logo2_gradient.png" alt="Oracle VM VirtualBox" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li class="last"><a href="/prefs">Preferences</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="last first"><a href="/browser">Browse Source</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="pagepath" class="noprint">
+  <a class="pathentry first" title="View WikiStart" href="/wiki">wiki:</a><a class="pathentry" href="/wiki/Linux_Downloads" title="View Linux_Downloads">Linux_Downloads</a>
+</div>
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><a href="/wiki/WikiStart">Start Page</a></li><li><a href="/wiki/TitleIndex">Index</a></li><li class="last"><a href="/wiki/Linux_Downloads?action=history">History</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="wiki">
+      <div class="wikipage searchable">
+        
+          
+          <div class="trac-modifiedby"><a href="/wiki/Linux_Downloads?action=diff&amp;version=381" title="Version 381 by klaus">Last modified</a> <a class="timeline" href="/timeline?from=2022-06-27T20%3A22%3A42Z&amp;precision=second" title="2022-06-27T20:22:42Z in Timeline">10 months</a> ago</div>
+          <div id="wikipage"><h1 id="DownloadVirtualBoxforLinuxHosts">Download VirtualBox for Linux Hosts</h1>
+<p>
+<strong>Note:</strong> The package architecture has to match the Linux kernel architecture, that is, if you are running a 64-bit kernel, install the appropriate AMD64 package (it does not matter if you have an Intel or an AMD CPU). Mixed installations (e.g. Debian/Lenny ships an AMD64 kernel with 32-bit packages) are not supported. To install VirtualBox anyway you need to setup a 64-bit chroot environment.
+</p>
+<p>
+The VirtualBox base package binaries are released under the terms of the <a class="wiki" href="/wiki/GPL">GPL version 2</a>.
+</p>
+<p>
+Please choose the appropriate package for your Linux distribution.
+<h3 id="VirtualBox7.0.6forLinux"><a class="wiki" href="/wiki/VirtualBox">VirtualBox</a> 7.0.6 for Linux</h3>
+<ul><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/VirtualBox-7.0-7.0.6_155176_el9-1.x86_64.rpm"><span class="icon"> </span>Oracle Linux 9 / Red Hat Enterprise Linux 9</a>
+</li><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/VirtualBox-7.0-7.0.6_155176_el8-1.x86_64.rpm"><span class="icon"> </span>Oracle Linux 8 / Red Hat Enterprise Linux 8</a>
+</li><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/VirtualBox-7.0-7.0.6_155176_el7-1.x86_64.rpm"><span class="icon"> </span>Oracle Linux 7 / Red Hat Enterprise Linux 7 / CentOS 7</a>
+</li><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/virtualbox-7.0_7.0.6-155176~Ubuntu~jammy_amd64.deb"><span class="icon"> </span>Ubuntu 22.04</a>
+</li><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/virtualbox-7.0_7.0.6-155176~Ubuntu~focal_amd64.deb"><span class="icon"> </span>Ubuntu 20.04</a>
+</li><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/virtualbox-7.0_7.0.6-155176~Ubuntu~bionic_amd64.deb"><span class="icon"> </span>Ubuntu 18.04 / 18.10 / 19.04</a>
+</li><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/virtualbox-7.0_7.0.6-155176~Debian~bullseye_amd64.deb"><span class="icon"> </span>Debian 11</a>
+</li><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/virtualbox-7.0_7.0.6-155176~Debian~buster_amd64.deb"><span class="icon"> </span>Debian 10</a>
+</li><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/VirtualBox-7.0-7.0.6_155176_openSUSE153-1.x86_64.rpm"><span class="icon"> </span>openSUSE 15.3 / 15.4</a>
+</li><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/VirtualBox-7.0-7.0.6_155176_fedora36-1.x86_64.rpm"><span class="icon"> </span>Fedora 36 </a>
+</li><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/VirtualBox-7.0-7.0.6_155176_fedora35-1.x86_64.rpm"><span class="icon"> </span>Fedora 35 </a>
+</li><li><a class="ext-link" href="https://download.virtualbox.org/virtualbox/7.0.6/VirtualBox-7.0.6-155176-Linux_amd64.run"><span class="icon"> </span>All distributions</a> (built on EL6 and therefore not requiring recent system libraries)
+</li></ul>
+</p>
+<p>
+You might want to compare the checksums to verify the integrity of downloaded packages.
+<em>The SHA256 checksums should be favored as the MD5 algorithm must be treated as insecure! </em>
+<ul><li><a href="/download/hashes/7.0.6/SHA256SUMS">SHA256 checksums</a>, <a href="/download/hashes/7.0.6/MD5SUMS">MD5 checksums</a>
+</li></ul>
+</p>
+<h3 id="OracleLinux">Oracle Linux</h3>
+<p>
+Users of Oracle Linux 6, 7 and 8 can use the Oracle Linux yum <a class="ext-link" href="http://yum.oracle.com/"><span class="icon"> </span>repository</a> and enable the <a class="ext-link" href="http://yum.oracle.com/repo/OracleLinux/OL6/developer/x86_64/index.html"><span class="icon"> </span>ol6_developer</a> channel for Oracle Linux 6, the <a class="ext-link" href="http://yum.oracle.com/repo/OracleLinux/OL7/developer/x86_64/index.html"><span class="icon"> </span>ol7_developer</a> channel for Oracle Linux 7, or the <a class="ext-link" href="http://yum.oracle.com/repo/OracleLinux/OL8/developer/x86_64/index.html"><span class="icon"> </span>ol8_developer</a> channel for Oracle Linux 8. After that, do
+</p>
+<pre class="wiki">yum install VirtualBox-6.1
+</pre><p>
+to get the latest maintenance release of VirtualBox 6.1.x installed.
+</p>
+<h3 id="Debian-basedLinuxdistributions">Debian-based Linux distributions</h3>
+<p>
+Add the following line to your <tt>/etc/apt/sources.list</tt>. For Debian 11 and older, replace '<tt>&lt;mydist&gt;</tt>' with '<tt>bullseye</tt>', '<tt>buster</tt>', or '<tt>stretch</tt>'. For Ubuntu 22.04 and older, 'replace '<tt>&lt;mydist&gt;</tt>' with '<tt>jammy</tt>', '<tt>eoan</tt>', '<tt>bionic</tt>', '<tt>xenial</tt>', 
+</p>
+<pre class="wiki">deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian &lt;mydist&gt; contrib
+</pre><p>
+The Oracle public key for verifying the signatures can be downloaded <a href="https://www.virtualbox.org/download/oracle_vbox_2016.asc">here</a>. You can add these keys with
+</p>
+<pre class="wiki">sudo gpg --dearmor oracle_vbox_2016.asc --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
+</pre><p>
+or combine downloading and registering:
+</p>
+<pre class="wiki">wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
+</pre><p>
+The key fingerprint for oracle_vbox_2016.asc is
+</p>
+<pre class="wiki">B9F8 D658 297A F3EF C18D  5CDF A2F6 83C5 2980 AECF
+Oracle Corporation (VirtualBox archive signing key) &lt;info@virtualbox.org&gt;
+</pre><p>
+To install VirtualBox, do
+</p>
+<pre class="wiki">sudo apt-get update
+sudo apt-get install virtualbox-6.1
+</pre><p>
+Replace <tt>virtualbox-6.1</tt> by <tt>virtualbox-6.0</tt> or <tt>virtualbox-5.2</tt> to install the latest VirtualBox 6.0 or 5.2 build.
+</p>
+<p>
+What to do when experiencing <strong>The following signatures were invalid: BADSIG ...</strong> when refreshing the packages from the repository?
+</p>
+<pre class="wiki"># sudo -s -H
+# apt-get clean
+# rm /var/lib/apt/lists/*
+# rm /var/lib/apt/lists/partial/*
+# apt-get clean
+# apt-get update
+</pre><p>
+If you previously added the Oracle key(s) to your default keyring (now considered insecure), remove them again with:
+</p>
+<pre class="wiki">sudo apt-key remove 5CDFA2F683C52980AECF
+sudo apt-key remove D9C954422A4B98AB5139
+</pre><p>
+<em>(As of VirtualBox 3.2, the signing key was changed. The old Sun public key for apt-secure can be downloaded <a class="ext-link" href="https://download.virtualbox.org/virtualbox/debian/sun_vbox.asc"><span class="icon"> </span>here</a>. Likewise, the Oracle public key for distributions older than Debian 8 and Ubuntu 16.04 can be downloaded <a href="https://www.virtualbox.org/download/oracle_vbox.asc">here</a>.)</em>
+</p>
+<h3 id="RPM-basedLinuxdistributions">RPM-based Linux distributions</h3>
+<p>
+We provide a yum/dnf-style repository for Oracle Linux/Fedora/RHEL/openSUSE. All .rpm packages are signed. The Oracle public key for rpm can be downloaded <a href="https://www.virtualbox.org/download/oracle_vbox.asc">here</a>. You can add this key <em>(not normally necessary, see below!)</em> with
+</p>
+<pre class="wiki">sudo rpm --import oracle_vbox.asc
+</pre><p>
+or combine downloading and registering:
+</p>
+<pre class="wiki">wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | rpm --import -
+</pre><p>
+The key fingerprint is
+</p>
+<pre class="wiki">7B0F AB3A 13B9 0743 5925  D9C9 5442 2A4B 98AB 5139
+Oracle Corporation (VirtualBox archive signing key) &lt;info@virtualbox.org&gt;
+</pre><p>
+After importing the public key, the package signature can be checked with
+</p>
+<pre class="wiki">rpm --checksig PACKAGE_NAME
+</pre><p>
+<em>Note that importing the key is not necessary for yum users (Oracle Linux/Fedora/RHEL/CentOS) when using one of the virtualbox.repo files from below as yum downloads and imports the public key automatically! Zypper users should run
+</em></p>
+<pre class="wiki">zypper refresh
+</pre><p>
+<em>
+</em></p>
+<p>
+The package signature is checked by yum/dnf/zypper as well:
+</p>
+<ul><li>Users of <strong>Oracle Linux</strong> / <strong>RHEL</strong> can add <a class="ext-link" href="https://download.virtualbox.org/virtualbox/rpm/el/virtualbox.repo"><span class="icon"> </span>the Oracle Linux repo file</a> to <em>/etc/yum.repos.d/</em>.
+</li><li>Users of <strong>Fedora</strong> can add <a class="ext-link" href="https://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo"><span class="icon"> </span>the Fedora repo file</a> to <em>/etc/yum.repos.d/</em>.
+</li><li>Users of <strong>openSUSE</strong> can add <a class="ext-link" href="https://download.virtualbox.org/virtualbox/rpm/opensuse/virtualbox.repo"><span class="icon"> </span>the openSUSE repo file</a> to <em>/etc/zypp/repos.d/</em>.
+</li></ul></div>
+        
+        
+      </div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="last first">
+          <a rel="nofollow" href="/wiki/Linux_Downloads?format=txt">Plain Text</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    </div><!-- center -->
+    <div class="innoframe" id="innofoot">
+    <p style="text-align:center">
+      <a href="https://www.oracle.com"><img src="/graphics/logo_oracle_footer.gif" alt="www.oracle.com" /></a><br />
+      <a href="https://www.oracle.com/virtualization/virtualbox/resources.html">Contact</a> – <a href="https://www.oracle.com/html/privacy.html">Privacy policy</a> – <a href="https://www.oracle.com/html/terms.html">Terms of Use</a>
+    </p>
+  </div>
+</body>
+</html>�s�/R           d5}Eu��d5}   \    O^partitionKey=%28https%2Cvirtualbox.org%29,:https://www.virtualbox.org/wiki/Linux_Downloads strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Date: Tue, 11 Apr 2023 15:30:33 GMT
+Server: Oracle-Application-Server-11g
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Content-Security-Policy: default-src 'self' 'unsafe-inline'; img-src * data:; frame-ancestors 'self'
+X-XSS-Protection: 1; mode=block
+Strict-Transport-Security: max-age=31536000
+Cache-Control: must-revalidate
+Content-Length: 15083
+Content-Type: text/html;charset=utf-8
+Content-Language: en
+ original-response-headers Date: Tue, 11 Apr 2023 15:30:33 GMT
+Server: Oracle-Application-Server-11g
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Content-Security-Policy: default-src 'self' 'unsafe-inline'; img-src * data:; frame-ancestors 'self'
+X-XSS-Protection: 1; mode=block
+Strict-Transport-Security: max-age=31536000
+Cache-Control: must-revalidate
+Content-Length: 15083
+Keep-Alive: timeout=5, max=99
+Connection: Keep-Alive
+Content-Type: text/html;charset=utf-8
+Content-Language: en
+ ctid 1 uncompressed-len 0   :�

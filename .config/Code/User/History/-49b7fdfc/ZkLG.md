@@ -1,0 +1,394 @@
+# ***Khái niệm cơ bản về tiến trình***
+Là một chương trình chạy trên hệ thống. Mỗi chương trình chạy hệ thống đều có tiến trình tương ứng
+Được định danh bởi một PID phục vụ cho việc giám sát, điều khiển và quản lý của hệ thống
+
+# ***Các loại tiến trình***
+Có 2 loại tiến trình gồm tiến trình cha và tiến trình con
+Khi một tiến trình sinh ra 1 tiến trình khác thì:
+-	Tiến trình ban đầu được gọi là tiến trình cha và được định danh bởi PPID(Parent)
+-	Tiến trình mới sẽ được gọi là tiến trình con
+Tương tác giữa tiến trình cha và tiến trình con
+-	Khi tiến trình con đang chạy thì tiến trình cha sẽ chờ
+-	Khi tiến trình con hoàn thành thì tiến trình cha sẽ tiếp tục thực thi và tiến trình con sẽ được kết thúc.
+## ***Các trạng thái của tiến trình*** 
+-	Run: tiến trình đang chạy
+-	Sleep: Tiến trình đang ở trạng thái chờ hoạt động
+-	Zombie: Tiến trình mà tiền trình cha đã kết thúc
+-	Stop: Tiến trình đã dừng hoạt động
+# ***Mục đích của quản lí tiến trình***
+-	Xác định những tiến trình đang chạy trên hệ thống 
+-	Trạng thái của các tiến trình 
+-	Tài nguyên mà các tiến trình đang sử dụng
+-	Kiểm soát tiến trình 
+-	Kết thúc các tiến tình không mong muốn
+-	Thực thi các nghiệp vụ theo lịch
+- Kiểm soát tải của hệ thống, giúp kiểm soát và tối ưu lại hệ thống, tránh ảnh hượng đến nghiệp vụ khác.
+# ***Các câu lệnh quản lý tiến trình***
+-	`ps -ef`: liệt kê các tiến trình đang hoạt động trên hệ thống
+*Các thông số*
+```sh
+ #ps -ef
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 07:51 ?        00:00:03 /sbin/init splash
+root           2       0  0 07:51 ?        00:00:00 [kthreadd]
+root           3       2  0 07:51 ?        00:00:00 [rcu_gp]
+root           4       2  0 07:51 ?        00:00:00 [rcu_par_gp]
+root           5       2  0 07:51 ?        00:00:00 [slub_flushwq]
+root           6       2  0 07:51 ?        00:00:00 [netns]
+root           8       2  0 07:51 ?        00:00:00 [kworker/0:0H-events_highpri
+root          10       2  0 07:51 ?        00:00:00 [mm_percpu_wq]
+root          11       2  0 07:51 ?        00:00:00 [rcu_tasks_kthread]
+root          12       2  0 07:51 ?        00:00:00 [rcu_tasks_rude_kthread]
+root          13       2  0 07:51 ?        00:00:00 [rcu_tasks_trace_kthread]
+root          14       2  0 07:51 ?        00:00:00 [ksoftirqd/0]
+root          15       2  0 07:51 ?        00:00:19 [rcu_preempt]
+root          16       2  0 07:51 ?        00:00:00 [migration/0]
+root          17       2  0 07:51 ?        00:00:00 [idle_inject/0]
+root          19       2  0 07:51 ?        00:00:00 [cpuhp/0]
+root          20       2  0 07:51 ?        00:00:00 [cpuhp/1]
+root          21       2  0 07:51 ?        00:00:00 [idle_inject/1]
+root          22       2  0 07:51 ?        00:00:00 [migration/1]
+root          23       2  0 07:51 ?        00:00:00 [ksoftirqd/1]
+root          25       2  0 07:51 ?        00:00:00 [kworker/1:0H-events_highpri
+root          26       2  0 07:51 ?        00:00:00 [cpuhp/2]
+root          27       2  0 07:51 ?        00:00:00 [idle_inject/2]
+root          28       2  0 07:51 ?        00:00:00 [migration/2]
+root          29       2  0 07:51 ?        00:00:00 [ksoftirqd/2]
+root          31       2  0 07:51 ?        00:00:00 [kworker/2:0H-events_highpri
+root          32       2  0 07:51 ?        00:00:00 [cpuhp/3]
+root          33       2  0 07:51 ?        00:00:00 [idle_inject/3]
+root          34       2  0 07:51 ?        00:00:00 [migration/3]
+root          35       2  0 07:51 ?        00:00:00 [ksoftirqd/3]
+root          37       2  0 07:51 ?        00:00:00 [kworker/3:0H-events_highpri
+root          38       2  0 07:51 ?        00:00:00 [cpuhp/4]
+root          39       2  0 07:51 ?        00:00:00 [idle_inject/4]
+root          40       2  0 07:51 ?        00:00:00 [migration/4]
+root          41       2  0 07:51 ?        00:00:00 [ksoftirqd/4]
+root          43       2  0 07:51 ?        00:00:00 [kworker/4:0H-events_highpri
+```
+-  UID: User quản lý tiến trình 
+- PID: ID tiến trình
+- PPID: ID tiến trình cha
+- STIME: Start time
+- c: CPU đang thực thi
+- TIME: Thời gian thực thi của tiến trình 
+- CMD: Câu lệnh thực thi
+- `ps -fu oracle`: Hiện thị các tiến trình của user oracle
+- `pgrep`: Hiển thị thông tin các tiến trình của một chương trình
+Ví dụ liệt kê các tiến trình chạy java: `pgrep -l java`
+-	`top`: Hiện thị trạng thái của các tiến trình đang hoạt động trên hệ thống
+```sh
+top - 15:57:58 up  8:06,  1 user,  load average: 0,11, 0,08, 0,09
+Tasks: 317 total,   1 running, 316 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  4,0 us,  1,4 sy,  0,0 ni, 94,6 id,  0,1 wa,  0,0 hi,  0,0 si,  0,0 st
+MiB Mem :   7608,8 total,    373,2 free,   2928,0 used,   4307,6 buff/cache
+MiB Swap:   2048,0 total,   2046,7 free,      1,2 used.   3670,9 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                                                                                                     
+   2169 vanphon+  20   0 5916936 332404 127324 S  18,2   4,3  15:29.59 gnome-shell                                                                                                                                 
+   5059 vanphon+  20   0 4868660 536852 224956 S   6,3   6,9  51:44.12 firefox                                                                                                                                     
+   1923 vanphon+  20   0   25,5g 153948  96308 S   5,3   2,0  13:26.48 Xorg                                                                                                                                        
+  36995 vanphon+  20   0   18,8g 271548 111092 S   1,0   3,5   0:40.89 Isolated Web Co                                                                                                                             
+     53 root      20   0       0      0      0 S   0,7   0,0   0:24.94 ksoftirqd/6                                                                                                                                 
+    749 root      20   0  287724  10568   9672 S   0,7   0,1   0:56.39 thermald                                                                                                                                    
+   2407 vanphon+  20   0  327060  12536   7280 S   0,7   0,2   0:11.70 ibus-daemon                                                                                                                                 
+  39874 root      20   0       0      0      0 I   0,7   0,0   0:00.13 kworker/6:0-events                                                                                                                          
+      1 root      20   0  168208  13384   8192 S   0,3   0,2   0:03.61 systemd                                                                                                                                     
+     15 root      20   0       0      0      0 I   0,3   0,0   0:22.43 rcu_preempt            
+```
+Đây là một công cụ đa năng cho phép hiển thị tất cả những tải của hệ điều hành
+-	-`Kill` :  Để xử lí tiến trình nó không stop theo lệnh được hoặc bị treo chúng ta cần kill để tránh ảnh hưởng đến hệ thống.
+-	Có 2 loại gồm: `kill -9` và `kill -15`
+-	- kill -9: kết thúc tiến trình ngay lập tức.
+-	- kill -15: gửi tín hiệu kết thúc đến tiến trình, chờ tiến trình thực hiện cleanup và kết thúc(trong một số trường hợp kill -15 không thể tắt được tiến trình, buộc phải sử dụng kill -9 để dừng tiến trình.
+-	- `pkill`: kết thúc một tiến trình hoặc nhiều tiến trình theo tên hoặc thuộc tính của tiến trình
+-	Ví dụ: kill tất cả các tiến trình java trên máy chủ: pkill java
+-	Lưu ý: cần đặc biệt thẩn trọng trong khi sử dụng `pkill`. Trong hầu hết các trường hợp nên sử dụng `ps` hoặc `pgrep` để xác định tiến trình và sử dụng `kill` để kết thúc tiến trình.
+-	# ***Đặt lịch tiến trình chạy tự động***
+-	Giảm thiểu thời gian tác động vào hệ thống. Hệ thống yêu cầu onl mà ta không thể onl ta cần có tiến trình để nó rà soát xem tiến trình có chết không. Nếu chết thì nó tự bật lên.
+-	## Mục đích
+-	Thiết lập lịch cho 1 tác vụ được thực hiện vào 1 thời điểm xác định
+-	Giúp tự động hóa các công việc mang tính lặp lại
+-	Hỗ trợ cho việc vận hành, giám sát hệ thống.
+-	## Các kiểu đặt để nó chạy tự động
+-	AT: đặt lịch cho 1 lệnh hoặc 1 tiến trình thực thi 1 lần duy nhất vào 1 thời điểm xác định.
+-	Crontab: Cho phép chạy một lệnh hay một nhóm các lệnh. Đặt lịch cho 1 lệnh hoặc 1 tiến trình thực thi lặp lại nhiều lần
+-	*Nguyên lý hoạt động*
+-	Sử dụng daemon cron
+-	Lịch thực thi được lưu trong file crontab
+-	Daemon cron đọc file crontab để thực thi theo lịch và câu lệnh cấu hình crontab
+
+
+# ***Tìm hiểu thêm***
+# ***Khái niệm***
+- Khi chạy một file chương trình thì hệ điều hành sẽ đưa file đó từ trên đĩa cứng vào trong RAM để thực thi. Phiên bản của file chương trình trong RAM được gọi là tiến trình
+  ```Lưu ý: chương trình là một file nằm trên đĩa cứng. Khi chương trình được thực thi thì nó trở thành tiến trình(nằm trong RAM).```
+
+- khi chạy một lệnh đều tạo ra tiến trình. Ví dụ chạy lệnh ls -l là cho thi hành một file chương trình cụ thể là file /bin/ls
+- Tiến trình luôn sử dụng tài nguyên của máy tính(CPU,RAM, và các thiết bị ngoại vi) và việc quản lý tiến trình(do nhân Linux đảm nhiệm) là phân bổ các tài nguyên này cho tiến trình một cách hợp lý
+- Để quản lý được, nhân Linux phải ghi lại các thông tin về tiến trình gồm
+  - Tên, số ID của tiến trình
+  - Địa chỉ của tiến trình trong bộ nhớ
+  - Trạng thái hiện thời của tiến trình
+  - Độ ưu tiên của tiến trình 
+  - Thông tin về nguồn tài nguyên(CPU, bộ nhớ) mà tiến trình đang sử dụng
+  - Thông tin về các file và các cổng mạng mà tiến trình đang mở
+  - Chủ sở hữu của tiến trình
+  - Danh sách các signal mà tiến trình sẽ bắt(catch)
+  ## ***Tìm hiểu về các thông tin về tiến trình***
+  ### ***Tiến trình cha, tiến trình con, số ID của tiến trình.***
+    - Khi một tiến trình đang chạy mà nó gọi ra một tiến trình khác thì tiến trình ban đầu là tiến trình cha, tiến trình sau là tiến trình con: PID(process identification number. Tiến trình cha PPID(parent process).
+- Khi máy tính khởi động, nhân Linux trên đĩa cứng được tải vào RAM để chạy. Khi chạy nhân Linux sẽ tải file /`sbin/init` vào RAM để chạy và `init` trở thành tiến trình đầu tiên. `PID` của `init` bằng 1.Từ đây nó gọi ra các tiến trình con khác và các tiến trình con khác gọi ra các tiến trình con của nó nữa. Các tiến trình con có PID tăng dần, khi một tiến trình kết thúc PID của nó lại được dùng để gán cho các tiến trình con khác sau này.
+- Lệnh `pstree` cho biết cấu trúc "cha-con" của tất cả tiến trình đang có ở thời điểm hiện tại
+
+ ```sh $ pstree -p
+systemd(1)─┬─ModemManager(686)─┬─{ModemManager}(698)
+           │                   └─{ModemManager}(703)
+           ├─NetworkManager(606)─┬─{NetworkManager}(666)
+           │                     └─{NetworkManager}(670)
+           ├─accounts-daemon(597)─┬─{accounts-daemon}(742)
+           │                      └─{accounts-daemon}(744)
+           ├─acpid(598)
+           ├─avahi-daemon(600)───avahi-daemon(634)
+           ├─bluetoothd(601)
+           ├─colord(1628)─┬─{colord}(1629)
+           │              └─{colord}(1631)
+           ├─containerd(728)─┬─{containerd}(730)
+           │                 ├─{containerd}(731)
+           │                 ├─{containerd}(732)
+           │                 ├─{containerd}(733)
+```
+### ***Phân bổ CPU và độ ưu tiên của tiến trình***
+- Với hệ điều hành đa nhiệm thì người dùng có thể chạy một lúc nhiều chương trình. Tuy nhiên tại mỗi thời điểm CPU chỉ thực hiện được 1 tiến trình. Và giải pháp của nó là CPU không thực hiện trọn vẹn 1 tiến trình nào cả. Mà với mỗi tiến trình CPU chỉ thực thi trong một khoảng thời gian rất nhanh rồi chuyển sang tiến trình khác và cứ chuyển liên tục như vậy. Rõ ràng các tiến trình được thực thi lần lượt nhưng vì thời gian cho mỗi tiến trình là rất nhỏ nên người dùng không cảm nhận được.Và tốc độ của CPU là hàng tỉ phép tính trên giây nên trong một thời gian rất nhỏ nó cũng làm được rất nhiều việc và khiến người dùng cảm thấy như nó đang chạy đồng thời.
+- Mỗi tiến trình có mức độ quan trọng khác nhau nên để dễ điều phối mỗi tiến trình được gắn với một độ ưu tiên nào đó, và nó là số `nice`. Số `nice` càng lớn thì nó chạy sau và nhường các tiến trình khác chạy trước.
+### ***Trạng thái của tiến trình***
+Tiến trình luôn ở một trong 5 trạng thái
+- Runnable: tiến trình ở trạng thái sẵn sàng để chạy. Nó được cấp phát đầy đủ các tài nguyên và chỉ đợi tới phiên được cấp CPU thì sẽ chạy.
+- Sleeping: tiến trình đang đợi sự kiện nào đó xảy ra. Khi sự kiện đó xảy ra nó sẽ được duyệt chờ cấp phát CPU để chạy.
+- Zoombie: Tiến trình đã kết thúc nhưng nó không được xóa sạch khỏi RAM và tiến trình cha của nó không nhận được thông báo về việc nó đã kết thúc.
+- Traced/Stopped: những tiến trình đã bị buộc dừng lại.
+
+```sh
+top - 10:45:57 up  2:54,  1 user,  load average: 1,49, 1,44, 1,38
+Tasks: 311 total,   3 running, 308 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  6,2 us,  2,2 sy,  0,0 ni, 91,6 id,  0,0 wa,  0,0 hi,  0,0 si,  0,0 st
+MiB Mem :   7608,8 total,   1954,9 free,   2174,2 used,   3479,7 buff/cache
+MiB Swap:   2048,0 total,   2048,0 free,      0,0 used.   4564,5 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                                                                                                   
+   2421 vanphon+  20   0 5387256 289600 128172 S  26,4   3,7  17:07.34 gnome-shell                                                                                                                               
+   2187 vanphon+  20   0   25,5g 150944  94276 R  13,2   1,9   4:44.24 Xorg                                                                                                                                      
+   9407 vanphon+  20   0  909232  56804  43556 R   8,3   0,7   0:13.83 gnome-terminal-                                                                                                                           
+   4620 vanphon+  20   0 2679948 199988 130540 S   5,0   2,6   4:08.66 Isolated Web Co                                                                                                                           
+   3457 vanphon+  20   0 4028736 474704 218664 S   4,1   6,1   8:31.2
+   ```
+   # ***Các thao tác với tiến trình***
+   Để xem trạng thái của tiến trình thường dùng 2 công cụ là `ps` và `top`. Lệnh `top` cho biết trạng thái của các tiến trình theo thời gian thực, cứ 5 giây trạng thái lại được cập nhật một lần. Lệnh ps chỉ in ra được trạng thái các tiến trình tại đúng thời điểm lệnh được thực hiện.
+   ## ***Thao tác với lệnh ps***
+   Lệnh `ps` không tham số hiện thị danh sách các tiến trình được khởi tạo bời người sử dụng đang đăng nhập tại terminal.
+   ```sh$ ps
+    PID TTY          TIME CMD
+   9430 pts/0    00:00:00 bash
+  11074 pts/0    00:00:00 ps 
+  ```
+  Lệnh này cho biết ít thông tin nên người ta thường dùng 3 tham số `aux`:
+  - A: hiện thị tiến trình của tất cả các user.
+  - U:hiện thị các thông tin chi tiết hơn về tiến trình
+  - X:hiện thị tiến trình chạy trên tất cả các terminal
+```sh 
+ps- aux 
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.1 168016 13368 ?        Ss   07:51   0:03 /sbin/i
+root           2  0.0  0.0      0     0 ?        S    07:51   0:00 [kthrea
+root           3  0.0  0.0      0     0 ?        I<   07:51   0:00 [rcu_gp
+root           4  0.0  0.0      0     0 ?        I<   07:51   0:00 [rcu_pa
+root           5  0.0  0.0      0     0 ?        I<   07:51   0:00 [slub_f
+root           6  0.0  0.0      0     0 ?        I<   07:51   0:00 [netns]
+root           8  0.0  0.0      0     0 ?        I<   07:51   0:00 [kworke
+root          10  0.0  0.0      0     0 ?        I<   07:51   0:00 [mm_per
+root          11  0.0  0.0      0     0 ?        I    07:51   0:00 [rcu_ta
+root          12  0.0  0.0      0     0 ?        I    07:51   0:00 [rcu_ta
+root          13  0.0  0.0      0     0 ?        I    07:51   0:00 [rcu_ta 
+```
+
+```Lưu ý```: trang thông tin về các tiến trình thường dài nên ta có thể sử dụng `ps aux | less`
+
+```
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.1 168016 13368 ?        Ss   07:51   0:03 /sbin/i
+nit splash
+root           2  0.0  0.0      0     0 ?        S    07:51   0:00 [kthrea
+dd]
+root           3  0.0  0.0      0     0 ?        I<   07:51   0:00 [rcu_gp
+]
+root           4  0.0  0.0      0     0 ?        I<   07:51   0:00 [rcu_pa
+r_gp]
+root           5  0.0  0.0      0     0 ?        I<   07:51   0:00 [slub_f
+lushwq]
+root           6  0.0  0.0      0     0 ?        I<   07:51   0:00 [netns]
+ ```
+
+### ***Giải thích các thông tin***
+- USER: tên của user đã khởi tạo tiến trình
+- PID:số ID của tiến trình
+- %CPU: tỉ lệ giữa thời gian chiếm giữ CPU của tiến trình và thời gian mà tiến trình đã nằm trong bộ nhớ.
+- %MEM: phần trăm RAM mà tiến trình sử dụng tại thời điểm hiện thị thông tin 
+- VSZ: lượng bộ nhớ ảo(phần cứng giả làm RAM) mà tiến trình sử dụng tính theo byte.
+- TTY:terminal mà tiến trình được khởi tạo trên đó. Dấu hỏi thể hiện tiến trình này là một daemon và nó không liên kết với một terminal nào
+- STAT: trạng thái hiện tại của tiến trình
+Ngoài các trạng thái cơ bản còn có các kí hiệu thêm:
+  - `<`; tiến trình có độ ưu tiên cao
+  - `N`: tiến trình có độ ưu tiên thấp 
+  - `L`: một số trang bộ nhớ của tiến trình đã bị khóa
+  - `s`: tiến trình là một session leader
+  - `+`:nhóm tiến trình xung quanh
+  - `W`: tiến trình đã được đẩy xuống đĩa cứng(bộ nhớ ảo) thay vì nămf trong RAM.
+- `START`: thời điểm tiến trình được khởi tạo.
+- `TIME`: thời gian tiến trình tồn tại tính từ khi nó bắt đầu khởi tạo.
+- `COMMAND`: Lệnh được khởi tạo để khởi tạo tiến trình. Nếu tên của lệnh được đặt trong ngoặc vuông thì tiến trình là một luồng của kernel.
+
+## ***Theo dõi tiến trình bằng lệnh top(hoặc prstat, topas)***
+Khác với lệnh `ps` có thể hiển thị được tất cả các tiến trình trong hệ thống, lệnh `top` chỉ hiện thị các tiến trình hoạt động tích cực nhất. Trạng thái các tiến trình được cập nhật theo thời gian cho đến khi bạn bấm phím `q` để thoát khỏi lệnh `top`.
+```sh
+top - 14:04:31 up  6:12,  1 user,  load average: 0,17, 0,48, 0,71
+Tasks: 304 total,   1 running, 303 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  1,0 us,  0,8 sy,  0,0 ni, 98,2 id,  0,0 wa,  0,0 hi,  0,0 si,  0,0 st
+MiB Mem :   7608,8 total,   2064,4 free,   1989,6 used,   3554,8 buff/cache
+MiB Swap:   2048,0 total,   2048,0 free,      0,0 used.   4738,5 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                                                                                             
+   2187 vanphon+  20   0   25,5g 150484  93768 S   4,7   1,9   7:54.50 Xorg                                                                                                                                
+   2421 vanphon+  20   0 5859368 299152 128384 S   3,7   3,8  26:48.56 gnome-shell                                                                                                                         
+   9407 vanphon+  20   0  912428  59856  43556 S   2,7   0,8   0:23.75 gnome-terminal-                                                                                                                     
+    241 root     -51   0       0      0      0 S   1,0   0,0   0:10.97 irq/51-DELL0955:00
+```
+Các lệnh tương đương với lệnh `top` trên AIX là `prstat`, trên Solaris là `topas`.
+- Phần đầu kết quả của lệnh `top` là 5 dòng thông tin chung về hệ thống
+  - Dòng 1 hiện thị output của lệnh uptime, gồm: tổng thời gian hệ thống đã chạy kể từ lúc khởi động máy(14:04:31 up 6:12), số user đang đăng nhập vào hệ thống(1user) và trạng thái sử dụng CPU của hệ thống. Ba con số cuối cùng thể hiện tình trạng sử dụng CPU của hệ thống cách đây 1 phút, 5 phút, 15 phút; nếu con số này lớn hơn 1 thì có nghĩa là hệ thống đang quá tải.
+  - Dòng 2 thống kê tổng số tiến trình, số tiến trình trong các trạng thái.
+  - Dòng 3 cho biết việc sử dụng CPU của các tiến trình
+    - `us(user)`: các tiến trình thuộc user space. Use space là vùng bộ nhớ chỉ chứa các tiến trình mà khi chạy không cần quyền của root và không cần truy cập đến kernel của Linux.
+    - `sy(system)`: các tiến trình thuộc system space. System space là vùng bộ nhớ chỉ chứa các tiến trình đòi hỏi quyền của root và truy cập đến kernel của Linux. Số lượng tiến trình trong system space sẽ ít hơn các tiến trình user space.
+    - `ni(nice)`: các tiến trình có số `nice` được người dùng tự điều chỉnh bằng lệnh nice.
+    - `id(idle)`: thời gian CPU rảnh rỗi.
+    - `wa(waiting)`: thời gian hệ thống đợi các thao tác vào/ra(trong những lúc như thế này CPU sẽ không được sử dụng).
+    - `hi(hardware interrupt)`: thời gian hệ thống đợi xử lý các ngắt cứng.
+    - `si(software interrupt)`: thời gian hệ thống đợi xử lí các ngắt mềm.
+
+  - Dòng 4 cho biết tình trạng sử dụng RAM: total- tổng dung lượng bộ nhớ, used- dung lượng bộ nhớ đã sử dụng, free-dung lượng bộ nhớ chưa dùng, buff-dung lượng bộ nhớ buffer(vùng bộ nhớ tạm lưu trữ dữ liệu khi đọc/ghi từ/ra đĩa cứng.) 
+  - Dòng 5 cho biết tình trạng sử dụng bộ nhớ Swap(bộ nhớ của đĩa cứng được giả làm RAM)
+
+- Phần dưới kết quả của lệnh `top` là trạng thái của các tiến trình.
+  - `PR`: Độ ưu tiên của tiến trình, độ ưu tiên càng cao tiến trình càng được chạy trước
+  - `NI`: Giữa các tiến trình có cùng độ ưu tiên. Số `nice` cho biết tiến trình nào được chạy trước. Số `nice` càng thấp nó đòi được chạy trước.
+  - `VIRT`: Tổng dung lượng bộ nhớ mà tiến trình sử dụng, bao gồm phần bộ nhớ RAM + phần bộ nhớ ảo: VIRT= RES + SWAP
+  - `SWAP`: dung lượng bộ nhớ ảo mà tiến trình sử dụng.
+  - `RES`: dung lượng bộ nhớ RAM mà tiến trình đang sử dụng. 
+  - `SHR`: phần bộ nhớ dùng chung của tiến trình. Thông thường đây là thư viện được dùng chung bởi nhiều tiến trình.
+  - `S`: Trạng thái của tiến trình. 
+  - `%CPU`: Tỉ lệ giữa thời gian chiếm giữ CPU của tiến trình và thời gian mà tiến trình đã nằm trong bộ nhớ
+  - `%MEM`: Phần trăm RAM mà tiến trình sử dụng tại thời điểm hiện tại.
+## ***Tìm kiếm một tiến tình***
+- Để tra thông tin về một tiến trình nào đó, ví dụ tìm kiếm các tiến trình có chữa chữ "sshd", dùng `ps aux | grep sshd`
+```
+$ ps aux | grep sshd
+vanphon+   16879  0.0  0.0  20740  2696 pts/0    S+   16:10   0:00 grep --color=auto sshd
+vanphong17@vanphong17-Inspiron-5490:~$ ps aux | grep phongnv
+vanphon+   16890  0.0  0.0  20740  2700 pts/0    S+   16:10   0:00 grep --color=auto phongnv
+
+```
+```
+$ ps aux | grep ls
+root        1084  0.0  0.0      0     0 ?        S    07:51   0:00 [UVM Tools Event Queue]
+vanphon+    2053  0.1  0.4 3190816 31512 ?       S<sl 07:57   0:46 /usr/bin/pulseaudio --daemonize=no --log-target=journal
+vanphon+    9811  0.0  0.0 33575772 1816 ?       Sl   09:38   0:00 /usr/share/code/chrome_crashpad_handler --monitor-self-annotation=ptype=crashpad-handler --no-rate-limit --database=/home/vanphong17/.config/Code/Crashpad --url=appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=cc7a3bee-ee52-4a8d-8323-c45e7ca1b104&iid=cc7a3bee-ee52-4a8d-8323-c45e7ca1b104&sid=cc7a3bee-ee52-4a8d-8323-c45e7ca1b104 --annotation=IsOfficialBuild=1 --annotation=_companyName=Microsoft --annotation=_productName=VSCode --annotation=_version=1.77.0 --annotation=exe=/usr/share/code/code --enable-crashpad . --annotation=lsb-release=Ubuntu 22.04.2 LTS --annotation=plat=Linux --annotation=prod=Electron --annotation=ver=19.1.11 --initial-client-fd=43 --shared-client-connection
+vanphon+   16948  0.0  0.0  20740  2680 pts/0    S+   16:12   0:00 grep --color=auto ls
+```
+
+
+- Hoặc có thể dùng lệnh `pgrep` nhưng lệnh này chỉ cho biết ID tiến trình: `pgrep ls`
+```
+  $ pgrep ls
+1084
+2053
+```
+- Tìm ID các tiến trình có tên `ls` do root khởi tạo:
+`pgrep -u root ls`
+```
+$ pgrep -u root ls
+1084
+```
+- Tìm ID các tiến trình do user root hoặc daemon khởi tạo. `pgrep -u root,daemon`
+```
+$ pgrep -u root,daemon
+1
+2
+3
+4
+5
+6
+8
+10
+11
+12
+13
+14
+15
+16
+```
+
+## ***Điều chỉnh số nice của tiến trình***
+Số `nice` của tiến trình biến đổi trong khoảng -20(độ ưu tiên CPU cao nhất) đến +19(độ ưu tiên thấp nhất).
+- Có thể đặt lại, tăng/giảm số nice bằng lệnh `nice` hoặc `renice`
+- Khi một tiến trình được khởi tạo, số nice của nó được gán bằng 0. Khi chạy một lệnh nếu muốn gắn số nice của nó khác đi thì thêm lệnh `nice -n (số_nice)` ở đầu.
+
+ví dụ: `nice -n 3 top` lệnh top được chạy với số nice được gán bằng +3.
+```
+0 root      20   0 1686740  70724  48804 S   0,3   0,9   0:04.63 dockerd                                                                                                                             
+   9791 vanphon+  20   0   36,9g 170824 124316 S   0,3   2,2   3:31.76 code                                                                                                                                
+   9866 vanphon+  20   0   54,5g 219032  87308 S   0,3   2,8  22:29.12 code                                                                                                                                
+   9891 vanphon+  20   0   36,4g 155100  65196 S   0,3   2,0  17:20.82 code                                                                                                                                
+  14744 vanphon+  20   0 2510028 142464  93904 S   0,3   1,8   0:08.08 Isolated Web Co                                                                                                                     
+  18072 vanphon+  23   3   24896   4472   3604 R   0,3   0,1   0:00.59 top                                                                                                                                 
+  18103 root      20   0       0      0      0 I   0,3   0,0   0:00.01 kworker/2:2-events                                                                                                                  
+      1 root      20   0  168016  13368   8272 S   0,0   0,2
+```
+- `renice -3 9407` để đặt lại số nice= -3 cho tiến trình có ID= 9407
+```
+ renice +3 9407
+9407 (process ID) old priority 0, new priority 3
+```
+```
+$ renice -3 17
+renice: failed to set priority for 17 (process ID): Operation not permitted
+vanphong17@vanphong17-Inspiron-5490:~$ renice -3 9827
+renice: failed to set priority for 9827 (process ID): Permission denied
+vanphong17@vanphong17-Inspiron-5490:~$ renice -3 53
+renice: failed to set priority for 53 (process ID): Operation not permitted
+vanphong17@vanphong17-Inspiron-5490:~$ renice -3 378
+renice: failed to get priority for 378 (process ID): No such process
+vanphong17@vanphong17-Inspiron-5490:~$ renice -3 70
+renice: failed to set priority for 70 (process ID): Operation not permitted
+vanphong17@vanphong17-Inspiron-5490:~$ renice -3 489
+renice: failed to set priority for 489 (process ID): Operation not permitted
+vanphong17@vanphong17-Inspiron-5490:~$ renice +3 489
+renice: failed to set priority for 489 (process ID): Operation not permitted
+vanphong17@vanphong17-Inspiron-5490:~$ renice +3 9407
+9407 (process ID) old priority 0, new priority 3
+```
+- `renice 3 -u vanphong17`: đặt lại số nice = +3 cho tiến trình user vanphong17
+```
+ renice -3 -u lp
+renice: failed to set priority for 7 (user ID): Operation not permitted
+vanphong17@vanphong17-Inspiron-5490:~$ renice -3 -u rtkit
+renice: failed to set priority for 116 (user ID): Operation not permitted
+vanphong17@vanphong17-Inspiron-5490:~$ renice 7 -u lp
+renice: failed to set priority for 7 (user ID): Operation not permitted
+vanphong17@vanphong17-Inspiron-5490:~$ renice 10 -u lp
+renice: failed to set priority for 7 (user ID): Operation not permitted
+```
+
+
+Ngày nay thường không phải điều chỉnh thủ công bởi khả năng của CPU rất đủ để đáp ứng các tiến trình. Thêm nữa, với các tiến trình đòi hỏi CPU nhiều thì thường việc này cũng được tính đến sẵn khi lập trình.
+
+## ***Thao tác với lệnh `Kill`***

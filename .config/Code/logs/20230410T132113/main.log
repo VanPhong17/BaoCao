@@ -1,0 +1,35 @@
+2023-04-10 13:21:13.463 [info] [SharedProcess] using utility process
+2023-04-10 13:21:13.540 [info] update#setState idle
+2023-04-10 13:21:14.263 [info] [UtilityProcess type: shared-process, pid: <none>]: creating new...
+2023-04-10 13:21:14.268 [info] [UtilityProcess id: 1, type: fileWatcher, pid: <none>]: creating new...
+2023-04-10 13:21:14.274 [info] [UtilityProcess type: shared-process, pid: 4015]: successfully created
+2023-04-10 13:21:14.276 [info] [UtilityProcess id: 1, type: fileWatcher, pid: 4016]: successfully created
+2023-04-10 13:21:14.347 [info] [UtilityProcess id: 1, type: extensionHost, pid: <none>]: creating new...
+2023-04-10 13:21:14.354 [info] [UtilityProcess id: 1, type: extensionHost, pid: 4036]: successfully created
+2023-04-10 13:21:14.421 [info] [UtilityProcess id: 2, type: extensionHost, pid: <none>]: creating new...
+2023-04-10 13:21:14.427 [info] [UtilityProcess id: 2, type: extensionHost, pid: 4051]: successfully created
+2023-04-10 13:21:14.521 [info] [UtilityProcess id: 2, type: fileWatcher, pid: <none>]: creating new...
+2023-04-10 13:21:14.534 [info] [UtilityProcess id: 2, type: fileWatcher, pid: 4072]: successfully created
+2023-04-10 13:21:43.542 [info] update#setState checking for updates
+2023-04-10 13:22:03.807 [info] update#setState available for download
+2023-04-10 13:37:24.631 [error] update#isLatestVersion(): failed to check for updates
+2023-04-10 13:37:24.633 [error] Error: net::ERR_ADDRESS_UNREACHABLE
+    at SimpleURLLoaderWrapper.<anonymous> (node:electron/js2c/browser_init:105:7047)
+    at SimpleURLLoaderWrapper.emit (node:events:526:28)
+2023-04-10 13:39:04.983 [error] update#isLatestVersion(): failed to check for updates
+2023-04-10 13:39:04.983 [error] Error: net::ERR_ADDRESS_UNREACHABLE
+    at SimpleURLLoaderWrapper.<anonymous> (node:electron/js2c/browser_init:105:7047)
+    at SimpleURLLoaderWrapper.emit (node:events:526:28)
+2023-04-10 16:22:14.278 [info] [UtilityProcess id: 1, type: extensionHost, pid: 4036]: received exit event with code 0
+2023-04-10 16:22:14.278 [info] Extension host with pid 4036 exited with code: 0, signal: unknown.
+2023-04-10 16:22:14.320 [info] [UtilityProcess id: 1, type: fileWatcher, pid: 4016]: attempting to kill the process...
+2023-04-10 16:22:14.321 [info] [UtilityProcess id: 1, type: fileWatcher, pid: 4016]: successfully killed the process
+2023-04-10 16:22:14.323 [error] Blocked vscode-file request vscode-file://vscode-app/usr/share/code/resources/app/out/vs/base/worker/workerMain.js#editorWorkerService
+2023-04-10 16:22:14.342 [info] [UtilityProcess id: 1, type: fileWatcher, pid: 4016]: received exit event with code 15
+2023-04-10 16:22:14.342 [error] [UtilityProcessWorker]: terminated unexpectedly with code 15, signal: unknown
+2023-04-10 16:22:14.343 [error] [UtilityProcess id: 1, type: fileWatcher, pid: 4016]: crashed with code 15 and reason 'killed'
+2023-04-10 16:22:18.882 [info] [UtilityProcess id: 2, type: extensionHost, pid: 4051]: received exit event with code 0
+2023-04-10 16:22:18.882 [info] Extension host with pid 4051 exited with code: 0, signal: unknown.
+2023-04-10 16:22:18.909 [info] [UtilityProcess id: 2, type: fileWatcher, pid: 4072]: attempting to kill the process...
+2023-04-10 16:22:18.909 [info] [UtilityProcess id: 2, type: fileWatcher, pid: 4072]: successfully killed the process
+2023-04-10 16:22:18.913 [info] [UtilityProcess id: 2, type: fileWatcher, pid: 4072]: received exit event with code 0

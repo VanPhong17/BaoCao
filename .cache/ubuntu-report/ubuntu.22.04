@@ -1,0 +1,64 @@
+{
+  "Version": "22.04",
+  "OEM": {
+    "Vendor": "Dell Inc.",
+    "Product": "Inspiron 5490",
+    "Family": "Inspiron"
+  },
+  "BIOS": {
+    "Vendor": "Dell Inc.",
+    "Version": "1.18.1"
+  },
+  "Arch": "amd64",
+  "HwCap": "x86-64-v3",
+  "GPU": [
+    {
+      "Vendor": "8086",
+      "Model": "9b41"
+    }
+  ],
+  "RAM": 7.8,
+  "Partitions": [
+    40,
+    0.1,
+    0
+  ],
+  "Screens": [
+    {
+      "Size": "309mmx174mm",
+      "Resolution": "1920x1080",
+      "Frequency": "60.02"
+    }
+  ],
+  "Autologin": false,
+  "LivePatch": false,
+  "Session": {
+    "DE": "ubuntu:GNOME",
+    "Name": "ubuntu",
+    "Type": "x11"
+  },
+  "Language": "en_US",
+  "Timezone": "Asia/Ho_Chi_Minh",
+  "Install": {
+    "Media": "Ubuntu 22.04.2 LTS \"Jammy Jellyfish\" - Release amd64 (20230223)",
+    "Type": "GTK",
+    "OEM": false,
+    "PartitionMethod": "resize_use_free",
+    "DownloadUpdates": true,
+    "Language": "en",
+    "Minimal": false,
+    "RestrictedAddons": true,
+    "Stages": {
+      "0": "language",
+      "3": "console_setup",
+      "6": "wireless",
+      "29": "prepare",
+      "372": "partman",
+      "407": "start_install",
+      "435": "timezone",
+      "547": "usersetup",
+      "623": "user_done",
+      "1188": "done"
+    }
+  }
+}

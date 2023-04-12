@@ -1,0 +1,24 @@
+2023-04-12 09:40:22.678 [info] Extension host with pid 4798 started
+2023-04-12 09:40:22.678 [info] Skipping acquiring lock for /home/vanphong17/.config/Code/User/workspaceStorage/3c926026ee115f6b139b4ce4d83e30e1.
+2023-04-12 09:40:22.807 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2023-04-12 09:40:22.852 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-04-12 09:40:22.854 [info] ExtensionService#_doActivateExtension kisstkondoros.vscode-gutter-preview, startup: true, activationEvent: '*'
+2023-04-12 09:40:22.890 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-04-12 09:40:22.921 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-04-12 09:40:22.948 [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+2023-04-12 09:40:23.002 [info] Eager extensions activated
+2023-04-12 09:40:23.024 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-04-12 09:40:23.032 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-04-12 09:40:44.987 [info] ExtensionService#_doActivateExtension vscode.extension-editing, startup: false, activationEvent: 'onLanguage:markdown'
+2023-04-12 09:40:44.992 [info] ExtensionService#_doActivateExtension vscode.markdown-language-features, startup: false, activationEvent: 'onLanguage:markdown'
+2023-04-12 09:40:45.047 [info] ExtensionService#_doActivateExtension shd101wyy.markdown-preview-enhanced, startup: false, activationEvent: 'onLanguage:markdown'
+2023-04-12 09:40:45.460 [info] ExtensionService#_doActivateExtension yzhang.markdown-all-in-one, startup: false, activationEvent: 'onLanguage:markdown'
+2023-04-12 09:40:45.585 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-04-12 09:40:45.642 [info] ExtensionService#_doActivateExtension vscode.markdown-math, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2023-04-12 09:47:22.449 [info] ExtensionService#_doActivateExtension vscode.npm, startup: false, activationEvent: 'onTerminalQuickFixRequest:ms-vscode.npm-command'
+2023-04-12 09:54:42.012 [info] ExtensionService#_doActivateExtension vscode.media-preview, startup: false, activationEvent: 'onCustomEditor:imagePreview.previewEditor'
+2023-04-12 09:55:09.002 [warning] [Decorations] CAPPING events from decorations provider vscode.git 258
+2023-04-12 09:55:20.507 [warning] [Decorations] CAPPING events from decorations provider vscode.git 288
+2023-04-12 09:55:31.191 [warning] [Decorations] CAPPING events from decorations provider vscode.git 294
+2023-04-12 09:55:43.686 [warning] [Decorations] CAPPING events from decorations provider vscode.git 297
+2023-04-12 09:57:26.796 [warning] [Decorations] CAPPING events from decorations provider vscode.git 297

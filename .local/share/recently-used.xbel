@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="file:///home/vanphong17/mycode/index.html" added="2023-04-04T15:20:37.080942Z" modified="2023-04-04T15:20:37.080946Z" visited="2023-04-04T15:20:37.080942Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/html"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-04-04T15:20:37.080944Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/code_1.77.0-1680085573_amd64.deb" added="2023-04-05T01:34:49.304597Z" modified="2023-04-05T01:34:49.304600Z" visited="2023-04-05T01:34:49.304598Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/vnd.debian.binary-package"/>
+        <bookmark:applications>
+          <bookmark:application name="File Roller" exec="&apos;file-roller&apos;" modified="2023-04-05T01:34:49.304599Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Thuc-tap-2023/PhongNV/Linux" added="2023-04-05T02:51:54.997149Z" modified="2023-04-12T01:34:55.574469Z" visited="2023-04-05T02:51:54.997150Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="inode/directory"/>
+        <bookmark:applications>
+          <bookmark:application name="code" exec="&apos;code %u&apos;" modified="2023-04-12T01:34:55.574461Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Pictures/Screenshots/Screenshot%20from%202023-04-05%2014-49-53.png" added="2023-04-05T07:49:53.055784Z" modified="2023-04-05T07:49:53.055788Z" visited="2023-04-05T07:49:53.055784Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:applications>
+          <bookmark:application name="gnome-shell" exec="&apos;gnome-shell %u&apos;" modified="2023-04-05T07:49:53.055786Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Pictures/Screenshots/Screenshot%20from%202023-04-05%2014-50-12.png" added="2023-04-05T07:50:12.923775Z" modified="2023-04-05T07:50:12.923778Z" visited="2023-04-05T07:50:12.923775Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:applications>
+          <bookmark:application name="gnome-shell" exec="&apos;gnome-shell %u&apos;" modified="2023-04-05T07:50:12.923777Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/qtranslate.exe" added="2023-04-05T08:02:38.007987Z" modified="2023-04-05T08:02:38.008001Z" visited="2023-04-05T08:02:38.007989Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/x-ms-dos-executable"/>
+        <bookmark:applications>
+          <bookmark:application name="org.gnome.Nautilus" exec="&apos;file-roller %U&apos;" modified="2023-04-05T08:02:38.007995Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/BaoCao-main.zip" added="2023-04-05T14:31:20.352315Z" modified="2023-04-05T14:31:41.078379Z" visited="2023-04-05T14:31:20.352316Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/zip"/>
+        <bookmark:applications>
+          <bookmark:application name="File Roller" exec="&apos;file-roller&apos;" modified="2023-04-05T14:31:41.078378Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Thuc-tap-2023/PhongNV/Linux/B%C3%A0i%209_Process/Process.md" added="2023-04-06T13:46:19.316176Z" modified="2023-04-07T08:33:55.615518Z" visited="2023-04-06T13:46:19.316177Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/markdown"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-04-07T08:33:55.615517Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/BaoCao-main/Process.md" added="2023-04-06T14:01:09.085095Z" modified="2023-04-06T14:01:09.428812Z" visited="2023-04-06T14:01:09.085097Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/markdown"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-04-06T14:01:09.428811Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/BaoCao-main/LVM" added="2023-04-06T14:02:40.792473Z" modified="2023-04-06T14:02:41.101107Z" visited="2023-04-06T14:02:40.792475Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-04-06T14:02:41.101104Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/giao_trinh_he_dieu_hanh_unix_va_linux.pdf" added="2023-04-07T02:09:53.148243Z" modified="2023-04-07T02:09:53.148246Z" visited="2023-04-07T02:09:53.148244Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/pdf"/>
+        <bookmark:applications>
+          <bookmark:application name="Document Viewer" exec="&apos;evince %u&apos;" modified="2023-04-07T02:09:53.148245Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///media/vanphong17/DaTa/Th%C6%B0%20m%E1%BB%A5c%20%E1%BB%94%20D/H%E1%BB%8Dc%20AWS/B%C3%A0i%20t%E1%BA%ADp%20b%C3%A1o%20c%C3%A1o%20anh%20Th%C3%A0nh/BaoCao" added="2023-04-07T04:25:46.207326Z" modified="2023-04-07T08:29:33.592619Z" visited="2023-04-07T04:25:46.207329Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="inode/directory"/>
+        <bookmark:applications>
+          <bookmark:application name="code" exec="&apos;code %u&apos;" modified="2023-04-07T08:29:33.592612Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/BaoCao-main/B%C3%A0i%2011:LVM/LVM.md" added="2023-04-07T14:21:16.842253Z" modified="2023-04-11T06:47:22.685036Z" visited="2023-04-07T14:21:16.842254Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/markdown"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-04-11T06:47:22.685035Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Pictures/Screenshots/Screenshot%20from%202023-04-10%2020-25-11.png" added="2023-04-10T13:25:11.159821Z" modified="2023-04-10T13:25:11.159826Z" visited="2023-04-10T13:25:11.159822Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:applications>
+          <bookmark:application name="gnome-shell" exec="&apos;gnome-shell %u&apos;" modified="2023-04-10T13:25:11.159824Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///media/vanphong17/DaTa/Th%C6%B0%20m%E1%BB%A5c%20%E1%BB%94%20D/Nh%E1%BB%AFng%20file%20k%20li%C3%AAn%20quan/CayTienTrinh_TC33.pdf" added="2023-04-10T13:27:52.272085Z" modified="2023-04-10T13:27:52.272090Z" visited="2023-04-10T13:27:52.272085Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/pdf"/>
+        <bookmark:applications>
+          <bookmark:application name="Document Viewer" exec="&apos;evince %u&apos;" modified="2023-04-10T13:27:52.272087Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///media/vanphong17/DaTa/Th%C6%B0%20m%E1%BB%A5c%20%E1%BB%94%20D/S%C3%A1ch/nhasachmienphi-hay-tra-loi-em-tai-sao-tap-1.pdf" added="2023-04-10T14:37:32.410876Z" modified="2023-04-10T14:37:32.410881Z" visited="2023-04-10T14:37:32.410877Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/pdf"/>
+        <bookmark:applications>
+          <bookmark:application name="Document Viewer" exec="&apos;evince %u&apos;" modified="2023-04-10T14:37:32.410879Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///media/vanphong17/DaTa/Th%C6%B0%20m%E1%BB%A5c%20%E1%BB%94%20D/S%C3%A1ch/nhasachmienphi-nhung-dieu-ban-nen-biet-ve-khoa-hoc-va-cong-nghe-song-ngu.pdf" added="2023-04-10T14:37:56.847400Z" modified="2023-04-10T14:37:56.847405Z" visited="2023-04-10T14:37:56.847401Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/pdf"/>
+        <bookmark:applications>
+          <bookmark:application name="Document Viewer" exec="&apos;evince %u&apos;" modified="2023-04-10T14:37:56.847402Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///media/vanphong17/DaTa/Th%C6%B0%20m%E1%BB%A5c%20%E1%BB%94%20D/S%C3%A1ch/Can-ban-CNTT-toan-cau-_-V2.2.pdf" added="2023-04-10T14:38:36.517331Z" modified="2023-04-10T14:38:36.517337Z" visited="2023-04-10T14:38:36.517332Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/pdf"/>
+        <bookmark:applications>
+          <bookmark:application name="Document Viewer" exec="&apos;evince %u&apos;" modified="2023-04-10T14:38:36.517334Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Pictures/Screenshots/29744471_2070588906290946_2557916133016813479_o.jpg" added="2023-04-10T15:02:18.683711Z" modified="2023-04-10T15:02:32.218437Z" visited="2023-04-10T15:02:18.683713Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="xdg-desktop-portal-gnome" exec="&apos;xdg-desktop-portal-gnome %u&apos;" modified="2023-04-10T15:02:32.218435Z" count="2"/>
+          <bookmark:application name="snap.firefox" exec="&apos;gio open %u&apos;" modified="2023-04-10T15:02:32.192723Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Documents/Untitled%201" added="2023-04-10T15:45:53.477509Z" modified="2023-04-10T15:45:53.477524Z" visited="2023-04-10T15:45:53.477511Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/octet-stream"/>
+        <bookmark:applications>
+          <bookmark:application name="LibreOffice 7.3" exec="&apos;soffice %u&apos;" modified="2023-04-10T15:45:53.477517Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Thuc-tap-2023/PhongNV/Linux/B%C3%A0i%208_Linux%20Swap%20memory/Swap%20memory.md" added="2023-04-11T06:46:45.080096Z" modified="2023-04-11T06:48:21.740102Z" visited="2023-04-11T06:46:45.080097Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/markdown"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-04-11T06:47:51.122034Z" count="2"/>
+          <bookmark:application name="snap.firefox" exec="&apos;gio open %u&apos;" modified="2023-04-11T06:48:21.709912Z" count="1"/>
+          <bookmark:application name="xdg-desktop-portal-gnome" exec="&apos;xdg-desktop-portal-gnome %u&apos;" modified="2023-04-11T06:48:21.740099Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/giao_trinh_mang_may_tinh_ho_dac_phuong_cuuduongthancong_com.pdf" added="2023-04-11T15:57:16.295832Z" modified="2023-04-11T15:57:16.295836Z" visited="2023-04-11T15:57:16.295833Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/pdf"/>
+        <bookmark:applications>
+          <bookmark:application name="Document Viewer" exec="&apos;evince %u&apos;" modified="2023-04-11T15:57:16.295834Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Thuc-tap-2023/PhongNV/Linux/10.%20Volume%20Manager%20Basics/Volume%20Manager%20Basics.md" added="2023-04-12T01:43:13.298429Z" modified="2023-04-12T02:44:51.122353Z" visited="2023-04-12T01:43:13.298431Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/markdown"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="snap.firefox" exec="&apos;gio open %u&apos;" modified="2023-04-12T01:43:13.298435Z" count="1"/>
+          <bookmark:application name="xdg-desktop-portal-gnome" exec="&apos;xdg-desktop-portal-gnome %u&apos;" modified="2023-04-12T01:43:13.323298Z" count="1"/>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-04-12T02:44:51.122351Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/Thuc-tap-2023-main.zip" added="2023-04-12T02:38:31.353894Z" modified="2023-04-12T02:38:31.353898Z" visited="2023-04-12T02:38:31.353895Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/zip"/>
+        <bookmark:applications>
+          <bookmark:application name="File Roller" exec="&apos;file-roller&apos;" modified="2023-04-12T02:38:31.353896Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads" added="2023-04-12T02:39:02.069144Z" modified="2023-04-12T02:39:02.069150Z" visited="2023-04-12T02:39:02.069145Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="inode/directory"/>
+        <bookmark:applications>
+          <bookmark:application name="org.gnome.Nautilus" exec="&apos;org.gnome.Nautilus %u&apos;" modified="2023-04-12T02:39:02.069147Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>

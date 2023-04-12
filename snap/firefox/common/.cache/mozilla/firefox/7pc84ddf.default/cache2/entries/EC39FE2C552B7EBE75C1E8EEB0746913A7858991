@@ -1,0 +1,797 @@
+class clsMediaPlayer {
+	generateID(s) {
+		return md5(s).replace(/(....)(?=.)/g, "$1-");
+	}
+	setCookie(name,value,days) {
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + (days*24*60*60*1000));
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	}
+	getCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}
+	eraseCookie(name) {   
+		document.cookie = name+'=; Max-Age=-99999999;';  
+	}
+	
+	
+	getQueryString(param){
+		var queryString = [];
+		var hash;
+		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		var vars = new Array();
+		for(var i = 0; i < hashes.length; i++) {
+			hash = hashes[i].split('=');
+			if (hash[0]==param)
+				return hash[1];
+			queryString.push(hash[0]);
+			vars[hash[0]] = hash[1];
+		}
+		return queryString;
+	}	
+	getAttempt(){
+		var attempt = $('input:hidden[name=attempt]').val();
+		if (isNaN(attempt))
+			attempt = this.getQueryString('attempt');
+		return attempt;
+	}
+	stopOtherAudio(cur_mediaplayerid) {
+		$('.mediacontainer').each(function(){
+			var mediaplay = $(this).find('audio').get(0);
+			var mediaplay_id = $(mediaplay).attr('id');
+			if (!mediaplay.paused && mediaplay_id!=cur_mediaplayerid) {;
+				var playbutton = $(this).find('.playbutton');
+				mediaplay.pause();
+				$(playbutton).val('Pause...');
+				$(playbutton).attr('disabled',false);
+			}
+		});
+	}
+	/*
+	var getDuration0 = function (url, next) {
+		//return true;
+		var _player = new Audio(url);
+		_player.addEventListener("durationchange", function (e) {
+			if (this.duration!=Infinity) {
+			   var duration = this.duration
+			   _player.remove();
+			   next(duration);
+			};
+		}, false);      
+		_player.load();
+		_player.currentTime = 24*60*60; //fake big time
+		_player.volume = 0; 
+		// _player.play();
+		//waiting...
+	};
+
+	var getDuration = function (url) {
+		const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+		const request = new XMLHttpRequest();
+		
+		request.open('GET', url, true)
+		request.responseType = 'arraybuffer'
+		request.onload = function() {
+			audioContext.decodeAudioData(request.response,
+				function(buffer) {
+					let duration = buffer.duration
+					console.log(duration)
+					gduration = duration;
+				}
+			)
+		}
+		request.send();
+	}
+	*/
+	getDuration = function (url, next) {
+    	var _player = new Audio(url);
+    	_player.addEventListener("durationchange", function (e) {
+        	if (this.duration!=Infinity) {
+           		var duration = this.duration;
+           		_player.remove();
+           		next(duration);
+        	}
+    	}, false);      
+		_player.load();
+		_player.currentTime = 24*60*60; //fake big time
+		_player.volume = 0;
+		_player.play();
+		//waiting...
+	}
+}
+String.prototype.toHHMMSS = function () {
+	var sec_num = parseInt(this, 10); // don't forget the second param
+	var hours   = Math.floor(sec_num / 3600);
+	var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+	var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+	if (hours   < 10) {hours   = "0"+hours;}
+	if (minutes < 10) {minutes = "0"+minutes;}
+	if (seconds < 10) {seconds = "0"+seconds;}
+	var time    = (parseInt(hours)>0?hours+':':'')+minutes+':'+seconds;
+	return time;
+}
+/*
+MobileDetect:
+console.log( md.mobile() );          		 // 'Sony'
+console.log( md.phone() );           		 // 'Sony'
+console.log( md.tablet() );         		 // null
+console.log( md.userAgent() );      		 // 'Safari'
+console.log( md.os() );             		 // 'AndroidOS'
+console.log( md.is('iPhone') );     		 // false
+console.log( md.is('bot') );        		 // false
+console.log( md.version('Webkit') );         // 534.3
+console.log( md.versionStr('Build') );       // '4.1.A.0.562'
+console.log( md.match('playstation|xbox') ); // false
+*/
+$(document).ready(function(){
+	console.log('mediaplayer-js '+window.navigator.userAgent);
+	// var mobiledetect = new MobileDetect(window.navigator.userAgent);
+	// console.log(mobiledetect);
+	
+	var _clsMediaPlayer = new clsMediaPlayer();
+	var gPlaying = false;
+	var gPlayingBm;	
+	var gduration;
+	
+	$('.mediacontainer').each(function(){
+		var _thismediacontainer = $(this);
+		var _containermedia_src = $(this).data('src');
+		var _timeplay = $(this).data('timeplay');
+		$(this).removeAttr('data-src');
+		var _generateID = _clsMediaPlayer.generateID(_containermedia_src);
+		var mediaplayer_id = 'mediaplayer_'+_generateID;
+		var currentLastTime = _clsMediaPlayer.getCookie("currentTime_"+mediaplayer_id);
+		var durationLastTime = _clsMediaPlayer.getCookie("durationTime_"+mediaplayer_id);
+		if (durationLastTime==null) durationLastTime='00:00';
+
+		console.log(mediaplayer_id);
+		console.log('currentLastTime = '+currentLastTime);
+		console.log('_timeplay = '+_timeplay);
+		if (_timeplay==undefined) {
+			$(this).append('<audio id="'+mediaplayer_id+'" class="mediaplayer" controls controlsList="nodownload"><source src="'+_containermedia_src+'" type="audio/mpeg">Your browser does not support the audio element.</audio>');
+			return;
+		}
+		
+		$(this).append('<input type="button" value="Play" class="btn-primary pull-left playbutton"><audio id="'+mediaplayer_id+'" preload="auto" class="mediaplayer" disabled><source src="'+_containermedia_src+'" type="audio/mpeg">Your browser does not support the audio element.</audio><div class="progressBar pull-left"><span class="progress">&nbsp;</span></div><!--input class="volume" min="0" max="1" step="0.001" type="range" /-->');
+		const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+		
+		
+		var mediaplay_container = $(this);
+		var mediaplay = $(this).find('audio').get(0);
+		var playbutton = $(this).find('.playbutton');				
+		var volumebutton = $(this).find('.volume');				
+		// var mediaplay_id = 'mediaplayer_' + Math.random().toString(36).substr(5, 8);
+		var mediaplay_id = 'mediaplayer_' + _generateID;
+		var mp3_listening = _generateID;
+		var progress = $(mediaplay_container).find('.progress');
+		$(playbutton).val('Loading...');
+		$(playbutton).attr('disabled',true);
+		/**/
+		mediaplay.addEventListener("loadstart", function() {
+		  	// console.log('grabbing the file');
+		});
+		mediaplay.addEventListener("durationchange", function() {
+		  	// console.log('you can display the duration now');
+		});
+		mediaplay.addEventListener("loadedmetadata", function() {
+			_clsMediaPlayer.getDuration (_containermedia_src, function (duration) {
+				let gduration = duration;
+				console.log('you can display the duration now (loadedmetadata): '+gduration);
+			});
+			
+		});
+		mediaplay.addEventListener("loadeddata", function() {
+			/*NOT WORKING*/
+			let gduration = mediaplay.duration;
+		  	console.log('you could display the playhead now: '+gduration);
+			
+		});
+		mediaplay.addEventListener("progress", function() {
+		  	console.log('you could let the user know the media is downloading...');
+		});
+		mediaplay.addEventListener("timeupdate", function() {
+		  	var value = 0;			
+			if (mediaplay.currentTime > 0) {
+				value = Math.floor((100 / gduration) * mediaplay.currentTime);
+				_clsMediaPlayer.setCookie("currentTime_"+mediaplayer_id, mediaplay.currentTime);
+			}
+			
+			$(progress).text(parseInt(mediaplay.currentTime).toString().toHHMMSS()+'/'+durationLastTime.toString().toHHMMSS());
+			if (value<100) $(progress).width(value + '%');
+		});
+		mediaplay.addEventListener("canplay", function() {			
+			$(progress).text('00:00/00:00');
+			$(playbutton).attr('disabled',false);
+			$(playbutton).val('Play');
+		});
+		/*
+		if (!mobiledetect.mobile()) {
+			const request = new XMLHttpRequest();
+			request.open('GET', _containermedia_src, true)
+			request.responseType = 'arraybuffer'
+			request.onload = function() {
+				audioContext.decodeAudioData(request.response,
+					function(buffer) {
+						gduration = buffer.duration;
+						_clsMediaPlayer.setCookie("durationTime_"+mediaplayer_id,gduration);
+						$(progress).text('00:00/00:00');
+						$(playbutton).attr('disabled',false);
+						$(playbutton).val('Play');
+					}
+				)
+			}
+			request.send();
+		}
+		else {
+			gduration = mediaplay.duration;
+			alert(gduration);
+			$(progress).text('00:00/00:00');
+			$(playbutton).attr('disabled',false);
+			$(playbutton).val('Play');
+		}
+		*/
+		$(this).find('audio').attr('id',mediaplay_id);
+		$(playbutton).data('mediaplay',mediaplay_id);
+		$(volumebutton).data('mediaplay',mediaplay_id);
+		
+		if (currentLastTime!=null) mediaplay.currentTime = currentLastTime;
+		$(progress).width('16%');
+		/*
+		$(this).find('audio').bind("timeupdate", function(){			
+			var value = 0;			
+			if (mediaplay.currentTime > 0) {
+				value = Math.floor((100 / gduration) * mediaplay.currentTime);
+				_clsMediaPlayer.setCookie("currentTime_"+mediaplayer_id, mediaplay.currentTime);
+			}
+			
+			$(progress).text(parseInt(mediaplay.currentTime).toString().toHHMMSS()+'/'+durationLastTime.toString().toHHMMSS());
+			if (value<100) $(progress).width(value + '%');
+			// else {
+				// $(playbutton).val('Play');
+				// $(playbutton).attr('disabled',false);
+				// $(playbutton).removeClass('btn-success');
+				// $(playbutton).addClass('btn-primary');
+			// }
+			
+		});
+		*/
+		
+		$(playbutton).on('click',function(){
+			
+			mediaplay.volume = 1;
+			console.log('mediaplay.duration='+mediaplay.duration);
+			//var playbutton = $(this);
+			try {
+				// if (!gPlaying) { 
+					// var mediaplay_DOC = $(_thismediacontainer).parent().find('.mediaplayer');
+					
+					var checkAns = confirm("1. B·∫†N CH·ªà C√ì DUY NH·∫§T 1 L·∫¶N KHI CLICK V√ÄO N√öT PLAY CHO M·ªñI B√ÄI NGHE.\n\n2. Trong qu√° tr√¨nh nghe, v√¨ b·∫•t k·ª≥ l√Ω do n√†o b·∫°n ƒë√≥ng c·ª≠a s·ªï b√†i thi, b·∫°n s·∫Ω KH√îNG TH·ªÇ click v√†o n√∫t Play ƒë·ªÉ nghe l·∫°i b√†i hi·ªán t·∫°i n·ªØa\n\n3. H√ÉY KI·ªÇM TRA H√åNH ·∫¢NH (n·∫øu c√≥) TRONG C√ÅC PH∆Ø∆†NG √ÅN CH·ªåN ƒê√É HI·ªÇN TH·ªä ƒê·∫¶Y ƒê·ª¶ CH∆ØA\n\n\nB·∫†N C√ì CH·∫ÆC CH·∫ÆN MU·ªêN NGHE NGAY B√ÇY GI·ªú KH√îNG?");
+					if (!checkAns) {
+						return;
+					}
+					_clsMediaPlayer.stopOtherAudio(mediaplayer_id);
+					var qid = $(_thismediacontainer).parent().parent().parent().parent().find('.info').find('.qno').text();
+					var attid = _clsMediaPlayer.getAttempt();
+					attid = parseInt(attid);
+					console.log('QID = '+qid);
+					console.log('ATTID = '+attid);
+					
+					gPlayingBm = qid;
+					var currentLastTime = _clsMediaPlayer.getCookie("currentTime_"+mediaplayer_id);
+					// if (gduration == undefined) {
+					if (mediaplay.duration == undefined) {
+						alert("Hi·ªán t·ªáp audio ch∆∞a ƒë∆∞·ª£c t·∫£i th√†nh c√¥ng. Tr√¨nh duy·ªát s·∫Ω t·ª± ƒë·ªông reload l·∫°i (gduration="+gduration+")");
+						location.reload();
+						return;
+					}
+						
+					var _completed_percent = Math.floor((currentLastTime/gduration)*100);
+					console.log(_completed_percent + ' - ' + currentLastTime +' / '+ gduration);
+					$.ajax({
+						method: "POST",
+						dataType: "json	",
+						cache: false,
+						url: "/tlu-custom/pluginlib.php",
+						data: {attempt:attid,mp3:mp3_listening,questno:qid,completed_percent:_completed_percent,action:'checklistening'},
+						success: function(response) {
+							console.log(response);
+							if (!response.listened) {
+								gPlaying=true;
+								_clsMediaPlayer.setCookie("currentTime_"+mediaplayer_id,response.completed_percent*gduration/100);
+								// mediaplay.currentTime = response.completed_percent*gduration/100;
+								mediaplay.play();
+								$(playbutton).val('Listening');
+								$(playbutton).removeClass('btn-primary');
+								$(playbutton).addClass('btn-success');
+								$(playbutton).attr('disabled',true);
+							}
+							else { 								
+								mediaplay.currentTime = gduration;
+								mediaplay.pause();
+								$(playbutton).val('Listened');
+								$(playbutton).attr('disabled',true);
+								$(playbutton).removeClass('btn-primary');
+								$(playbutton).addClass('btn-danger');
+								alert("You already listened this question!");
+							}							
+						},
+						error: function(err) {
+							alert("Error! See on console log");
+							console.log(err);
+						}
+					});
+				// }
+				// else {					
+					// alert('Please finish the previous playing.');
+					// window.location.href='#mediabm'+gPlayingBm;
+				// }
+			}
+			catch (e) {
+				// Fail silently but show in F12 developer tools console
+				console.log("Error:");console.log(e);
+			}
+		});
+		$(volumebutton).on('change',function(){
+			var mediaplay = $('#'+$(this).data('mediaplay')).get(0);
+			mediaplay.volume = $(this).val();
+		});
+	});
+});        ‡{  x‡{Ñ   20230321162322-8l?   https://elearning.thanglong.edu.vn/tlu-custom/js/mediaplayer.js   ‚2  class clsMediaPlayer {
+	generateID(s) {
+		return md5(s).replace(/(....)(?=.)/g, "$1-");
+	}
+	setCookie(name,value,days) {
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + (days*24*60*60*1000));
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	}
+	getCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}
+	eraseCookie(name) {   
+		document.cookie = name+'=; Max-Age=-99999999;';  
+	}
+	
+	
+	getQueryString(param){
+		var queryString = [];
+		var hash;
+		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		var vars = new Array();
+		for(var i = 0; i < hashes.length; i++) {
+			hash = hashes[i].split('=');
+			if (hash[0]==param)
+				return hash[1];
+			queryString.push(hash[0]);
+			vars[hash[0]] = hash[1];
+		}
+		return queryString;
+	}	
+	getAttempt(){
+		var attempt = $('input:hidden[name=attempt]').val();
+		if (isNaN(attempt))
+			attempt = this.getQueryString('attempt');
+		return attempt;
+	}
+	stopOtherAudio(cur_mediaplayerid) {
+		$('.mediacontainer').each(function(){
+			var mediaplay = $(this).find('audio').get(0);
+			var mediaplay_id = $(mediaplay).attr('id');
+			if (!mediaplay.paused && mediaplay_id!=cur_mediaplayerid) {;
+				var playbutton = $(this).find('.playbutton');
+				mediaplay.pause();
+				$(playbutton).val('Pause...');
+				$(playbutton).attr('disabled',false);
+			}
+		});
+	}
+	/*
+	var getDuration0 = function (url, next) {
+		//return true;
+		var _player = new Audio(url);
+		_player.addEventListener("durationchange", function (e) {
+			if (this.duration!=Infinity) {
+			   var duration = this.duration
+			   _player.remove();
+			   next(duration);
+			};
+		}, false);      
+		_player.load();
+		_player.currentTime = 24*60*60; //fake big time
+		_player.volume = 0; 
+		// _player.play();
+		//waiting...
+	};
+
+	var getDuration = function (url) {
+		const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+		const request = new XMLHttpRequest();
+		
+		request.open('GET', url, true)
+		request.responseType = 'arraybuffer'
+		request.onload = function() {
+			audioContext.decodeAudioData(request.response,
+				function(buffer) {
+					let duration = buffer.duration
+					console.log(duration)
+					gduration = duration;
+				}
+			)
+		}
+		request.send();
+	}
+	*/
+	getDuration = function (url, next) {
+    	var _player = new Audio(url);
+    	_player.addEventListener("durationchange", function (e) {
+        	if (this.duration!=Infinity) {
+           		var duration = this.duration;
+           		_player.remove();
+           		next(duration);
+        	}
+    	}, false);      
+		_player.load();
+		_player.currentTime = 24*60*60; //fake big time
+		_player.volume = 0;
+		_player.play();
+		//waiting...
+	}
+}
+String.prototype.toHHMMSS = function () {
+	var sec_num = parseInt(this, 10); // don't forget the second param
+	var hours   = Math.floor(sec_num / 3600);
+	var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+	var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+	if (hours   < 10) {hours   = "0"+hours;}
+	if (minutes < 10) {minutes = "0"+minutes;}
+	if (seconds < 10) {seconds = "0"+seconds;}
+	var time    = (parseInt(hours)>0?hours+':':'')+minutes+':'+seconds;
+	return time;
+}
+/*
+MobileDetect:
+console.log( md.mobile() );          		 // 'Sony'
+console.log( md.phone() );           		 // 'Sony'
+console.log( md.tablet() );         		 // null
+console.log( md.userAgent() );      		 // 'Safari'
+console.log( md.os() );             		 // 'AndroidOS'
+console.log( md.is('iPhone') );     		 // false
+console.log( md.is('bot') );        		 // false
+console.log( md.version('Webkit') );         // 534.3
+console.log( md.versionStr('Build') );       // '4.1.A.0.562'
+console.log( md.match('playstation|xbox') ); // false
+*/
+$(document).ready(function(){
+	console.log('mediaplayer-js '+window.navigator.userAgent);
+	// var mobiledetect = new MobileDetect(window.navigator.userAgent);
+	// console.log(mobiledetect);
+	
+	var _clsMediaPlayer = new clsMediaPlayer();
+	var gPlaying = false;
+	var gPlayingBm;	
+	var gduration;
+	
+	$('.mediacontainer').each(function(){
+		var _thismediacontainer = $(this);
+		var _containermedia_src = $(this).data('src');
+		var _timeplay = $(this).data('timeplay');
+		$(this).removeAttr('data-src');
+		var _generateID = _clsMediaPlayer.generateID(_containermedia_src);
+		var mediaplayer_id = 'mediaplayer_'+_generateID;
+		var currentLastTime = _clsMediaPlayer.getCookie("currentTime_"+mediaplayer_id);
+		var durationLastTime = _clsMediaPlayer.getCookie("durationTime_"+mediaplayer_id);
+		if (durationLastTime==null) durationLastTime='00:00';
+
+		console.log(mediaplayer_id);
+		console.log('currentLastTime = '+currentLastTime);
+		console.log('_timeplay = '+_timeplay);
+		if (_timeplay==undefined) {
+			$(this).append('<audio id="'+mediaplayer_id+'" class="mediaplayer" controls controlsList="nodownload"><source src="'+_containermedia_src+'" type="audio/mpeg">Your browser does not support the audio element.</audio>');
+			return;
+		}
+		
+		$(this).append('<input type="button" value="Play" class="btn-primary pull-left playbutton"><audio id="'+mediaplayer_id+'" preload="auto" class="mediaplayer" disabled><source src="'+_containermedia_src+'" type="audio/mpeg">Your browser does not support the audio element.</audio><div class="progressBar pull-left"><span class="progress">&nbsp;</span></div><!--input class="volume" min="0" max="1" step="0.001" type="range" /-->');
+		const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+		
+		
+		var mediaplay_container = $(this);
+		var mediaplay = $(this).find('audio').get(0);
+		var playbutton = $(this).find('.playbutton');				
+		var volumebutton = $(this).find('.volume');				
+		// var mediaplay_id = 'mediaplayer_' + Math.random().toString(36).substr(5, 8);
+		var mediaplay_id = 'mediaplayer_' + _generateID;
+		var mp3_listening = _generateID;
+		var progress = $(mediaplay_container).find('.progress');
+		$(playbutton).val('Loading...');
+		$(playbutton).attr('disabled',true);
+		/**/
+		mediaplay.addEventListener("loadstart", function() {
+		  	// console.log('grabbing the file');
+		});
+		mediaplay.addEventListener("durationchange", function() {
+		  	// console.log('you can display the duration now');
+		});
+		mediaplay.addEventListener("loadedmetadata", function() {
+			_clsMediaPlayer.getDuration (_containermedia_src, function (duration) {
+				let gduration = duration;
+				console.log('you can display the duration now (loadedmetadata): '+gduration);
+			});
+			
+		});
+		mediaplay.addEventListener("loadeddata", function() {
+			/*NOT WORKING*/
+			let gduration = mediaplay.duration;
+		  	console.log('you could display the playhead now: '+gduration);
+			
+		});
+		mediaplay.addEventListener("progress", function() {
+		  	console.log('you could let the user know the media is downloading...');
+		});
+		mediaplay.addEventListener("timeupdate", function() {
+		  	var value = 0;			
+			if (mediaplay.currentTime > 0) {
+				value = Math.floor((100 / gduration) * mediaplay.currentTime);
+				_clsMediaPlayer.setCookie("currentTime_"+mediaplayer_id, mediaplay.currentTime);
+			}
+			
+			$(progress).text(parseInt(mediaplay.currentTime).toString().toHHMMSS()+'/'+durationLastTime.toString().toHHMMSS());
+			if (value<100) $(progress).width(value + '%');
+		});
+		mediaplay.addEventListener("canplay", function() {			
+			$(progress).text('00:00/00:00');
+			$(playbutton).attr('disabled',false);
+			$(playbutton).val('Play');
+		});
+		/*
+		if (!mobiledetect.mobile()) {
+			const request = new XMLHttpRequest();
+			request.open('GET', _containermedia_src, true)
+			request.responseType = 'arraybuffer'
+			request.onload = function() {
+				audioContext.decodeAudioData(request.response,
+					function(buffer) {
+						gduration = buffer.duration;
+						_clsMediaPlayer.setCookie("durationTime_"+mediaplayer_id,gduration);
+						$(progress).text('00:00/00:00');
+						$(playbutton).attr('disabled',false);
+						$(playbutton).val('Play');
+					}
+				)
+			}
+			request.send();
+		}
+		else {
+			gduration = mediaplay.duration;
+			alert(gduration);
+			$(progress).text('00:00/00:00');
+			$(playbutton).attr('disabled',false);
+			$(playbutton).val('Play');
+		}
+		*/
+		$(this).find('audio').attr('id',mediaplay_id);
+		$(playbutton).data('mediaplay',mediaplay_id);
+		$(volumebutton).data('mediaplay',mediaplay_id);
+		
+		if (currentLastTime!=null) mediaplay.currentTime = currentLastTime;
+		$(progress).width('16%');
+		/*
+		$(this).find('audio').bind("timeupdate", function(){			
+			var value = 0;			
+			if (mediaplay.currentTime > 0) {
+				value = Math.floor((100 / gduration) * mediaplay.currentTime);
+				_clsMediaPlayer.setCookie("currentTime_"+mediaplayer_id, mediaplay.currentTime);
+			}
+			
+			$(progress).text(parseInt(mediaplay.currentTime).toString().toHHMMSS()+'/'+durationLastTime.toString().toHHMMSS());
+			if (value<100) $(progress).width(value + '%');
+			// else {
+				// $(playbutton).val('Play');
+				// $(playbutton).attr('disabled',false);
+				// $(playbutton).removeClass('btn-success');
+				// $(playbutton).addClass('btn-primary');
+			// }
+			
+		});
+		*/
+		
+		$(playbutton).on('click',function(){
+			
+			mediaplay.volume = 1;
+			console.log('mediaplay.duration='+mediaplay.duration);
+			//var playbutton = $(this);
+			try {
+				// if (!gPlaying) { 
+					// var mediaplay_DOC = $(_thismediacontainer).parent().find('.mediaplayer');
+					
+					var checkAns = confirm("1. B·∫†N CH·ªà C√ì DUY NH·∫§T 1 L·∫¶N KHI CLICK V√ÄO N√öT PLAY CHO M·ªñI B√ÄI NGHE.\n\n2. Trong qu√° tr√¨nh nghe, v√¨ b·∫•t k·ª≥ l√Ω do n√†o b·∫°n ƒë√≥ng c·ª≠a s·ªï b√†i thi, b·∫°n s·∫Ω KH√îNG TH·ªÇ click v√†o n√∫t Play ƒë·ªÉ nghe l·∫°i b√†i hi·ªán t·∫°i n·ªØa\n\n3. H√ÉY KI·ªÇM TRA H√åNH ·∫¢NH (n·∫øu c√≥) TRONG C√ÅC PH∆Ø∆†NG √ÅN CH·ªåN ƒê√É HI·ªÇN TH·ªä ƒê·∫¶Y ƒê·ª¶ CH∆ØA\n\n\nB·∫†N C√ì CH·∫ÆC CH·∫ÆN MU·ªêN NGHE NGAY B√ÇY GI·ªú KH√îNG?");
+					if (!checkAns) {
+						return;
+					}
+					_clsMediaPlayer.stopOtherAudio(mediaplayer_id);
+					var qid = $(_thismediacontainer).parent().parent().parent().parent().find('.info').find('.qno').text();
+					var attid = _clsMediaPlayer.getAttempt();
+					attid = parseInt(attid);
+					console.log('QID = '+qid);
+					console.log('ATTID = '+attid);
+					
+					gPlayingBm = qid;
+					var currentLastTime = _clsMediaPlayer.getCookie("currentTime_"+mediaplayer_id);
+					// if (gduration == undefined) {
+					if (mediaplay.duration == undefined) {
+						alert("Hi·ªán t·ªáp audio ch∆∞a ƒë∆∞·ª£c t·∫£i th√†nh c√¥ng. Tr√¨nh duy·ªát s·∫Ω t·ª± ƒë·ªông reload l·∫°i (gduration="+gduration+")");
+						location.reload();
+						return;
+					}
+						
+					var _completed_percent = Math.floor((currentLastTime/gduration)*100);
+					console.log(_completed_percent + ' - ' + currentLastTime +' / '+ gduration);
+					$.ajax({
+						method: "POST",
+						dataType: "json	",
+						cache: false,
+						url: "/tlu-custom/pluginlib.php",
+						data: {attempt:attid,mp3:mp3_listening,questno:qid,completed_percent:_completed_percent,action:'checklistening'},
+						success: function(response) {
+							console.log(response);
+							if (!response.listened) {
+								gPlaying=true;
+								_clsMediaPlayer.setCookie("currentTime_"+mediaplayer_id,response.completed_percent*gduration/100);
+								// mediaplay.currentTime = response.completed_percent*gduration/100;
+								mediaplay.play();
+								$(playbutton).val('Listening');
+								$(playbutton).removeClass('btn-primary');
+								$(playbutton).addClass('btn-success');
+								$(playbutton).attr('disabled',true);
+							}
+							else { 								
+								mediaplay.currentTime = gduration;
+								mediaplay.pause();
+								$(playbutton).val('Listened');
+								$(playbutton).attr('disabled',true);
+								$(playbutton).removeClass('btn-primary');
+								$(playbutton).addClass('btn-danger');
+								alert("You already listened this question!");
+							}							
+						},
+						error: function(err) {
+							alert("Error! See on console log");
+							console.log(err);
+						}
+					});
+				// }
+				// else {					
+					// alert('Please finish the previous playing.');
+					// window.location.href='#mediabm'+gPlayingBm;
+				// }
+			}
+			catch (e) {
+				// Fail silently but show in F12 developer tools console
+				console.log("Error:");console.log(e);
+			}
+		});
+		$(volumebutton).on('change',function(){
+			var mediaplay = $('#'+$(this).data('mediaplay')).get(0);
+			mediaplay.volume = $(this).val();
+		});
+	});
+});”ò¿ŸØ   Ø       V√
+§      clsMediaPlayer     Å9ÎJ
+      generateID     ≥Õ:      md5    	÷Í–      (....)(?=.)    ÇØG      $1-    éK∑	      setCookie      Ó˛Æ&      days   ¯æR      expires    R∞J      date	   ∞åÙ      setTime
+    uÙ.      getTime    }∫¬m
+      ; expires=     ∏OÄ      document   _YNx      cookie     ≠j˛œ      ; path=/   ËIkí	      getCookie      ¶°æ      nameEQ     våƒ      charAt     ﬂY„	      substring      ⁄Eú¡      indexOf    ô◊H·      eraseCookie    ™∞
+Ò      =; Max-Age=-99999999;      ˜:•      getQueryString     ÅUÄ      param      ì°<      queryString    yá¥n      hash   ªº      hashes     ¯2áâ      window     0+QA      location   ª©`X      href   ÿÖ Ã      slice      ]¥¿      vars    Ñu2      push!   Z∆<
+      getAttempt"     ¢âô      attempt#     "Í√      input:hidden[name=attempt]$     &⁄õ      val%    ÕæZ      stopOtherAudio&     π¯ı       cur_mediaplayerid'      ãAHq      .mediacontainer(    *{wr	      mediaplay)      ◊œv      audio*      Aıès      mediaplay_id+   A¢Ωê      attr,   ûV¿      paused-     ”ªPH
+      playbutton.     Ö´ã      .playbutton/    œÃFW      pause0      
+•ık      Pause...1   ûzÉw      disabled2   í¯Ás      getDuration3    Â ¨¯      _player4    ¥'ø      Audio5       rO      addEventListener6   ∂È       durationchange7     ¿
+7      duration8   *N∑∆      remove9     2áU)      load:   Ëﬂ      currentTime;    ¬<JŒ      volume<     «SBö      play=   ºÒ‹      toHHMMSS>   ôíS      sec_num?    GÏÄ¥      hours@      `-Ñó      floorA      LPO≥      minutesB    O  j      secondsC    Ä%]¸      timeD   ¢Ñ
+      readyE      ˛Q1      consoleF    =X˚      logG    JMN–      mediaplayer-js H    π„+	      navigatorI      ìãà	      userAgentJ      [      _clsMediaPlayerK    ’üΩT      gPlayingL   ‘tùÉ
+      gPlayingBmM     È?ñ,	      gdurationN      ‚∑‹      _thismediacontainerO    ¯ÖÕ      _containermedia_srcP    6ó(Å      dataQ   ú∑»õ      srcR    ÁÎ√Ø	      _timeplayS      ôíïÈ      timeplayT   Ûûí
+      removeAttrU     ¿ÂÉ      data-srcV   ’–≤      _generateIDW    £≈/∂      mediaplayer_idX     ’YGŸ      mediaplayer_Y   g4’      currentLastTimeZ    $Í‰Ò      currentTime_[   ñËø
+      durationLastTime\   Õ&      durationTime_]      ≈u˛c      00:00^      2„Z~      currentLastTime = _     v‘◊&      _timeplay = `   ‹B-      appenda     ~¯      <audio id="b    ªò9F      " class="mediaplayer" controls controlsList="nodownload"><source src="c     TGÔL      " type="audio/mpeg">Your browser does not support the audio element.</audio>d   0d%;V      <input type="button" value="Play" class="btn-primary pull-left playbutton"><audio id="e     ∂ìÖ;      " preload="auto" class="mediaplayer" disabled><source src="f    5òL‡      " type="audio/mpeg">Your browser does not support the audio element.</audio><div class="progressBar pull-left"><span class="progress">&nbsp;</span></div><!--input class="volume" min="0" max="1" step="0.001" type="range" /-->g   ÜÇ=      audioContexth   å’k       AudioContexti   ¬HE      webkitAudioContextj     ÉÄj      mediaplay_containerk    ∑"ïÇ      volumebuttonl   °@ ¢      .volumem    º•ƒ-      mp3_listeningn      Â’øP      progresso   hˇ!
+	      .progressp      cvn˝
+      Loading...q     D>…	      loadstartr      —æß]      loadedmetadatas     P	ë3      you can display the duration now (loadedmetadata): t    ï∞"h
+      loadeddatau     }ÌËÑ$      you could display the playhead now: v   Ö∑¯•7      you could let the user know the media is downloading...w    ⁄ÿŸ≠
+      timeupdatex     à3¿µ      texty   ÎƒJ˚      widthz      π?œ/      canplay{    «º˛Ë      00:00/00:00|    –}¡B      Play}   ]óß‡      16%~    ü™‚X      click      ®&›      mediaplay.duration=Ä    ËE	      checkAnsÅ   :}»@      confirmÇ    °¡"R     1 .   B †N   C H »  C ”   D U Y   N H §T   1   L ¶N   K H I   C L I C K   V ¿ O   N ⁄ T   P L A Y   C H O   M ÷I   B ¿ I   N G H E . 
+ 
+ 2 .   T r o n g   q u ·   t r Ï n h   n g h e ,   v Ï   b •t   k Û  l ˝   d o   n ‡ o   b °n   Û n g   c Ìa   s ’  b ‡ i   t h i ,   b °n   s Ω  K H ‘ N G   T H ¬  c l i c k   v ‡ o   n ˙ t   P l a y   √  n g h e   l °i   b ‡ i   h i «n   t °i   n Ôa 
+ 
+ 3 .   H √ Y   K I ¬M   T R A   H Ã N H   ¢N H   ( n øu   c Û )   T R O N G   C ¡ C   P H Ø†N G   ¡ N   C H ÃN   √   H I ¬N   T H    ¶Y   Ê  C H ØA 
+ 
+ 
+ B †N   C ”   C H ÆC   C H ÆN   M U –N   N G H E   N G A Y   B ¬ Y   G I ‹  K H ‘ N G ? É   √      qidÑ    ˛Ë˘2      parentÖ     TèU˚      .infoÜ      £©h°      .qnoá    ØÑô      attidà      ä(“ò      QID = â     ê#      ATTID = ä   “Ô¢Z      alertã      õQ@V      H i «n   t «p   a u d i o   c h ∞a   ∞„c   t £i   t h ‡ n h   c Ù n g .   T r Ï n h   d u y «t   s Ω  t Ò  Ÿn g   r e l o a d   l °i   ( g d u r a t i o n = å   MΩT      reloadç     ˘∞Sô      _completed_percenté     èë¯)       - è    ﬁ—U       / ê    æd»ê      ajaxë   Ωpwm      methodí     ﬂ:      POSTì   DoÄw      dataTypeî   IéP’      json	ï      
+É€,      cacheñ      :LP      /tlu-custom/pluginlib.phpó      òø9Q      mp3ò    ä∆∂      questnoô    5Éu       completed_percentö      	‡Ï      actionõ     <9˜      checklisteningú     …©\9      successù    âOÁù      responseû   ¨ƒ›      listenedü   œ≤0	      Listening†      ˆ+      removeClass°    õsÿ      btn-primary¢    Bå|      addClass£   p8ﬂ      btn-success§    &\}E      Listened•   ≈L"Á
+      btn-danger¶     b·•”#      You already listened this question!ß    ˛tuW      error®      ºoò      err©    aï∫∂      Error! See on console log™      µÀâ      Error:´     Á˛¡      change¨     hqë      stopOtherAudio/<≠   :S      getDuration/<Æ      =7±      String.prototype.toHHMMSS        J  "                Ô%,â                                                                	                
+                                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                       ≥Oåc                                   j  `              o                ›  0 `3  P            e  7  o                 o                s              +  „                    +    
+ i  c               +                        i                "  o                &  P              (  *  -  o                 >  ?  A  B  C  o                  J  PK  PL  PM  P              N  PO  PR  V  W  PY  [  Pj  (  P-  Pk  *  m  Pn  Po             g                                                               7           M                           M                                „                                Ä  É  á  Y  ç               ù               ®           e                (  o   Ø¬0∞     IÙ$KEÆ˙ö   #      ë  ì  ï  ›  P  ú  ß        "  ó  ò  ô  ö  á&’™ç!´!   <       æ                       –    ™´   ’6∆   e   j   f    ≠   ’j   «⁄ÿ<   ;   j   ;   j	   ;
+   j   ;   j   ;   j   ;   j   ;   j   ;   ’´   »¨   ’¥   H   j   J   ’¥    ¥   p ◊H   ⁄j   t ’°∏0 J J J J J* J0 ñ@p`Pï@Ä  â`P+P/PDÄ ^ P  <           ˇˇˇˇ             T   T   "                         ¥    µ  p ◊H   ⁄i      p û°0 `P)Pî P3 Q     Æ                           √   ’µ ñc   ì   ¥   }Ÿ  ~  √  ’∂  ◊H   ⁄∂  ◊H   ⁄p  µ )<)<)Ë)%t ’   ∂  ◊H   ⁄p  %√   ’ì   ¥   µ     %µ ô   ì   ’   ì   %∂   %	   %K
+   ’°0 `P: `P= `Pí0 `Pñ Pî ˇˇˇÛP4 `Pê PN `P∏0 P ®  à                        µ     %√   ’¥   H   ◊H   ⁄   p √  ’√  ’î   ∂  ∂  H   ñπ   ì   ∂  ∂  I√  ’›î	   ∂  ◊H   ⁄p    ñ,   ì   ∂  ◊H	   ⁄∂  H   p √  ’ïæˇˇˇì   ∂  ◊H
+   ⁄∂   p ñ+   ì   ∂  ◊H	   ⁄∂   H   ∂  H   p ûì   ∂  .'√  ’ï8ˇˇˇì   û°0 `P> `Pñ P8  `P&fPò0 `P> !fP,Pì `Pï Pí0 `P/P/`Pù 	PC	 F `Pï@ `P1 Q    ®         _   G          2   Õ   D   D                            ¥   µ     %K   ’°0 `Pî0 P    ®  ò           
+       "      e    √   ’¥   H   H   ◊H   ⁄¥   H   H   ◊H   ⁄   p %p ◊H   ⁄   p √  ’¥	   }Ÿ  ~  √  ’√  ’î   ∂  ∂  H
+   ñ~   ì   ∂  ∂  I◊H   ⁄   p √  ’∂  Iµ  ñ   ì   ∂  Iûì   ∂   ◊H   ⁄∂  It ’∂  ∂  I∂  IM’∂  .'√  ’ïsˇˇˇì"   ∂   û°0 `P:0 `P± 0P%ˇˇˇÂP/-P8 `Pí0  `P&fPò0 `Pï P8 `Pî0 `PF F	 `Pë P4 `Pí@ $`Pï@ `P4 Q    ®         o   í   §   §   ]                	        ‘√  ’¥       p ◊H   ⁄p  √   ’¥    ∂   p ñ"   ì   ∂  ◊H   ⁄   p √   ’ì	   ∂   û°6 `P+P*P8 `P*P= `Pê P= `P4 Q T   T                            ¥       p ◊H   ⁄j   t ’°0 `P+P/PD P    d  d  Ú                        ‘√  ’¥    ∂  p ◊H   ⁄   p ◊H   ⁄p √   ’¥    ∂   p ◊H   ⁄   p √  ’∂   H   ò   ì   ’∂  ∑   ì   ñu   ì   ¥    ∂  p ◊H   ⁄   p √  ’∂   ◊H	   ⁄t  ’¥    ∂  p ◊H
+   ⁄   t ’¥    ∂  p ◊H   ⁄   t ’ì   °6 `P*P/P+P8 `P*P/P8 `PÆ0 `P*P/P8 `P+
+P4 `P*P/P4 `P*Pê PI	 P   @   @                           ‘√   ’∂   j   :   ’°fP@/P  ƒ   ƒ   m                  
+       ¥   }µ  Ÿ  ~ ƒ   ’∑   ◊H   ⁄   j   t ’∑   ◊H   ⁄t  ’∑   	ÄQK   ’∑   K   ’∑   ◊H   ⁄t  ’°0 `Pñ0 `Pñ@A PD	 `P,P4 `P? `P< `P,PD P   î   î   Q                       ‘√  ’∂  H   ¥   ñ6   ì   ∂  H   √   ’∑   ◊H   ⁄t  ’∑    ∂   t ’ì   °6 `Pô0 `P> `P,P4 `P*PI P  @   @                           ‘√   ’∑   Ø   I∂   t  ’°    ¨  ¨  5               !        ‘√  ’¥    ∂  
+p √   ’¥   ◊H   ⁄∂   *p √  ’¥   ◊H   ⁄∂   ∂  )&<*p √  ’∂   ∂  )&∂  <)&√  ’∂  
+ñ   ì      ∂  %√  ’ì   ∂  
+ñ   ì      ∂  %√  ’ì   ∂  
+ñ   ì      ∂  %√  ’ì   ¥    ∂  p ñ   ì   ∂     %ï   ì      ì   ∂  %   %∂  %√  ’∂  û°6 `P,P8 `Pî P8 `Pú P8 `Pö@ `Pë `Pî0 `Pë `Pî0 `Pë `Pî0 `P*P¬0 `P4Q    ¨   ¨   ^                          ¥   ◊H   ⁄   ¥   H   H   %t ’¥   }Ÿ  ~  ƒ   ’ƒ   ’¥    	   p ◊H
+   ⁄j   t ’°0 `P° PD `Pì0 `P70@
+ `P+P/PDÄ  ’P    §  Ñ  µ               Ö       ‘√  ’™´  ’¥    ∂  p ƒ   ’¥    ∂  p ◊H   ⁄   p ƒ   ’¥    ∂  p ◊H   ⁄   p √   ’¥    ∂  p ◊H   ⁄   t ’∑  ◊H   ⁄∑   p √  ’	   ∂  %ƒ   ’∑  ◊H
+   ⁄   ∑   %p √  ’∑  ◊H
+   ⁄   ∑   %p ƒ   ’∑   ñ   ì      ƒ   ’ì   ¥   ◊H   ⁄∑   t ’¥   ◊H   ⁄   ∂  %t ’¥   ◊H   ⁄   ∂   %t ’∂   ¥   ñC   ì'   ¥    ∂  p ◊H   ⁄   ∑   %   %∑   %   %t ’ †»°ì/   ¥    ∂  p ◊H   ⁄   ∑   %   %∑   %   %t ’¥   H   ô   ì:   ’¥   H   ì<   }Ÿ  ~  ´  ’¥    ∂  p √  ’¥    ∂  p ◊H   ⁄   p ◊H   ⁄p ƒ   ’¥    ∂  p ◊H   ⁄    p ƒ   ’¥    ∂  p ◊H   ⁄!   p √  ’	   ∂  %√  ’∂  ƒ   ’¥    ∂  p ◊H   ⁄"   p ƒ 	  ’¥    ∑   p ◊H#   ⁄$   t ’¥    ∑   p ◊H%   ⁄&   t ’∑   ◊H'   ⁄(   j)   t ’∑   ◊H'   ⁄*   j+   t ’∑   ◊H'   ⁄,   j-   t ’∑   ◊H'   ⁄.   j/   t ’∑   ◊H'   ⁄0   j1   t ’∑   ◊H'   ⁄2   j3   t ’∑   ◊H'   ⁄4   j5   t ’¥    ∂  p ◊H   ⁄   p ◊H%   ⁄6   ∂  t ’¥    ∑   p ◊H   ⁄7   ∂  t ’¥    ∂  p ◊H   ⁄7   ∂  t ’∂  ñ   ìx   ∑   ∂  J8   ’ìy   ¥    ∑ 	  p ◊H9   ⁄:   t ’¥    ∑   p ◊H;   ⁄<   j=   t ’¥    ∂  p ◊H;   ⁄>   j?   t ’»°&6 `P*P9 `P*P/P9 `P*P/P8 `P*P/P4 `Pë P8 `Pê0 `Pó P8 `Pó P9 `Pë `Pê@ `Pë P4 `Pñ P4 `Pñ P4 `Pî0 `P*Pß P4 `PAÄ    H `P*Pß P4 `P±@ `P*P8 `P*P/P+P9 `P*P/P9 `P*P/PH `P? `P: `P*P/P9 `P+P/P4 `P+Pê PD" `Pñ 
+PD% `Pñ 
+PD( `Pñ 
+PD/ `Pñ 
+PD5 `Pñ 
+PD8 `Pñ 
+PDB `Pñ 
+PDa `P*P/Pì P4 `P+Pì P4 `P*Pì PDe `Pê `Pî0 `P+P/PD{ `P+Pî PDÄ  ∆ `P*Pî P5000 P   §        Æ  ˇˇˇˇ    ù         (   (                               °@   (   (                               °@   L   L                             ∑  ◊H   ⁄∑   j   t ’°0 `Pñ PD P  t   d   *                       ™´   ’µ  ´   ’¥   ◊H   ⁄   ∂   %t ’»° 6 `P8 `Pñ P5 P t          )   ˇˇˇˇÄ   p   1                        ™´   ’∑   H   ´   ’¥   ◊H   ⁄   ∂   %t ’»° F `P? `Pñ PE P    Ä          0   ˇˇˇˇH   H                             ¥   ◊H   ⁄   t ’°0 `Pë P4 P    |  |                  %        √   ’∑   H   ñV   ì   ¥   ◊H   ⁄d∑  *∑   H   )p √   ’∑  ◊H   ⁄   ∑   %∑   H   t ’ì   ¥    ∑ 	  p ◊H   ⁄¥    ∑   H   p ◊H	   ⁄p  ◊H
+   ⁄p     %∑   ◊H	   ⁄p  ◊H
+   ⁄p  %t ’∂   dñ-   ì    ¥    ∑ 	  p ◊H   ⁄∂      %t ’ì%   °0 `P6 `Pñ0 `Pü P8 `P° PI `P+Pö P* P*Pï  P*P$ˇˇˇ•P4 `Pë `P+Pî P9 P  §   §   \                          ¥    ∑ 	  p ◊H   ⁄   t ’¥    ∑   p ◊H   ⁄   t ’¥    ∑   p ◊H   ⁄   t ’°0 `P+P/P4 `P+Pê P4 `P+P/P4 P ¸  ‹  ∂                X       $∑   J   ’¥   ◊H   ⁄   ∑   H   %t ’¶¥       p √   ’∂   ó   ì	    ûì	   ∑  ◊H   ⁄∑   t ’¥	    ∑   p ◊H
+   ⁄p  ◊H
+   ⁄p  ◊H
+   ⁄p  ◊H
+   ⁄p  ◊H   ⁄   p ◊H   ⁄   p ◊H   ⁄p  √  ’∑  ◊H   ⁄p  √  ’¥    ∂  p √  ’¥   ◊H   ⁄   ∂  %t ’¥   ◊H   ⁄   ∂  %t ’∂  ƒ  ’∑  ◊H   ⁄   ∑   %p √  ’∑   H   ¥   ñ7   ì.   ¥       ∑  %   %t ’¥   ◊H   ⁄t  ’ ûì5   ¥   ◊H   ⁄∂  ∑  *d)p √  ’¥   ◊H   ⁄∂     %∂  %   %∑  %t ’¥	   ◊H   ⁄7    !   :"   #   :$   :%   &   :'   7(   ∂  :)   ∑   :*   ∂  :+   ∂  :,   -   :.   :/   j0   :1   j2   :3   t ’ïB   ìR    †®™´  ’´  ’¥   ◊H   ⁄5   t ’¥   ◊H   ⁄∂  t ’»ìX   °@ `P< `Pú PDA	 `P+P8 	`P> `PAJ F `Pë P4 `P+P*P*	P*	P*	P/	P/P*P8 `P,P8 `P*P8 `Pñ P4 `Pñ PD `P: `Pó PH 	`Pö0 `Pó P4 `P,	P4 `PAJ F `Pô P8 `Pß P4 `Pë0 : : 6 : %)*))%? J; J Pë@F KH `Pë P$`Pê PJJ P  ¸  Ï  4   {  5   ˇˇˇˇ        -   F  X  X  ô                 2       ¥   ◊H   ⁄µ  t ’µ  H   óÀ   ì   ƒ  ’∑  ◊H   ⁄   ∑   %µ  H   ∑  )d*t ’∑   ◊H   ⁄t  ’¥    ∑   p ◊H	   ⁄
+   t ’¥    ∑   p ◊H   ⁄   t ’¥    ∑   p ◊H   ⁄   t ’¥    ∑   p ◊H   ⁄   t ’ï≤   ì   ∑   ∑  J   ’∑   ◊H   ⁄t  ’¥    ∑   p ◊H	   ⁄   t ’¥    ∑   p ◊H   ⁄   t ’¥    ∑   p ◊H   ⁄   t ’¥    ∑   p ◊H   ⁄   t ’¥       t ’ì2   °0 `P/P4 `Pí0 `P7 `P® PD `P,
+P4 `P+P/P4 `P+P/P4 `P+P/P4 `P+Pê PN0 `Pê0 `P,
+P4 `P+P/P4 `P+Pê P4 `P+P/P4 `P+P/P4 `P+PI P  \   \   #                         ¥       t ’¥   ◊H   ⁄µ  t ’°0 `P+P4 `P/P4 P    ¨   ¨   c                        ‘√  ’¥       ¥    ∂  p ◊H   ⁄   p %p ◊H   ⁄p √   ’∂   ¥    ∂  p ◊H   ⁄p  J   ’°6 `Pï P/P$ˇˇˇÛP+ P8 `P.P*P9 P    3ıÿ  `7  ›   8    `4  5  6    p9  :  ;  <    `
+  p2    `  `  V     P    `t     	  
+    ª    =      	  `=      Z  ;             
+  `        `          ?  Z  &  
+    =       `$  #  $  ˜     "    `$  ê   )  Ø   +  ç ,  .  /  $  0  1    `$  '  p     p  `X    @  0  :  t     `  `  `  `E  F  s    `2    p  `  `7  E  F  u    `E  F  v    `:    @    Z  $  x  X  π  =  /  y  %    `$  x  {  +  1  $  |    `E  F  û    Z  ô  <  $  $  ü  †  °  ¢  £  +  1  :  /  §  •  ä  ¶    `ä  ©  E  F    `;  E  F    7  Å  Ç  %  $  Ñ  ê   Ö  Ü  x  !  X  à  â    Z  ˇ  ä  ã  )    å    @  é  è  ê     @í  ë  î  ì  ï  ñ  ›    @"  ó  ò  ô  õ  ö  P    pú    pß     `™  !  `$  #  P  (  Ø   $  ;    `  `$  P  Q  S  T  U    X    Z  \  ]  E  F  ^  _  ˇ  `  a  b  c  d  e  f    h  i  ê   )  Ø   .  l  o  $  p  +  1  5  q    p6    pr    pt    pn    pw    pz    pç (  :  y  }   ~    p´    p  `E  F  G    H  I     $  '  p     p   `  `  `	  p  pg  I     p    p    p    p    p    p!    p%         p=  $    D    pˇXÑ-                            "              "  !            "  ,            "  0            "  =      !      "  Q      %      "  D      ¨      †               "     	   2      †
+        ≠      †              £  V      Æ      † !             † ·   @           † ]              † ^              † d              † _              † g              † m              † q              †               † £   6           † á      ú      †
+ û      ß      †
+ Ÿ              † ùH©¿      ‚2      ‚2                   #   ]      ]                  i   w  `   w     
+            É  •  z  •     
+            ≥  ˜  ®  ˜                   ã     ã                ô  0  è  0  +              Ä A  Õ  3  Õ  1              |  «  t  «  2   $            s
+  5  s
+  5  a              Ä ä
+  5  Å
+  5  a              ˆ
+  ¢  Ì
+  ¢  c   9          2     8      8                 _  +  V  +  q   %           Än  ‡2  f  ‡2  ä              Ç©  €2  °  €2  î   #             |  ∞  t  ∞  ∂   2             Î  .  „  .  π   7            i  =  a  =  º   7             ≠  1  §  1  Ω   >            t    l    √   3             8  è  0  è  …   1             ∆  \  æ  \  Ã   3             ê  
+  à  
+  ÷   0            »%  @2  ¿%  @2    #             C-  ™0  ;-  ™0  4              ¬0  1  ∫0  1  J             j2  ’2  b2  ’2  Z  &           5°›zó¬F™°ÌÙî      d3‘sd3‘sEw¯¡d=	™   n    O^partitionKey=%28https%2Cthanglong.edu.vn%29,:https://elearning.thanglong.edu.vn/tlu-custom/js/mediaplayer.js necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Server: nginx/1.20.1
+Date: Mon, 10 Apr 2023 09:14:26 GMT
+Content-Type: application/javascript
+Content-Length: 13026
+Last-Modified: Mon, 30 Jan 2023 12:16:45 GMT
+ETag: "63d7b52d-32e2"
+Strict-Transport-Security: max-age=31536000
+Accept-Ranges: bytes
+ original-response-headers Server: nginx/1.20.1
+Date: Mon, 10 Apr 2023 09:14:26 GMT
+Content-Type: application/javascript
+Content-Length: 13026
+Last-Modified: Mon, 30 Jan 2023 12:16:45 GMT
+Connection: keep-alive
+ETag: "63d7b52d-32e2"
+Strict-Transport-Security: max-age=31536000
+Accept-Ranges: bytes
+ ctid 2 uncompressed-len 0 net-response-time-onstart 695 net-response-time-onstop 695 alt-data 1;13026,javascript/moz-script-bytecode-20230321162322-8l alt-data-from-child 1   ÆŸ

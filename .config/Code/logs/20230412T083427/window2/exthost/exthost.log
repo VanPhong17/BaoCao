@@ -1,0 +1,18 @@
+2023-04-12 08:34:29.376 [info] Extension host with pid 6558 started
+2023-04-12 08:34:29.462 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-04-12 08:34:29.471 [info] ExtensionService#_doActivateExtension vscode.extension-editing, startup: false, activationEvent: 'onLanguage:markdown'
+2023-04-12 08:34:29.480 [info] ExtensionService#_doActivateExtension vscode.markdown-language-features, startup: false, activationEvent: 'onLanguage:markdown'
+2023-04-12 08:34:29.537 [info] ExtensionService#_doActivateExtension shd101wyy.markdown-preview-enhanced, startup: false, activationEvent: 'onLanguage:markdown'
+2023-04-12 08:34:30.563 [info] ExtensionService#_doActivateExtension yzhang.markdown-all-in-one, startup: false, activationEvent: 'onLanguage:markdown'
+2023-04-12 08:34:30.786 [info] ExtensionService#_doActivateExtension vscode.markdown-math, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2023-04-12 08:34:30.793 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-04-12 08:34:30.795 [info] ExtensionService#_doActivateExtension kisstkondoros.vscode-gutter-preview, startup: true, activationEvent: '*'
+2023-04-12 08:34:30.818 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2023-04-12 08:34:30.913 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-04-12 08:34:30.943 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-04-12 08:34:31.024 [info] Eager extensions activated
+2023-04-12 08:34:31.076 [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+2023-04-12 08:34:31.096 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-04-12 08:34:31.097 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-04-12 08:43:28.859 [info] Extension host terminating: renderer closed the MessagePort
+2023-04-12 08:43:28.882 [info] Extension host with pid 6558 exiting with code 0

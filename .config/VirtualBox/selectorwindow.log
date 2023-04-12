@@ -1,0 +1,21 @@
+00:00:00.373304 VirtualBox GUI VM Selector Window 7.0.6 r155176 linux.amd64 (Jan 11 2023 17:07:39) release log
+00:00:00.373306 Log opened 2023-04-11T15:32:51.915838000Z
+00:00:00.373307 Build Type: release
+00:00:00.373311 OS Product: Linux
+00:00:00.373311 OS Release: 5.19.0-38-generic
+00:00:00.373312 OS Version: #39~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 17 21:16:15 UTC 2
+00:00:00.373336 DMI Product Name: Inspiron 5490
+00:00:00.373341 DMI Product Version: 
+00:00:00.373349 Firmware type: UEFI
+00:00:00.373884 Secure Boot: Disabled
+00:00:00.373926 Host RAM: 7608MB (7.4GB) total, 4945MB (4.8GB) available
+00:00:00.373930 Executable: /usr/lib/virtualbox/VirtualBox
+00:00:00.373930 Process ID: 38868
+00:00:00.373931 Package type: LINUX_64BITS_UBUNTU_22_04
+00:00:00.373960 Qt version: 5.15.3
+00:00:00.374511 GUI: UIMediumEnumerator: Initial medium-enumeration finished!
+00:00:00.385709 GUI: UIMediumEnumerator: Medium-enumeration started...
+00:00:00.385722 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:00:00.877994 GUI: UIDesktopWidgetWatchdog::sltHandleHostScreenAvailableGeometryCalculated: Screen 0 work area is actually resized to: 74x27 x 1846x1053
+00:00:04.634551 GUI: UICommon: Handling aboutToQuit request..
+00:00:05.684721 GUI: UICommon: aboutToQuit request handled!

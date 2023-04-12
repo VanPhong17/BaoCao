@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="file:///home/vanphong17/Downloads/ZaloSetup-23-3-1.exe" added="2023-04-02T14:02:52Z" modified="2023-04-02T14:02:52Z" visited="1969-12-31T23:59:59Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/x-ms-dos-executable"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2023-04-02T14:02:52Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/code_1.77.0-1680085573_amd64.deb" added="2023-04-05T01:34:38Z" modified="2023-04-05T01:34:38Z" visited="1969-12-31T23:59:59Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/vnd.debian.binary-package"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2023-04-05T01:34:38Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/giao_trinh_he_dieu_hanh_unix_va_linux.pdf" added="2023-04-05T03:50:45Z" modified="2023-04-05T03:50:45Z" visited="1969-12-31T23:59:59Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/pdf"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2023-04-05T03:50:45Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/qtranslate.exe" added="2023-04-05T08:02:32Z" modified="2023-04-05T08:02:32Z" visited="1969-12-31T23:59:59Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/x-ms-dos-executable"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2023-04-05T08:02:32Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/BaoCao-main.zip" added="2023-04-05T14:31:10Z" modified="2023-04-05T14:31:10Z" visited="1969-12-31T23:59:59Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/zip"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2023-04-05T14:31:10Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Pictures/Screenshots/29744471_2070588906290946_2557916133016813479_o.jpg" added="2023-04-10T15:02:19Z" modified="2023-04-10T15:02:19Z" visited="1969-12-31T23:59:59Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2023-04-10T15:02:19Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/virtualbox-7.0_7.0.6-155176~Ubuntu~jammy_amd64.deb" added="2023-04-11T15:31:25Z" modified="2023-04-11T15:31:25Z" visited="1969-12-31T23:59:59Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/vnd.debian.binary-package"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2023-04-11T15:31:25Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/giao_trinh_mang_may_tinh_ho_dac_phuong_cuuduongthancong_com.pdf" added="2023-04-11T15:53:36Z" modified="2023-04-11T15:53:36Z" visited="1969-12-31T23:59:59Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/pdf"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2023-04-11T15:53:36Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/vanphong17/Downloads/Thuc-tap-2023-main.zip" added="2023-04-12T02:38:19Z" modified="2023-04-12T02:38:19Z" visited="1969-12-31T23:59:59Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/zip"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2023-04-12T02:38:19Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>

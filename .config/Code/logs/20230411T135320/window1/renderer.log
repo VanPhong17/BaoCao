@@ -1,0 +1,6 @@
+2023-04-11 13:53:20.926 [info] Electron sandbox mode is enabled!
+2023-04-11 13:53:20.945 [warning] Via 'product.json#extensionEnabledApiProposals' extension 'ms-vscode.vscode-selfhost-test-provider' wants API proposal 'testContinuousRun' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.
+2023-04-11 13:53:20.946 [warning] Via 'product.json#extensionEnabledApiProposals' extension 'ms-vscode.remote-repositories' wants API proposal 'contribEditorGutterMenu' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.
+2023-04-11 13:53:20.946 [warning] Via 'product.json#extensionEnabledApiProposals' extension 'github.vscode-pull-request-github' wants API proposal 'contribEditorGutterMenu' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.
+2023-04-11 13:53:20.946 [warning] Via 'product.json#extensionEnabledApiProposals' extension 'ms-toolsai.jupyter' wants API proposal 'notebookControllerKind' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.
+2023-04-11 13:53:24.201 [info] [perf] Render performance baseline is 57ms
